@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        python 算法基础 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="递归、排序、动态规划" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>python 算法基础 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://github.com/Pilchark/pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="python 算法基础" />
+<meta property="og:description" content="递归、排序、动态规划" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_algorithms/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-05T00:00:00+00:00" />
+<meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/06/py_pyenv_usage/" />
+
+<meta itemprop="name" content="python 算法基础">
+<meta itemprop="description" content="递归、排序、动态规划"><meta itemprop="datePublished" content="2021-12-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7218">
+<meta itemprop="keywords" content="python,data_structure," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python 算法基础"/>
+<meta name="twitter:description" content="递归、排序、动态规划"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://github.com/Pilchark/pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/Pilchark/pilchark.github.io/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/Pilchark/pilchark.github.io/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/Pilchark/pilchark.github.io/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/Pilchark/pilchark.github.io/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/Pilchark/pilchark.github.io/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="5">data_structure<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link" rel="35">python<span
+               class="tag-list-count">35</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">35</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">35</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" class="title">TOML : python 的好伙伴</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" class="title">使用 MkDocs 构建 python 项目的文档</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" class="title">使用 pytest 让测试更高效</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/Pilchark/pilchark.github.io/2021/12/ds_python_algorithms/"
+    >python 算法基础</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_algorithms/" class="article-date">
+  <time datetime="2021-12-05 00:00:00 &#43;0000 UTC" itemprop="datePublished">2021-12-05</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/python/"> Python </a>
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/data_structure/"> Data_Structure </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/python/"> python </a>
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/data_structure/"> data_structure </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7218字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 15分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<h2 id="基本概念">基本概念</h2>
+<ol>
+<li>
+<p>评价算法的好坏：渐近时间复杂度和渐近空间复杂度</p>
+</li>
+<li>
+<p>常用算法</p>
+<ul>
+<li>穷举法 - 又称为暴力破解法，对所有的可能性进行验证，直到找到正确答案。</li>
+<li>贪婪法 - 在对问题求解时，总是做出在当前看来最好的选择，不追求最优解，快速找到满意解。</li>
+<li>分治法 - 把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题,直到可以直接求解的程度，最后将子问题的解进行合并得到原问题的解。</li>
+<li>回溯法 - 回溯法又称为试探法，按选优条件向前搜索，当搜索到某一步发现原先选择并不优或达不到目标时，就退回一步重新选择。</li>
+<li>动态规划 - 基本思想也是将待求解问题分解成若干个子问题，先求解并保存这些子问题的解，避免产生大量的重复运算。</li>
+</ul>
+</li>
+<li>
+<p>列表</p>
+<ul>
+<li>timeit 模块(P70)</li>
+<li><code>from timeit import Timer</code></li>
+</ul>
+</li>
+<li>
+<p>字典 : 字典始终比列表快</p>
+</li>
+<li>
+<p>Python内置类型性能分析 : timeit</p>
+<pre><code class="language-py">def test1():
+   l = []
+   for i in range(1000):
+      l = l + [i]
+def test2():
+   l = []
+   for i in range(1000):
+      l.append(i)
+def test3():
+   l = [i for i in range(1000)]
+def test4():
+   l = list(range(1000))
+
+from timeit import Timer
+
+t1 = Timer(&quot;test1()&quot;, &quot;from __main__ import test1&quot;)
+print(&quot;concat &quot;,t1.timeit(number=1000), &quot;seconds&quot;)
+t2 = Timer(&quot;test2()&quot;, &quot;from __main__ import test2&quot;)
+print(&quot;append &quot;,t2.timeit(number=1000), &quot;seconds&quot;)
+t3 = Timer(&quot;test3()&quot;, &quot;from __main__ import test3&quot;)
+print(&quot;comprehension &quot;,t3.timeit(number=1000), &quot;seconds&quot;)
+t4 = Timer(&quot;test4()&quot;, &quot;from __main__ import test4&quot;)
+print(&quot;list range &quot;,t4.timeit(number=1000), &quot;seconds&quot;)
+</code></pre>
+</li>
+</ol>
+<h2 id="1-枚举英语enumerate">1. 枚举（英语：Enumerate）</h2>
+<ul>
+<li>枚举的思想是不断地猜测，从可能的集合中一一尝试，然后再判断题目的条件是否成立。</li>
+</ul>
+<h2 id="2-递归recursion--分治divide-and-conquer">2. 递归(Recursion) &amp; 分治(Divide and Conquer)</h2>
+<h3 id="1-性质">1. 性质</h3>
+<ol>
+<li>优点 : 结构清晰，可读性强</li>
+<li>缺点 : 利用堆栈来实现,每当进入一个函数调用，栈就会增加一层栈帧,递归层数过多时，就会造成 栈溢出.</li>
+</ol>
+<h3 id="2-区别">2. 区别</h3>
+<ol>
+<li>递归和枚举的区别: 枚举是横向地把问题划分，然后依次求解子问题；而递归是把问题逐级分解，是纵向的拆分。</li>
+<li>递归与分治的区别 : 递归是一种编程技巧，一种解决问题的思维方式；分治算法很大程度上是基于递归的，解决更具体问题的算法思想</li>
+</ol>
+<h3 id="3-练习">3. 练习</h3>
+<ol>
+<li>给定一个二叉树，找出其最大深度.<br>
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。<br>
+说明: 叶子节点是指没有子节点的节点。<br>
+示例：<br>
+给定二叉树 [3,9,20,null,null,15,7]<br>
+链接：<a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a></li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def maxDepth(self, root: TreeNode) -&gt; int:
+        if root is None:
+            return 0
+        else:
+            left_height = self.maxDepth(root.left)
+            right_height = self.maxDepth(root.right)
+            return max(left_height, right_height) + 1
+</code></pre>
+<ol start="2">
+<li>平衡二叉树<br>
+<a href="https://leetcode-cn.com/problems/balanced-binary-tree/solution/balanced-binary-tree-di-gui-fang-fa-by-jin40789108/">https://leetcode-cn.com/problems/balanced-binary-tree/solution/balanced-binary-tree-di-gui-fang-fa-by-jin40789108/</a>
+给定一个二叉树，判断它是否是高度平衡的二叉树。<br>
+一棵高度平衡二叉树定义为： 一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1
+示例：
+输入：root = [3,9,20,null,null,15,7]<br>
+输出：true<br>
+输入：root = [1,2,2,3,3,null,null,4,4]<br>
+输出：false</li>
+</ol>
+<ul>
+<li>从顶至底（暴力法）</li>
+</ul>
+<pre><code class="language-py">class Solution:
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        if not root : return True
+        return abs(self.depth(root.left) - self.depth(root.right)) &lt;= 1 \
+            and self.isBalanced(root.left) and self.isBalanced(root.right)
+        # 所有子树都要满足平衡树性质，因此三者使用逻辑与连接
+
+    def depth(self, root):
+        if not root: return 0
+        return max(self.depth(root.left), self.depth(root.right)) + 1
+</code></pre>
+<ul>
+<li>从底至顶(提前阻断法)</li>
+</ul>
+<pre><code class="language-py">class Solution:
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        return self.recur(root) != -1
+
+    def recur(self, root):
+        if not root: return 0
+        left = self.recur(root.left)
+        if left == -1: return -1
+        right = self.recur(root.right)
+        if right == -1: return -1
+        return max(left, right) + 1 if abs(left - right) &lt; 2 else -1
+</code></pre>
+<ol start="3">
+<li>二叉树的坡度<br>
+给定一个二叉树，计算 整个树 的坡度 。<br>
+一个树的 节点的坡度 定义即为，该节点左子树的节点之和和右子树节点之和的 差的绝对值 。如果没有左子树的话，左子树的节点之和为 0 ；没有右子树的话也是一样。空结点的坡度是 0 。<br>
+整个树 的坡度就是其所有节点的坡度之和<br>
+链接：<a href="https://leetcode-cn.com/problems/binary-tree-tilt">https://leetcode-cn.com/problems/binary-tree-tilt</a></li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def findTilt(self, root: TreeNode) -&gt; int:
+        def search(root: TreeNode) -&gt; (int, int): # 返回节点和，累积坡度
+            if not root:
+                return 0, 0
+            else:
+                sl, pl = search(root.left) # 递归求解子问题
+                sr, pr =search(root.right) # 递归求解子问题 
+                return sr + sl + root.val, abs(sl - sr) + pl + pr
+                # 跟节点的节点和，累积坡度与子问题的递归关系（合并子问题，形成原问题的解）
+        _, p = search(root)
+        return p
+</code></pre>
+<h2 id="3-贪心算法greedy-algorithm">3. 贪心算法(greedy algorithm)</h2>
+<ol>
+<li>适用范围 : 贪心算法在有最优子结构的问题中尤为有效。最优子结构的意思是问题能够分解成子问题来解决，子问题的最优解能递推到最终问题的最优解</li>
+<li>证明方法 :
+<ul>
+<li>反证法：如果交换方案中任意两个元素/相邻的两个元素后，答案不会变得更好，那么可以推定目前的解已经是最优解了。</li>
+<li>归纳法：先算得出边界情况（例如 n= 1）的最优解 F1 ，然后再证明：对于每个n， F(n+1)都可以由F(n)推导出结果</li>
+</ul>
+</li>
+<li>练习</li>
+</ol>
+<h2 id="4-排序-sorting-algorithm">4. 排序 (Sorting algorithm)</h2>
+<ul>
+<li>参考 : <a href="https://www.cnblogs.com/onepixel/p/7674659.html">https://www.cnblogs.com/onepixel/p/7674659.html</a></li>
+</ul>
+<h3 id="1-简介">1. 简介</h3>
+<blockquote>
+<p>稳定性 : 稳定性是指相等的元素经过排序之后相对顺序是否发生了改变。
+拥有稳定性这一特性的算法会让原本有相等键值的纪录维持相对次序，即如果一个排序算法是稳定的，当有两个相等键值的纪录 A 和 B，且在原本的列表中 A 出现在 B 之前，在排序过的列表中 A 也将会是在 B 之前。</p>
+</blockquote>
+<ul>
+<li><strong>稳定排序</strong> : 基数排序、计数排序、插入排序、冒泡排序、归并排序。</li>
+<li><strong>不稳定排序</strong> :  选择排序、堆排序、快速排序。</li>
+<li>时间复杂度</li>
+<li>空间复杂度</li>
+</ul>
+<h3 id="2-选择排序">2. 选择排序</h3>
+<h4 id="1-原理">1. 原理</h4>
+<blockquote>
+<p>每次找出第i小的元素（也就是Ai-An中最小的元素），然后将这个元素与数组第i位置上的元素交换
+选择排序的最优时间复杂度、平均时间复杂度和最坏时间复杂度均为O(n^2)<br>
+选择排序 : 每遍历一次列表只交换一次数据</p>
+</blockquote>
+<h4 id="2-实现">2. 实现</h4>
+<pre><code class="language-py"># selection_sort 代码实现
+from typing import List
+
+def selection_sort(arr: List[int]):
+    &quot;&quot;&quot;
+    选择排序
+    :param arr: 待排序的List
+    :return: 选择排序是就地排序(in-place)
+    &quot;&quot;&quot;
+    length = len(arr)
+    if length &lt;= 1:
+        return
+
+    for i in range(length):
+        min_index = i
+        min_val = arr[i]
+        for j in range(i, length):
+            if arr[j] &lt; min_val:
+                min_val = arr[j]
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+
+# 测试数据
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    selection_sort(arr)
+    print(&quot;选择排序结果：&quot;, arr)
+</code></pre>
+<h3 id="3-冒泡排序">3. 冒泡排序</h3>
+<h4 id="1-原理-1">1. 原理</h4>
+<blockquote>
+<p>它的工作原理是每次检查相邻两个元素，如果前面的元素与后面的元素满足给定的排序条件，就将相邻两个元素交换。当没有相邻的元素需要交换时，排序就完成了
+平均时间复杂度为O(n^2),最好情况下为O(n)</p>
+</blockquote>
+<h4 id="2-实现-1">2. 实现</h4>
+<pre><code class="language-py"># selection_sort 代码实现
+from typing import List
+
+#冒泡排序(每一次最大值冒到最后)
+def bubble_sort(arr: List[int]):
+    &quot;&quot;&quot;
+    冒泡排序(Bubble sort)
+    :param arr: 待排序的List,此处限制了排序类型为int
+    :return: 冒泡排序是就地排序(in-place)
+    &quot;&quot;&quot;
+    length = len(arr)
+    if length &lt;= 1:
+        return 
+
+    for i in range(length):
+        is_made_swap = False ## 设置标志位，若本身已经有序，则直接break
+        for j in range(length - i - 1):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                is_made_swap = True
+        if not is_made_swap:
+            break
+
+# 测试数据
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    bubble_sort(arr)
+    print(&quot;冒泡排序结果：&quot;, arr)
+</code></pre>
+<h3 id="4-插入排序">4. 插入排序</h3>
+<h4 id="1-原理-2">1. 原理</h4>
+<blockquote>
+<p>将待排列元素划分为“已排序”和“未排序”两部分，每次从“未排序的”元素中选择一个插入到“已排序的”元素中的正确位置。
+最优时间复杂度为 O(n),最坏时间复杂度和平均时间复杂度都为 O(n^2)</p>
+</blockquote>
+<h4 id="2-步骤">2. 步骤</h4>
+<ol>
+<li>从第一个元素开始，该元素可以认为已经被排序；</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描；</li>
+<li>如果该元素（已排序）大于新元素，将该元素移到下一位置；</li>
+<li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；</li>
+<li>将新元素插入到该位置后；</li>
+<li>重复步骤2~5。</li>
+</ol>
+<h4 id="3-实现">3. 实现</h4>
+<pre><code class="language-py"># insertion_sort 代码实现
+
+from typing import List
+
+def insertion_sort(arr: List[int]):
+    '''
+    插入排序
+    :param arr: 待排序 List
+    :return: 插入排序是就地排序(in-place)
+    '''
+    length = len(arr)
+    if length &lt;= 1: return
+
+    for i in range(1,length):
+        value = arr[i]
+        j = i - 1
+        while j &gt;= 0 and arr[j] &gt; value:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = value
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    insertion_sort(arr)
+    print(&quot;插入排序结果：&quot;, arr)
+</code></pre>
+<h3 id="5-计数排序">5. 计数排序</h3>
+<h4 id="1-原理-3">1. 原理</h4>
+<blockquote>
+<p>计数排序的时间复杂度为 O(n + w) ，其中 w 代表待排序数据的值域大小。
+计数排序是一个稳定的排序算法。当输入的元素是 n 个 0到 k 之间的整数时，时间复杂度是O(n+k)，空间复杂度也是O(n+k)，其排序速度快于任何比较排序算法。当k不是很大并且序列比较集中时，计数排序是一个很有效的排序算法。</p>
+</blockquote>
+<h4 id="2-步骤-1">2. 步骤</h4>
+<ol>
+<li>找出待排序的数组中最大和最小的元素；</li>
+<li>统计数组中每个值为i的元素出现的次数，存入数组C的第i项；</li>
+<li>对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）；</li>
+<li>反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1。</li>
+</ol>
+<h4 id="3-实现-1">3. 实现</h4>
+<pre><code class="language-py"># counting_sort 代码
+from typing import List
+
+def counting_sort(arr: List[int]):
+    max = min = arr[0]
+    for i in arr:
+        if i &lt; min: min = i
+        if i &gt; max: max = i
+    count = [0] * (max - min + 1)  #根据区间范围内出现的数字分组
+
+    for j in range(max - min + 1):  #把每个计数归零
+        count[j] = 0
+    for index in arr:
+        count[index - min] += 1  #数字每出现一个，对应的计数器+1
+    index = 0
+    for a in range(max - min + 1):
+        for c in range(count[a]):  #将分组后的数字展开排序
+            arr[index] = a+min
+            index += 1
+
+# 测试数据
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    counting_sort(arr)
+    print(&quot;计数排序结果&quot;, arr)
+</code></pre>
+<h3 id="6-基数排序-radix-sort">6. 基数排序 (Radix sort)</h3>
+<h4 id="1-原理-4">1. 原理</h4>
+<blockquote>
+<p>将待排序的元素拆分为 k 个关键字（比较两个元素时，先比较第一关键字，如果相同再比较第二关键字……）。</p>
+<p>然后先对第k关键字进行稳定排序，再对第k-1关键字进行稳定排序..最后对第一关键字进行稳定排序，这样就完成了对整个待排序序列的稳定排序。</p>
+<p>通常而言，基数排序比基于比较的排序算法（比如快速排序）要快。但由于需要额外的内存空间，因此当内存空间稀缺时，原地置换算法（比如快速排序）或许是个更好的选择。</p>
+</blockquote>
+<h4 id="2-复杂度">2. 复杂度</h4>
+<ul>
+<li>待排序的数组<code>R[1,2..n]</code>,数组中最大的数是K位，基数为r(十进制基数为10).则遍历一位数的时间复杂度为<code>O(n+r)</code>,所以，总的时间复杂度为<code>O((n+r)×k)</code></li>
+<li>空间复杂度 : 需要开辟 r 个队列，最坏条件下可能用到一个 r×n 的二维数组来做为桶，所以空间复杂度为 O(r×n)</li>
+</ul>
+<h4 id="3-实现-2">3. 实现</h4>
+<pre><code class="language-py"># radix_sort 代码
+from typing import List
+
+def radix_sort(arr: List[int]):
+    n = len(str(max(arr)))  #记录最大值的位数
+    for k in range(n): # n 轮排序
+        # 每一轮生成10个列表
+        bucket_list = [[] for i in range(10)] #因每一位数字都是0-9,所以10个筒
+        for i in arr:
+            # 按第 k 位放入到桶中
+            bucket_list[i//(10**k)%10].append(i)
+            #按当前桶的顺序重排列表
+        arr=[j for i in bucket_list for j in i]
+    return arr
+
+# 测试数据
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    arr_new = radix_sort(arr)
+    print(&quot;计数排序结果为：&quot;, arr_new)
+</code></pre>
+<h3 id="7-快速排序-quicksort">7. 快速排序 (Quicksort)</h3>
+<ul>
+<li><a href="https://www.jb51.net/article/158963.htm">https://www.jb51.net/article/158963.htm</a></li>
+</ul>
+<h4 id="1-原理-5">1. 原理</h4>
+<blockquote>
+<p>快速排序(Quick Sort)是对冒泡排序的一种改进。<br>
+选一基准元素，依次将剩余元素中小于该基准元素的值放置其左侧，大于等于该基准元素的值放置其右侧;<br>
+然后，取基准元素的前半部分和后半部分分别进行同样的处理。</p>
+</blockquote>
+<h4 id="2-步骤-2">2. 步骤</h4>
+<ol>
+<li>首先设定一个分界值(pivot)，通过该分界值将数组分成左右两部分</li>
+<li>将大于或等于分界值的数据集中到数组右边，小于分界值的数据集中到数组的左边。这个称为分区（partition）操作</li>
+<li>递归到两个子序列中分别进行快速排序；</li>
+<li>不用合并，因为此时数列已经完全有序。</li>
+</ol>
+<h4 id="3-复杂度">3. 复杂度</h4>
+<ul>
+<li>时间复杂度
+<ul>
+<li>最优：O(nlog⁡2n)</li>
+<li>最差：O(n^2)</li>
+<li>平均：O(nlog⁡2n)</li>
+</ul>
+</li>
+<li>空间复杂度
+<ul>
+<li>最优的情况是每一次都平分数组O(log2n)</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-实现">4. 实现</h4>
+<pre><code class="language-py"># quick_sort 代码实现
+def quick_sort(array, l, r):
+  if l &lt; r:
+    q = partition(array, l, r)
+    quick_sort(array, l, q - 1)
+    quick_sort(array, q + 1, r)
+  
+def partition(array, l, r):
+  x = array[r]
+  i = l - 1
+  for j in range(l, r):
+    if array[j] &lt;= x:
+      i += 1
+      array[i], array[j] = array[j], array[i]
+  array[i + 1], array[r] = array[r], array[i+1]
+  return i + 1
+
+# 测试数据
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    quick_sort(arr,0,len(arr)-1)
+    print(&quot;快速排序结果：&quot;, arr)
+</code></pre>
+<h3 id="8-归并排序-merge-sort">8. 归并排序 (merge sort)</h3>
+<h4 id="1-原理-6">1. 原理</h4>
+<blockquote>
+<p>先将整个序列两两分开，然后每组中的两个元素排好序。接着就是组与组和合并，只需将两组所有的元素遍历一遍，即可按顺序合并。以此类推，最终所有组合并为一组时，整个数列完成排序。</p>
+</blockquote>
+<h4 id="2-步骤-3">2. 步骤</h4>
+<ol>
+<li>把长度为n的输入序列分成两个长度为n/2的子序列；</li>
+<li>对这两个子序列分别采用递归的进行排序；</li>
+<li>将两个排序好的子序列的元素拿出来，按照顺序合并成一个最终的序列，即可完成排序。</li>
+</ol>
+<h4 id="3-复杂度-1">3. 复杂度</h4>
+<ul>
+<li>时间复杂度
+<ul>
+<li>最优：O(nlog⁡2n)</li>
+<li>最差：O(nlog⁡2n)</li>
+<li>平均：O(nlog⁡2n)</li>
+</ul>
+</li>
+<li>空间复杂度
+<ul>
+<li>O(n)</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-实现-1">4. 实现</h4>
+<pre><code class="language-py"># merge_sort 代码实现
+
+from typing import List
+
+def merge(arr1:List[int], arr2:List[int]): 
+    result = []
+    while arr1 and arr2:
+        if arr1[0] &lt; arr2[0]:
+            result.append(arr1.pop(0))
+        else:
+            result.append(arr2.pop(0))
+    if arr1:
+        result += arr1
+    if arr2:
+        result += arr2
+    return result
+
+def merge_sort(arr:List[int]):
+    &quot;&quot;&quot;
+    归并排序
+    :param arr: 待排序的List
+    :return: 排好序的List
+    &quot;&quot;&quot;
+    if len(arr) &lt;= 1:
+        return arr
+    mid = len(arr)//2
+    return merge(merge_sort(arr[:mid]), merge_sort(arr[mid:]))
+
+# 测试数据
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    arr_new = merge_sort(arr)
+    print(&quot;归并排序结果：&quot;, arr_new)
+</code></pre>
+<h3 id="9-堆排序-head-sort">9. 堆排序 (Head Sort)</h3>
+<h4 id="1-原理-7">1. 原理</h4>
+<blockquote>
+<p>堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点</p>
+</blockquote>
+<h4 id="2-步骤-4">2. 步骤</h4>
+<ol>
+<li>将初始待排序关键字序列(R1,R2….Rn)构建成大顶堆，此堆为初始的无序区；</li>
+<li>将堆顶元素R[1]与最后一个元素R[n]交换，此时得到新的无序区(R1,R2,……Rn-1)和新的有序区(Rn),且满足R[1,2…n-1]&lt;=R[n]；</li>
+<li>由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2….Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成。</li>
+</ol>
+<h4 id="3-复杂度-2">3. 复杂度</h4>
+<ul>
+<li>时间复杂度
+<ul>
+<li>最优：O(nlog⁡2n)</li>
+<li>最差：O(nlog⁡2n)</li>
+<li>平均：O(nlog⁡2n)</li>
+</ul>
+</li>
+<li>空间复杂度
+<ul>
+<li>O(1)</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-实现-2">4. 实现</h4>
+<pre><code>```py
+# heap_sort 代码实现
+from typing import List
+def build(arr:List[int], root, end):
+    while True:
+        child = 2 * root + 1 # 左子节点的位置
+        if child &gt; end: # 若左子节点超过了最后一个节点，则终止循环
+            break
+        if (child + 1 &lt;= end) and (arr[child + 1] &gt; arr [child]): # 若右子节点在最后一个节点之前，并且右子节点比左   子节点大，则我们的孩子指针移到右子节点上
+            child += 1
+        if arr[child] &gt; arr[root]: # 若最大的孩子节点大于根节   点，则交换两者顺序，并且将根节点指针，移到这个孩子节点上
+            arr[child], arr[root] = arr[root], arr[child]
+            root = child
+        else:
+            break
+
+def heap_sort(arr:List[int]):
+    n = len(arr)
+    first_root = n // 2 - 1 # 确认最深最后的那个根节点的位置
+    for root in range(first_root, -1, -1): # 由后向前遍历所有的 根节点，建堆并进行调整
+        build(arr, root, n - 1)
+
+    for end in range(n - 1, 0, -1): 
+    # 调整完成后，将堆顶的根节点与堆内最后一个元素调换位置，此时为数组中最大的元素，然后重新调整堆，将最大的元素冒到堆顶。依次重复上述操作
+        arr[0], arr[end] = arr[end], arr[0]
+        build(arr, 0, end - 1)
+
+# 测试数据
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    heap_sort(arr)
+    print(&quot;堆排序结果：&quot;, arr)
+```
+</code></pre>
+<h3 id="10-桶排序-bucket-sort">10. 桶排序 (Bucket sort)</h3>
+<h4 id="1-原理-8">1. 原理</h4>
+<blockquote>
+<p>桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。</p>
+</blockquote>
+<h4 id="2-步骤-5">2. 步骤</h4>
+<ol>
+<li>设置一个定量的数组当作空桶；</li>
+<li>遍历序列，并将元素一个个放到对应的桶中；</li>
+<li>对每个不是空的桶进行排序；</li>
+<li>从不是空的桶里把元素再放回原来的序列中。</li>
+</ol>
+<h4 id="3-复杂度-3">3. 复杂度</h4>
+<ul>
+<li>时间复杂度
+<ul>
+<li>最优：O(nlog⁡2n)</li>
+<li>最差：O(nlog⁡2n)</li>
+<li>平均：O(nlog⁡2n)</li>
+</ul>
+</li>
+<li>空间复杂度
+<ul>
+<li>O(1)</li>
+</ul>
+</li>
+</ul>
+<h4 id="4实现">4.实现</h4>
+<pre><code class="language-py"># bucket_sort 代码实现
+
+from typing import List
+
+def bucket_sort(arr:List[int]):
+    #桶排序
+    min_num = min(arr)
+    max_num = max(arr)
+    bucket_range = (max_num - min_num) / len(arr)  #桶大小
+    count_list = [ [] for i in range(len(arr) + 1)] #桶数组
+    #填数
+    for i in arr:
+        count_list[int((i - min_num)//bucket_range)].append(i)
+    arr.clear()
+    #回填
+    for i in count_list:
+        for j in sorted(i):
+            arr.append(j)
+
+# 测试数据
+
+if __name__ == '__main__':
+    import random
+    random.seed(54)
+    arr = [random.randint(0,100) for _ in range(10)]
+    print(&quot;原始数据：&quot;, arr)
+    bucket_sort(arr)
+    print(&quot;桶排序结果：&quot;, arr)
+</code></pre>
+<h3 id="11-二分查找--bisect">11. 二分查找 &amp; bisect</h3>
+<ul>
+<li>参考
+<ul>
+<li><a href="https://www.jb51.net/article/102899.htm">Python实现二分查找与bisect模块详解</a></li>
+<li><a href="https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/">二分查找的理解</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="1-原理-9">1. 原理</h4>
+<ul>
+<li>用来在一个有序数组中查找某一元素的算法。</li>
+<li>每次考察数组当前部分的中间元素，如果中间元素刚好是要找的，就结束搜索过程；</li>
+<li>如果中间元素小于所查找的值，到右侧查找；</li>
+<li>如果中间元素大于所查找的值，到左侧查找。</li>
+</ul>
+<h4 id="2-复杂度-1">2. 复杂度</h4>
+<ul>
+<li>时间复杂度
+<ul>
+<li>最优时间复杂度为 O(1)</li>
+<li>平均 &amp; 最坏 : O(logn)</li>
+</ul>
+</li>
+<li>空间复杂度
+<ul>
+<li>迭代版本的二分查找的空间复杂度为 O(1)。</li>
+<li>递归（无尾调用消除）版本的二分查找的空间复杂度为 O(logn)。</li>
+</ul>
+</li>
+</ul>
+<p>!&gt; mid 的索引为<code>mid =（left + right）/ 2</code>但是这样写有可能溢出，所以我们需要改进一下写成<code>mid = left +（right - left）/ 2</code> 或者 <code>left + ((right - left ) &gt;&gt; 1)</code></p>
+<h4 id="4-实现-3">4. 实现</h4>
+<ol>
+<li>递归法</li>
+</ol>
+<pre><code class="language-py">from typing import List
+import random
+def binary_search_recursion(lst, value, low, high): 
+    if high &lt; low: 
+        return None
+    mid = low + ((high - low ) &gt;&gt; 1)
+    if lst[mid] &gt; value: 
+        return binary_search_recursion(lst, value, low,mid-1) 
+    elif lst[mid] &lt; value: 
+        return binary_search_recursion(lst, value, mid+1, high) 
+    else: 
+        return mid
+</code></pre>
+<ol start="2">
+<li>非递归</li>
+</ol>
+<pre><code class="language-py">def binary_search_loop(lst,value): 
+    low, high = 0, len(lst)-1
+    while low &lt;= high: 
+        mid = low + ((high - low ) &gt;&gt; 1)
+        if lst[mid] &lt; value: 
+            low = mid + 1
+        elif lst[mid] &gt; value: 
+            high = mid - 1
+        else:
+            return mid 
+    return None
+</code></pre>
+<ol start="3">
+<li>测试</li>
+</ol>
+<pre><code class="language-py">if __name__ == &quot;__main__&quot;:
+    lst = [i for i in range(1000)]
+    def test_recursion():
+        binary_search_recursion(lst, 999, 0, len(lst)-1)
+    def test_loop():
+        binary_search_loop(lst, 999)
+    import timeit
+    t1 = timeit.Timer(&quot;test_recursion()&quot;, setup=&quot;from __main__ import test_recursion&quot;)
+    t2 = timeit.Timer(&quot;test_loop()&quot;, setup=&quot;from __main__ import test_loop&quot;)
+    print(&quot;Recursion:&quot;, t1.timeit())
+    print(&quot;Loop:&quot;, t2.timeit())
+</code></pre>
+<p>?&gt; 结论 : 循环方式比递归效率高</p>
+<ol start="4">
+<li>
+<p>bisect 模块</p>
+<ul>
+<li>用于维护有序列表, 实现了一个算法用于插入元素到有序列表。</li>
+<li>示例</li>
+</ul>
+<pre><code class="language-py">import bisect
+import random
+
+random.seed(1)
+
+print('New Pos Contents')
+print('--- --- --------')
+
+l = []
+for i in range(1, 15):
+    r = random.randint(1, 100)
+    position = bisect.bisect(l, r)
+    bisect.insort(l, r)
+    print('%3d %3d' % (r, position), l)
+</code></pre>
+<ul>
+<li>用 bisect 模块实现二分查找</li>
+</ul>
+<pre><code class="language-py">from bisect import bisect_left
+def binary_search_bisect(lst, x):
+    i = bisect_left(lst, x)
+    if i != len(lst) and lst[i] == x:
+        return i
+    return None
+</code></pre>
+</li>
+</ol>
+<p>?&gt; 结论 : 比循环实现略快，比递归实现差不多要快一半</p>
+<h4 id="二分查找的高级模板">二分查找的高级模板</h4>
+<ul>
+<li><strong>查找需要访问数组中当前索引及其直接右邻居索引的元素或条件</strong></li>
+</ul>
+<pre><code class="language-py">def binarySearch(nums, target):
+    &quot;&quot;&quot;
+    :type nums: List[int]
+    :type target: int
+    :rtype: int
+    &quot;&quot;&quot;
+    if len(nums) == 0:
+        return -1
+
+    left, right = 0, len(nums)
+    while left &lt; right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] &lt; target:
+            left = mid + 1
+        else:
+            right = mid
+
+    # Post-processing:
+    # End Condition: left == right
+    if left != len(nums) and nums[left] == target:
+        return left
+    return -1
+</code></pre>
+<h2 id="5-动态规划">5. 动态规划</h2>
+<h3 id="特点">特点</h3>
+<ol>
+<li>计数(有多少种方法走)</li>
+<li>求最大最小值(最长上升子序列)</li>
+<li>求存在性(能否取出k个数使得和为Sum)</li>
+</ol>
+<h3 id="硬币问题">硬币问题</h3>
+<blockquote>
+<p>有3种硬币，面值为2元，5元，7元，每种硬币都足够多
+买一本书需要27元
+如何用最少的硬币正好付清，不需要对方找钱</p>
+</blockquote>
+<ol>
+<li>确定状态 :
+<ul>
+<li>最后一步: 一定有最后一枚硬币 a(k)</li>
+<li>子问题: 用多少硬币可以拼出 27-a(k)
+<ul>
+<li>如果 a(k) 是2，f(27) = f(27-2)+1</li>
+<li>如果 a(k) 是5，f(27) = f(27-5)+1</li>
+<li>如果 a(k) 是7，f(27) = f(27-7)+1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>? 使用递归的弊端 : 有很多重复操作</p>
+</blockquote>
+<ol start="2">
+<li>
+<p>转移方程</p>
+<ul>
+<li>设状态<code>f[X]</code>=最少用多少枚硬币拼出X</li>
+<li><code>f[X] = min{f[X-2]+1, f[X-5]+1, f[X-7]+1}</code></li>
+</ul>
+</li>
+<li>
+<p>初始条件和边界情况</p>
+<ul>
+<li>X-2,X-5,X-7小于0怎么办？</li>
+<li>如果不能拼出Y,就定义<code>f[Y]</code>=正无穷</li>
+<li>初始条件: <code>f[0]=0</code></li>
+</ul>
+</li>
+<li>
+<p>计算顺序</p>
+<ul>
+<li>初始条件: <code>f[0]=0</code></li>
+<li>然后计算 <code>f[1],f[2],...f[27]</code></li>
+<li>当算法到 <code>f[x]</code> 时，<code>f[X-2]</code>,<code>f[X-5]</code>,<code>f[X-7]</code> 就都已经得到结果了</li>
+<li>每一步尝试3种硬币，一共27步</li>
+<li>没有任何重复</li>
+<li>算法时间复杂度 : 27*3</li>
+</ul>
+</li>
+</ol>
+<h3 id="走格子问题">走格子问题</h3>
+<blockquote>
+<p>给定 m 行 n 列的网格，有一个机器人从左上角(0,0)出发,每一步可以向下或向右走一步，问有多少种不同的方式走到右下角</p>
+</blockquote>
+<ol>
+<li>
+<p>确定状态</p>
+<ul>
+<li>最后一步一定是向右或向下</li>
+<li>右下角坐标为(m-1,n-1)</li>
+<li>前一步机器人在(m-2,n-1) 或 (m-1,n-2)</li>
+</ul>
+</li>
+<li>
+<p>转移方程</p>
+<ul>
+<li>初始状态 <code>f[0][0] = 1</code></li>
+<li>边界情况 i=0 或 j=0，则前一步只能有一个方向过来 <code>f[i][j] = 1</code></li>
+<li><code>f[i][j] = f[i-1][j] + f[i][j-1]</code></li>
+</ul>
+</li>
+<li>
+<p>计算顺序</p>
+<ul>
+<li>计算第0行</li>
+<li>计算第1行</li>
+<li>计算第m-1行</li>
+<li>时间复杂度 : O(MN)</li>
+<li>空间复杂度 : O(MN)</li>
+</ul>
+</li>
+</ol>
+<h3 id="青蛙跳问题存在型动态规划">青蛙跳问题(存在型动态规划)</h3>
+<blockquote>
+<p>有 n 块石头分别在 x 轴的0,1,&hellip;,n-1 位置
+青蛙在石头0，想跳到石头 n-1
+如果青蛙在在第 i 块石头上，它最多可以向右跳距离 a(i)
+问青蛙能否跳到石头 n-1</p>
+</blockquote>
+<ol>
+<li>
+<p>确定状态</p>
+<ul>
+<li>最后一步是从石头 i 跳过来的，i&lt;n-1</li>
+<li>最后一步不超过跳跃的最大距离 n-1-i&lt;a(i)</li>
+<li>子问题 : 青蛙可以跳到石头i(难点)</li>
+</ul>
+</li>
+<li>
+<p>转移方程</p>
+<ul>
+<li>设 <code>f[j]</code> 表示能不能跳到石头 j
+<code>f[j] = OR (f[i] AND i + a[i] &gt;= j)</code></li>
+<li>初始状态 <code>f[0] = True</code></li>
+</ul>
+</li>
+<li>
+<p>计算顺序</p>
+<ul>
+<li>计算 <code>f[1], f[2], ..., f[n-1]</code></li>
+<li>时间复杂度 : O(N^2)</li>
+<li>空间复杂度 : O(N)</li>
+</ul>
+</li>
+</ol>
+<h3 id="常见动态规划类型">常见动态规划类型</h3>
+<ol>
+<li>坐标型动态规划</li>
+<li>序列型(fi)表示前i各有当时</li>
+<li>划分型</li>
+<li>区间型(满许一个)</li>
+<li>背包型(装满时数量最多)</li>
+<li>最长序列型</li>
+<li>博弈型(下棋)</li>
+<li>综合型</li>
+</ol>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_algorithms/" title="python 算法基础" target="_blank" rel="external">https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_algorithms/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://github.com/Pilchark/pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://github.com/Pilchark/pilchark.github.io/about/" title="About"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_data_type/"
+                    title="python 的数据类型"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://github.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://github.com/Pilchark/pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

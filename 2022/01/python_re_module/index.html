@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Python re 模块 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="python re 模块正则用法" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>Python re 模块 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://github.com/Pilchark/pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Python re 模块" />
+<meta property="og:description" content="python re 模块正则用法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/Pilchark/pilchark.github.io/2022/01/python_re_module/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-05T00:00:00+00:00" />
+<meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/06/py_pyenv_usage/" />
+
+<meta itemprop="name" content="Python re 模块">
+<meta itemprop="description" content="python re 模块正则用法"><meta itemprop="datePublished" content="2022-01-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3946">
+<meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python re 模块"/>
+<meta name="twitter:description" content="python re 模块正则用法"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://github.com/Pilchark/pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/Pilchark/pilchark.github.io/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/Pilchark/pilchark.github.io/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/Pilchark/pilchark.github.io/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/Pilchark/pilchark.github.io/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/Pilchark/pilchark.github.io/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="5">data_structure<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link" rel="35">python<span
+               class="tag-list-count">35</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">35</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">35</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" class="title">TOML : python 的好伙伴</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" class="title">使用 MkDocs 构建 python 项目的文档</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" class="title">使用 pytest 让测试更高效</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/Pilchark/pilchark.github.io/2022/01/python_re_module/"
+    >Python re 模块</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://github.com/Pilchark/pilchark.github.io/2022/01/python_re_module/" class="article-date">
+  <time datetime="2022-01-05 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-01-05</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/python/"> Python </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/python/"> python </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3946字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 8分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<ul>
+<li>参考 : <a href="https://wiki.jikexueyuan.com/project/explore-python/Regular-Expressions/re.html">https://wiki.jikexueyuan.com/project/explore-python/Regular-Expressions/re.html</a></li>
+</ul>
+<h2 id="1-re-模块">1. re 模块</h2>
+<p>在 Python 中，我们可以使用内置的 re 模块来使用正则表达式。</p>
+<p>有一点需要特别注意的是，正则表达式使用 <code>\</code> 对特殊字符进行转义，比如，为了匹配字符串 &lsquo;python.org&rsquo;，我们需要使用正则表达式 <code>'python\.org'</code>，而 Python 的字符串本身也用 <code>\</code> 转义，所以上面的正则表达式在 Python 中应该写成 <code>'python\\.org'</code>，这会很容易陷入 <code>\</code> 的困扰中，因此，我们建议使用 Python 的原始字符串，只需加一个 r 前缀，上面的正则表达式可以写成：</p>
+<pre><code>```py
+r'python\.org'
+```
+</code></pre>
+<p>re 模块提供了不少有用的函数，用以匹配字符串，比如：</p>
+<ul>
+<li>compile 函数</li>
+<li>match 函数</li>
+<li>search 函数</li>
+<li>findall 函数</li>
+<li>finditer 函数</li>
+<li>split 函数</li>
+<li>sub 函数</li>
+<li>subn 函数</li>
+</ul>
+<p>re 模块的一般使用步骤如下：</p>
+<ul>
+<li>使用 compile 函数将正则表达式的字符串形式编译为一个 Pattern 对象</li>
+<li>通过 Pattern 对象提供的一系列方法对文本进行匹配查找，获得匹配结果（一个 Match 对象）</li>
+<li>最后使用 Match 对象提供的属性和方法获得信息，根据需要进行其他的操作</li>
+</ul>
+<h2 id="2-compile-函数">2. compile 函数</h2>
+<p><strong>compile 函数用于编译正则表达式，生成一个 Pattern 对象</strong>，它的一般使用形式如下：</p>
+<pre><code>```py
+re.compile(pattern[, flag])
+```
+</code></pre>
+<p>其中，pattern 是一个字符串形式的正则表达式，flag 是一个可选参数，表示匹配模式，比如忽略大小写，多行模式等。</p>
+<p>下面，让我们看看例子。</p>
+<pre><code>```py
+import re
+
+# 将正则表达式编译成 Pattern 对象 
+pattern = re.compile(r'\d+')
+```
+</code></pre>
+<p>在上面，我们已将一个正则表达式编译成 Pattern 对象，接下来，我们就可以利用 pattern 的一系列方法对文本进行匹配查找了。Pattern 对象的一些常用方法主要有：</p>
+<ul>
+<li>match 方法</li>
+<li>search 方法</li>
+<li>findall 方法</li>
+<li>finditer 方法</li>
+<li>split 方法</li>
+<li>sub 方法</li>
+<li>subn 方法</li>
+</ul>
+<h3 id="21-match-方法">2.1. match 方法</h3>
+<p>match 方法用于查找字符串的头部（也可以指定起始位置），它是一次匹配，只要找到了一个匹配的结果就返回，而不是查找所有匹配的结果。它的一般使用形式如下：</p>
+<pre><code>```py
+match(string[, pos[, endpos]])
+```
+</code></pre>
+<p>其中，string 是待匹配的字符串，pos 和 endpos 是可选参数，指定字符串的起始和终点位置，默认值分别是 0 和 len (字符串长度)。因此，<strong>当你不指定 pos 和 endpos 时，match 方法默认匹配字符串的头部</strong>。</p>
+<p>当匹配成功时，返回一个 Match 对象，如果没有匹配上，则返回 None。</p>
+<p>看看例子。</p>
+<pre><code>```py
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; pattern = re.compile(r'\d+')                    # 用于匹配至少一个数字
+&gt;&gt;&gt; m = pattern.match('one12twothree34four')        # 查找头部，没有匹配
+&gt;&gt;&gt; print m
+None
+&gt;&gt;&gt; m = pattern.match('one12twothree34four', 2, 10) # 从'e'的位置开始匹配，没有匹配
+&gt;&gt;&gt; print m
+None
+&gt;&gt;&gt; m = pattern.match('one12twothree34four', 3, 10) # 从'1'的位置开始匹配，正好匹配
+&gt;&gt;&gt; print m                                         # 返回一个 Match 对象
+&lt;_sre.SRE_Match object at 0x10a42aac0&gt;
+&gt;&gt;&gt; m.group(0)   # 可省略 0
+'12'
+&gt;&gt;&gt; m.start(0)   # 可省略 0
+3
+&gt;&gt;&gt; m.end(0)     # 可省略 0
+5
+&gt;&gt;&gt; m.span(0)    # 可省略 0
+(3, 5)
+```
+</code></pre>
+<p>在上面，当匹配成功时返回一个 Match 对象，其中：</p>
+<ul>
+<li><code>group([group1, …])</code> 方法用于获得一个或多个分组匹配的字符串，当要获得整个匹配的子串时，可直接使用 <code>group()</code> 或 <code>group(0)</code>；</li>
+<li><code>start([group])</code> 方法用于获取分组匹配的子串在整个字符串中的起始位置（子串第一个字符的索引），参数默认值为 0；</li>
+<li><code>end([group])</code> 方法用于获取分组匹配的子串在整个字符串中的结束位置（子串最后一个字符的索引+1），参数默认值为 0；</li>
+<li><code>span([group])</code> 方法返回 <code>(start(group), end(group))</code>。</li>
+</ul>
+<p>再看看一个例子：</p>
+<pre><code>```py
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; pattern = re.compile(r'([a-z]+) ([a-z]+)', re.I)   # re.I 表示忽略大小写
+&gt;&gt;&gt; m = pattern.match('Hello World Wide Web')
+&gt;&gt;&gt; print m                               # 匹配成功，返回一个 Match 对象
+&lt;_sre.SRE_Match object at 0x10bea83e8&gt;
+&gt;&gt;&gt; m.group(0)                            # 返回匹配成功的整个子串
+'Hello World'
+&gt;&gt;&gt; m.span(0)                             # 返回匹配成功的整个子串的索引
+(0, 11)
+&gt;&gt;&gt; m.group(1)                            # 返回第一个分组匹配成功的子串
+'Hello'
+&gt;&gt;&gt; m.span(1)                             # 返回第一个分组匹配成功的子串的索引
+(0, 5)
+&gt;&gt;&gt; m.group(2)                            # 返回第二个分组匹配成功的子串
+'World'
+&gt;&gt;&gt; m.span(2)                             # 返回第二个分组匹配成功的子串
+(6, 11)
+&gt;&gt;&gt; m.groups()                            # 等价于 (m.group(1), m.group(2), ...)
+('Hello', 'World')
+&gt;&gt;&gt; m.group(3)                            # 不存在第三个分组
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+IndexError: no such group
+```
+</code></pre>
+<h3 id="22-search-方法">2.2. search 方法</h3>
+<p>search 方法用于查找字符串的任何位置，它也是一次匹配，只要找到了一个匹配的结果就返回，而不是查找所有匹配的结果，它的一般使用形式如下：</p>
+<pre><code>```py
+search(string[, pos[, endpos]])
+```
+</code></pre>
+<p>其中，string 是待匹配的字符串，pos 和 endpos 是可选参数，指定字符串的起始和终点位置，默认值分别是 0 和 len (字符串长度)。</p>
+<p>当匹配成功时，返回一个 Match 对象，如果没有匹配上，则返回 None。</p>
+<p>让我们看看例子：</p>
+<pre><code>```py
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; pattern = re.compile('\d+')
+&gt;&gt;&gt; m = pattern.search('one12twothree34four')  # 这里如果使用 match 方法则不匹配
+&gt;&gt;&gt; m
+&lt;_sre.SRE_Match object at 0x10cc03ac0&gt;
+&gt;&gt;&gt; m.group()
+'12'
+&gt;&gt;&gt; m = pattern.search('one12twothree34four', 10, 30)  # 指定字符串区间
+&gt;&gt;&gt; m
+&lt;_sre.SRE_Match object at 0x10cc03b28&gt;
+&gt;&gt;&gt; m.group()
+'34'
+&gt;&gt;&gt; m.span()
+(13, 15)
+```
+</code></pre>
+<p>再来看一个例子：</p>
+<pre><code>```py
+# -*- coding: utf-8 -*-
+
+import re
+
+# 将正则表达式编译成 Pattern 对象
+pattern = re.compile(r'\d+') 
+
+# 使用 search() 查找匹配的子串，不存在匹配的子串时将返回 None 
+# 这里使用 match() 无法成功匹配 
+m = pattern.search('hello 123456 789') 
+
+if m: 
+    # 使用 Match 获得分组信息 
+    print 'matching string:',m.group()
+    print 'position:',m.span()
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+matching string: 123456
+position: (6, 12)
+```
+</code></pre>
+<h3 id="23-findall-方法">2.3. findall 方法</h3>
+<p>上面的 match 和 search 方法都是一次匹配，只要找到了一个匹配的结果就返回。然而，在大多数时候，我们需要搜索整个字符串，获得所有匹配的结果。</p>
+<p>findall 方法的使用形式如下：</p>
+<pre><code>```py
+findall(string[, pos[, endpos]])
+```
+</code></pre>
+<p>其中，string 是待匹配的字符串，pos 和 endpos 是可选参数，指定字符串的起始和终点位置，默认值分别是 0 和 len (字符串长度)。</p>
+<p>findall 以列表形式返回全部能匹配的子串，如果没有匹配，则返回一个空列表。</p>
+<p>看看例子：</p>
+<pre><code>```py
+import re
+
+pattern = re.compile(r'\d+')   # 查找数字
+result1 = pattern.findall('hello 123456 789')
+result2 = pattern.findall('one1two2three3four4', 0, 10)
+
+print result1
+print result2
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+['123456', '789']
+['1', '2']
+```
+</code></pre>
+<h3 id="24-finditer-方法">2.4. finditer 方法</h3>
+<p>finditer 方法的行为跟 findall 的行为类似，也是搜索整个字符串，获得所有匹配的结果。但它返回一个顺序访问每一个匹配结果（Match 对象）的迭代器。</p>
+<p>看看例子：</p>
+<pre><code>```py
+# -*- coding: utf-8 -*-
+
+import re
+
+pattern = re.compile(r'\d+')
+
+result_iter1 = pattern.finditer('hello 123456 789')
+result_iter2 = pattern.finditer('one1two2three3four4', 0, 10)
+
+print type(result_iter1)
+print type(result_iter2)
+
+print 'result1...'
+for m1 in result_iter1:   # m1 是 Match 对象
+    print 'matching string: {}, position: {}'.format(m1.group(), m1.span())
+
+print 'result2...'
+for m2 in result_iter2:
+    print 'matching string: {}, position: {}'.format(m2.group(), m2.span())
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+&lt;type 'callable-iterator'&gt;
+&lt;type 'callable-iterator'&gt;
+result1...
+matching string: 123456, position: (6, 12)
+matching string: 789, position: (13, 16)
+result2...
+matching string: 1, position: (3, 4)
+matching string: 2, position: (7, 8)
+```
+</code></pre>
+<h3 id="25-split-方法">2.5. split 方法</h3>
+<p>split 方法按照能够匹配的子串将字符串分割后返回列表，它的使用形式如下：</p>
+<pre><code>```py
+split(string[, maxsplit])
+```
+</code></pre>
+<p>其中，maxsplit 用于指定最大分割次数，不指定将全部分割。</p>
+<p>看看例子：</p>
+<pre><code>```py
+import re
+
+p = re.compile(r'[\s\,\;]+')
+print p.split('a,b;; c   d')
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+['a', 'b', 'c', 'd']
+```
+</code></pre>
+<h3 id="26-sub-方法">2.6. sub 方法</h3>
+<p>sub 方法用于替换。它的使用形式如下：</p>
+<pre><code>```py
+sub(repl, string[, count])
+```
+</code></pre>
+<p>其中，repl 可以是字符串也可以是一个函数：</p>
+<ul>
+<li>如果 repl 是字符串，则会使用 repl 去替换字符串每一个匹配的子串，并返回替换后的字符串，另外，repl 还可以使用 <code>\id</code> 的形式来引用分组，但不能使用编号 0；</li>
+<li>如果 repl 是函数，这个方法应当只接受一个参数（Match 对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。</li>
+</ul>
+<p>count 用于指定最多替换次数，不指定时全部替换。</p>
+<p>看看例子：</p>
+<pre><code>```py
+import re
+
+p = re.compile(r'(\w+) (\w+)')
+s = 'hello 123, hello 456'
+
+def func(m):
+    return 'hi' + ' ' + m.group(2)
+
+print p.sub(r'hello world', s)  # 使用 'hello world' 替换 'hello 123' 和 'hello 456'
+print p.sub(r'\2 \1', s)        # 引用分组
+print p.sub(func, s)
+print p.sub(func, s, 1)         # 最多替换一次
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+hello world, hello world
+123 hello, 456 hello
+hi 123, hi 456
+hi 123, hello 456
+```
+</code></pre>
+<h3 id="27-subn-方法">2.7. subn 方法</h3>
+<p>subn 方法跟 sub 方法的行为类似，也用于替换。它的使用形式如下：</p>
+<pre><code>```py
+subn(repl, string[, count])
+```
+</code></pre>
+<p>它返回一个元组：</p>
+<pre><code>```py
+(sub(repl, string[, count]), 替换次数)
+```
+</code></pre>
+<p>元组有两个元素，第一个元素是使用 sub 方法的结果，第二个元素返回原字符串被替换的次数。</p>
+<p>看看例子：</p>
+<pre><code>```py
+import re
+
+p = re.compile(r'(\w+) (\w+)')
+s = 'hello 123, hello 456'
+
+def func(m):
+    return 'hi' + ' ' + m.group(2)
+
+print p.subn(r'hello world', s)
+print p.subn(r'\2 \1', s)
+print p.subn(func, s)
+print p.subn(func, s, 1)
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+('hello world, hello world', 2)
+('123 hello, 456 hello', 2)
+('hi 123, hi 456', 2)
+('hi 123, hello 456', 1)
+```
+</code></pre>
+<h2 id="3-其他函数">3. 其他函数</h2>
+<p>事实上，使用 compile 函数生成的 Pattern 对象的一系列方法跟 re 模块的多数函数是对应的，但在使用上有细微差别。</p>
+<h3 id="31-match-函数">3.1. match 函数</h3>
+<p>match 函数的使用形式如下：</p>
+<pre><code>```py
+re.match(pattern, string[, flags]):
+```
+</code></pre>
+<p>其中，pattern 是正则表达式的字符串形式，比如 <code>\d+</code>, <code>[a-z]+</code>。</p>
+<p>而 Pattern 对象的 match 方法使用形式是：</p>
+<pre><code>```py
+match(string[, pos[, endpos]])
+```
+</code></pre>
+<p>可以看到，match 函数不能指定字符串的区间，它只能搜索头部，看看例子：</p>
+<pre><code>```py
+import re
+
+m1 = re.match(r'\d+', 'One12twothree34four')
+if m1:
+    print 'matching string:',m1.group()
+else:
+    print 'm1 is:',m1
+
+m2 = re.match(r'\d+', '12twothree34four')
+if m2:
+    print 'matching string:', m2.group()
+else:
+    print 'm2 is:',m2
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+m1 is: None
+matching string: 12
+```
+</code></pre>
+<h3 id="32-search-函数">3.2. search 函数</h3>
+<p>search 函数的使用形式如下：</p>
+<pre><code>```py
+re.search(pattern, string[, flags])
+```
+</code></pre>
+<p>search 函数不能指定字符串的搜索区间，用法跟 Pattern 对象的 search 方法类似。</p>
+<h3 id="33-findall-函数">3.3. findall 函数</h3>
+<p>findall 函数的使用形式如下：</p>
+<pre><code>```py
+re.findall(pattern, string[, flags])
+```
+</code></pre>
+<p>findall 函数不能指定字符串的搜索区间，用法跟 Pattern 对象的 findall 方法类似。</p>
+<p>看看例子：</p>
+<pre><code>```py
+import re
+
+print re.findall(r'\d+', 'hello 12345 789')
+
+# 输出
+['12345', '789']
+```
+</code></pre>
+<h3 id="34-finditer-函数">3.4. finditer 函数</h3>
+<p>finditer 函数的使用方法跟 Pattern 的 finditer 方法类似，形式如下：</p>
+<pre><code>```py
+re.finditer(pattern, string[, flags])
+```
+</code></pre>
+<h3 id="35-split-函数">3.5. split 函数</h3>
+<p>split 函数的使用形式如下：</p>
+<pre><code>```py
+re.split(pattern, string[, maxsplit])
+```
+</code></pre>
+<h3 id="36-sub-函数">3.6. sub 函数</h3>
+<p>sub 函数的使用形式如下：</p>
+<pre><code>```py
+re.sub(pattern, repl, string[, count])
+```
+</code></pre>
+<h3 id="37-subn-函数">3.7. subn 函数</h3>
+<p>subn 函数的使用形式如下：</p>
+<pre><code>```py
+re.subn(pattern, repl, string[, count])
+```
+</code></pre>
+<h2 id="4-到底用哪种方式">4. 到底用哪种方式</h2>
+<p>从上文可以看到，使用 re 模块有两种方式：</p>
+<ul>
+<li>使用 re.compile 函数生成一个 Pattern 对象，然后使用 Pattern 对象的一系列方法对文本进行匹配查找；</li>
+<li>直接使用 re.match, re.search 和 re.findall 等函数直接对文本匹配查找；</li>
+</ul>
+<p>下面，我们用一个例子展示这两种方法。</p>
+<p>先看第 1 种用法：</p>
+<pre><code>```py
+import re
+
+# 将正则表达式先编译成 Pattern 对象
+pattern = re.compile(r'\d+')
+
+print pattern.match('123, 123')
+print pattern.search('234, 234')
+print pattern.findall('345, 345')
+```
+</code></pre>
+<p>再看第 2 种用法：</p>
+<pre><code>```py
+import re
+
+print re.match(r'\d+', '123, 123')
+print re.search(r'\d+', '234, 234')
+print re.findall(r'\d+', '345, 345')
+```
+</code></pre>
+<p>如果一个正则表达式需要用到多次（比如上面的 <code>\d+</code>），在多种场合经常需要被用到，出于效率的考虑，我们应该预先编译该正则表达式，生成一个 Pattern 对象，再使用该对象的一系列方法对需要匹配的文件进行匹配；而如果直接使用 re.match, re.search 等函数，每次传入一个正则表达式，它都会被编译一次，效率就会大打折扣。</p>
+<p>因此，我们推荐使用第 1 种用法。</p>
+<h2 id="5-匹配中文">5. 匹配中文</h2>
+<p>在某些情况下，我们想匹配文本中的汉字，有一点需要注意的是，<a href="http://blog.oasisfeng.com/2006/10/19/full-cjk-unicode-range/">中文的 unicode 编码范围</a> 主要在 <code>[\u4e00-\u9fa5]</code>，这里说主要是因为这个范围并不完整，比如没有包括全角（中文）标点，不过，在大部分情况下，应该是够用的。</p>
+<p>假设现在想把字符串 <code>title = u'你好，hello，世界'</code> 中的中文提取出来，可以这么做：</p>
+<pre><code>```py
+# -*- coding: utf-8 -*-
+
+import re
+
+title = u'你好，hello，世界'
+pattern = re.compile(ur'[\u4e00-\u9fa5]+')
+result = pattern.findall(title)
+
+print result
+```
+</code></pre>
+<p>注意到，我们在正则表达式前面加上了两个前缀 <code>ur</code>，其中 <code>r</code> 表示使用原始字符串，<code>u</code> 表示是 unicode 字符串。</p>
+<p>执行结果:</p>
+<pre><code>```py
+[u'\u4f60\u597d', u'\u4e16\u754c']
+```
+</code></pre>
+<h2 id="6-贪婪匹配">6. 贪婪匹配</h2>
+<p>在 Python 中，正则匹配默认是<strong>贪婪匹配</strong>（在少数语言中可能是非贪婪），也就是<strong>匹配尽可能多的字符</strong>。</p>
+<p>比如，我们想找出字符串中的所有 <code>div</code> 块：</p>
+<pre><code>```py
+import re
+
+content = 'aa&lt;div&gt;test1&lt;/div&gt;bb&lt;div&gt;test2&lt;/div&gt;cc'
+pattern = re.compile(r'&lt;div&gt;.*&lt;/div&gt;')
+result = pattern.findall(content)
+
+print result
+```
+</code></pre>
+<p>执行结果：</p>
+<pre><code>```py
+['&lt;div&gt;test1&lt;/div&gt;bb&lt;div&gt;test2&lt;/div&gt;']
+```
+</code></pre>
+<p>由于正则匹配是贪婪匹配，也就是尽可能多的匹配，因此，在成功匹配到第一个 <code>&lt;/div&gt;</code> 时，它还会向右尝试匹配，查看是否还有更长的可以成功匹配的子串。</p>
+<p>如果我们想非贪婪匹配，可以加一个 <code>?</code>，如下：</p>
+<pre><code>```py
+import re
+
+content = 'aa&lt;div&gt;test1&lt;/div&gt;bb&lt;div&gt;test2&lt;/div&gt;cc'
+pattern = re.compile(r'&lt;div&gt;.*?&lt;/div&gt;')    # 加上 ?
+result = pattern.findall(content)
+
+print result
+```
+</code></pre>
+<p>结果：</p>
+<pre><code>```py
+['&lt;div&gt;test1&lt;/div&gt;', '&lt;div&gt;test2&lt;/div&gt;']
+```
+</code></pre>
+<h2 id="7-小结">7. 小结</h2>
+<ul>
+<li>
+<p>re 模块的一般使用步骤如下：</p>
+</li>
+<li>
+<p>使用 compile 函数将正则表达式的字符串形式编译为一个 Pattern 对象；</p>
+</li>
+<li>
+<p>通过 Pattern 对象提供的一系列方法对文本进行匹配查找，获得匹配结果（一个 Match 对象）；</p>
+</li>
+<li>
+<p>最后使用 Match 对象提供的属性和方法获得信息，根据需要进行其他的操作；* Python 的正则匹配默认是贪婪匹配。</p>
+</li>
+</ul>
+<h2 id="8-参考资料">8. 参考资料</h2>
+<ul>
+<li>
+<p><a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html">Python正则表达式指南</a></p>
+</li>
+<li>
+<p><a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832260566c26442c671fa489ebc6fe85badda25cd000">正则表达式 - 廖雪峰的官方网站</a></p>
+</li>
+</ul>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://github.com/Pilchark/pilchark.github.io/2022/01/python_re_module/" title="Python re 模块" target="_blank" rel="external">https://github.com/Pilchark/pilchark.github.io/2022/01/python_re_module/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://github.com/Pilchark/pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2022/01/python_singleton/" title="Python 单例模式(Singleton) 的N种实现"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2022/01/py_pythoncpythoncython/"
+                    title="Cython vs Python vs CPython"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://github.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://github.com/Pilchark/pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

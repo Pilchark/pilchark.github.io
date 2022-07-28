@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Pilchark Blog</title>
+    <link>https://github.com/Pilchark/pilchark.github.io/categories/python/</link>
+    <description>Recent content in Python on Pilchark Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>CC BY 4.0 CN</copyright>
+    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://github.com/Pilchark/pilchark.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python 单例模式(Singleton) 的N种实现</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2022/01/python_singleton/</link>
+      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2022/01/python_singleton/</guid>
+      <description>参考: https://cloud.tencent.com/developer/article/1163891 很多初学者喜欢用全局变量，因为这比函数的参数传来传去更容易让人理解。确实在很多场景下用全局变量很方便。不过如果代码规模增大，并且有多</description>
+    </item>
+    
+    <item>
+      <title>MongoDB 基础使用</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mongodb/</link>
+      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mongodb/</guid>
+      <description>参考文章: https://www.w3resource.com/mongodb-exercises/ 1. 基础练习 连接数据库 mongodb://user:password@localhost:27017 选择数据库 use(&#39;database_name&#39;); 插入数据 db.inventory.insertMany([ { item: &amp;quot;journal&amp;quot;, qty: 25, size: { h: 14, w: 21, uom: &amp;quot;cm&amp;quot; }, status: &amp;quot;A&amp;quot; }, { item: &amp;quot;notebook&amp;quot;, qty: 50, size: { h: 8.5, w: 11, uom: &amp;quot;in&amp;quot; }, status: &amp;quot;A&amp;quot; }, { item: &amp;quot;paper&amp;quot;, qty: 100, size: { h:</description>
+    </item>
+    
+    <item>
+      <title>MySQL 基础使用</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mysql/</link>
+      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mysql/</guid>
+      <description>1. MySQL 安装配置 1.1. 安装 安装 linux ：apt install mysql-server windows 配置文件解析 /etc/my.cnf 或者 /etc/my.cnf.d/server.cnf sudo mysql ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;root&#39;; phpadmin dbeaver 1.2. 连接数据库 mysqlclient 连接(django ORM 依赖工具) sudo apt-get install libmysqlclient-dev sudo apt install</description>
+    </item>
+    
+    <item>
+      <title>树莓派入门玩法</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/pi/</link>
+      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/pi/</guid>
+      <description>安装系统 下载镜像 下载格式化软件: SD Card Fomatter 下载烧录软件: Win32DiskImager 烧录 tf 卡 配置 ssh : 进入到根目录，新建一个名为ssh的空白文件 配置时区：sudo raspi-config 配置 apt 源</description>
+    </item>
+    
+    <item>
+      <title>python 中 == 和 is 的区别</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_is_and_equal/</link>
+      <pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_is_and_equal/</guid>
+      <description>参考文章 : https://www.cnblogs.com/semon-code/p/8215230.html python 对象包含三个基本要素 : id(身份标识)， type(数据类型), value(值) == 用来比较两个对象的 value 是否相等 is 用来比较两个对象</description>
+    </item>
+    
+    <item>
+      <title>Python Dataclass 简介</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_data_classes/</link>
+      <pubDate>Tue, 07 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_data_classes/</guid>
+      <description>参考文章 : https://realpython.com/python-data-classes/ Python 3.7 的一个新功能是 dataclass, dataclass 是一个包含主要数据的类，且没有任何限制，使用 @dataclass 装饰符创建. 与普通类比较: ```py from dataclasses import dataclass @dataclass class DataClassCard: rank: str suit: str class RegularCard: def __init__(self, rank,</description>
+    </item>
+    
+    <item>
+      <title># Python 常用的测试框架</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_test_tool/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_test_tool/</guid>
+      <description>单元测试与模块测试 单元测试 是应用程序中的最小可测试部分 在面向过程中，单元可以是整个模块，但常见的是单个函数或过程 在面向对象中，单元通常是整个</description>
+    </item>
+    
+    <item>
+      <title># python 中 super.init 用法</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_super_init/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_super_init/</guid>
+      <description>参考文章 : https://blog.csdn.net/a__int__/article/details/104600972 解释 super().__init__()，就是继承父类的 init 方法，同样可以使用 super().[方法名]([参数])，去继承其他方</description>
+    </item>
+    
+    <item>
+      <title>python collections 库</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_collections_lib/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_collections_lib/</guid>
+      <description>参考文章 : https://www.liaoxuefeng.com/wiki/1016959663602400/1017681679479008 https://docs.python.org/zh-cn/3/library/collections.html collections是Python内建的一个集合模块，提供了许多有用的集合类。 namedtuple 我们知道tuple可以表示不变集合，例如，一</description>
+    </item>
+    
+    <item>
+      <title>python print 函数</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_print/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_print/</guid>
+      <description>参考文章: https://realpython.com/python-print/ https://stackoverflow.com/questions/5082452/string-formatting-vs-format-vs-f-string-literal print 输出的三种格式比较 1. % 方法 格式: print(&amp;quot;hi there %s&amp;quot; % name) 缺点: 如果 name = (1,2,3),则输出会报错 TypeError,需要改为 print(&amp;quot;hi there %s&amp;quot; % (name,)) 2.</description>
+    </item>
+    
+    <item>
+      <title>Python read, readline &amp; readlines</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_readreadlinereadlines/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_readreadlinereadlines/</guid>
+      <description>参考文章 : https://blog.csdn.net/quiet_girl/article/details/80113591 使用方法 ```py # python3 # -*- coding: utf-8 -*- # @Time : 2018/4/27 13:48 import datetime # 下面是read()方法的使用，“r”表示read with open(&#39;testRead.txt&#39;, &#39;r&#39;, encoding=&#39;UTF-8&#39;) as f1: results = f1.read() # 读取数据 print(results) # 下面是r</description>
+    </item>
+    
+    <item>
+      <title>python round 函数</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_round/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_round/</guid>
+      <description>参考文章 : https://realpython.com/python-rounding/ python 内置 round 函数 1. math.floor 和 math.ceil math.floor() 返回 x 的向下取整，小于或等于 x 的最大整数 math.ceil() 返回 x 的向上取整，dayu或等于 x 的最小整数 2. 实现四舍五入 def round_half_up(n, decimals=0):</description>
+    </item>
+    
+    <item>
+      <title>python 包管理工具</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_pip_and_pipx/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_pip_and_pipx/</guid>
+      <description>系统 pip 用法 设置国内镜像源 临时设置 : pip install -i https://pypi.tuna.tsinghua.edu.cn/simple [包名] 永久设置 : pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple 国内镜像网站 阿里云 http://mirrors.aliyun.com/pypi/simple/ 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/ 豆瓣 http://pypi.douban.com/simple/ 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ 中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/ 列</description>
+    </item>
+    
+    <item>
+      <title>python 的 OrderedDict 与 dict</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_ordereddict/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_ordereddict/</guid>
+      <description>原文 : https://realpython.com/python-ordereddict/ 前言 : Python 3.6中已更改, 内置dict类现在也保持有序。因此，Python社区中的许多人现在想知道OrderedDict是否仍然有用。</description>
+    </item>
+    
+    <item>
+      <title>Python 中 map(),filter() 和 reduce() 详解</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_mapfilterreduce/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_mapfilterreduce/</guid>
+      <description>参考文章 : http://c.biancheng.net/view/5342.html https://stackabuse.com/map-filter-and-reduce-in-python-with-examples/ Python 仅对函数式编程提供了部分支持，主要包括 map()、filter() 和 reduce() 这 3 个函数，它们通常都结合 lambda 匿名函数一起使用。 lambda 匿名函</description>
+    </item>
+    
+    <item>
+      <title>python 中的 *args 与 **kwargs</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_args_and_kwargs/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_args_and_kwargs/</guid>
+      <description>参考文章 : https://www.cnblogs.com/Zi-Lai-Ye/p/9651213.html 描述 *args：任意个无名参数，类型为tuple或list.用于向函数发送没有关键字的可变长度参数列表 **kwargs：任意个关</description>
+    </item>
+    
+    <item>
+      <title>浅拷贝和深拷贝</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_copy_and_deepcopy/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_copy_and_deepcopy/</guid>
+      <description>参考文章 : https://www.cnblogs.com/semon-code/p/8231041.html 对象赋值 对象赋值不会复制对象，它只会复制一个对象引用，不会开辟新的内存空间. test = [&amp;quot;test&amp;quot;, 18, [&amp;quot;python&amp;quot;,&amp;quot;java&amp;quot;]] copytest = test print(id(test)) # 4559314816 print(id(copytest)) # 4559314816 # 将test赋值给cop</description>
+    </item>
+    
+    <item>
+      <title>使用 namedtuple 写出简练的代码</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/py_namedtuple/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/py_namedtuple/</guid>
+      <description>原文 : https://realpy.thoncom/python-namedtuple/ 1. 使用 namedtuple 编写 Pythonic 代码 Pythonnamedtuple()是工厂函数，可在中使用collections。它允许您tuple使用命名字段创</description>
+    </item>
+    
+    <item>
+      <title>python 的基本数据结构</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_data_structure/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_data_structure/</guid>
+      <description>参考 : http://codingdict.com/article/4851 单链表 : https://zhuanlan.zhihu.com/p/95090717 1. 链表 1.1. 单链表 add_first(L,e): newest = Node(e) newest.next = L.head L.head = newest L.size += 1 class Node(object): def __init__(self, item): self.item = item self.next = None class SingleLinkList(object): def __init__(self, node=None): self.__head = node def is_empty(self): return self.__head is None def length(self): &amp;quot;&amp;quot;&amp;q</description>
+    </item>
+    
+    <item>
+      <title>python 的数据类型</title>
+      <link>https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_data_type/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://github.com/Pilchark/pilchark.github.io/2021/12/ds_python_data_type/</guid>
+      <description>参考 : https://docs.python.org/zh-cn/3/library/stdtypes.html?highlight=isalnum#bytearray.isalnum 内置数据类型 类型 缩写 文本类型： str 数值类型： int, float, complex 序列类型： list, tuple, range 映射类型： dict 集合类型： set, frozenset 布尔类型： bool 二进制类型： bytes, bytearray, memoryview python 查看数据类</description>
+    </item>
+    
+  </channel>
+</rss>

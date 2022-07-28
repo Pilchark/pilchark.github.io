@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Python 嵌套函数 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="Python 嵌套函数" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>Python 嵌套函数 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://github.com/Pilchark/pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Python 嵌套函数" />
+<meta property="og:description" content="Python 嵌套函数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/Pilchark/pilchark.github.io/2022/04/py_inner_function/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-04-19T00:00:00+00:00" />
+<meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/06/py_pyenv_usage/" />
+
+<meta itemprop="name" content="Python 嵌套函数">
+<meta itemprop="description" content="Python 嵌套函数"><meta itemprop="datePublished" content="2022-04-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-04-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1098">
+<meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python 嵌套函数"/>
+<meta name="twitter:description" content="Python 嵌套函数"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://github.com/Pilchark/pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/Pilchark/pilchark.github.io/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/Pilchark/pilchark.github.io/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/Pilchark/pilchark.github.io/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/Pilchark/pilchark.github.io/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/Pilchark/pilchark.github.io/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="5">data_structure<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link" rel="35">python<span
+               class="tag-list-count">35</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">35</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">35</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" class="title">TOML : python 的好伙伴</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" class="title">使用 MkDocs 构建 python 项目的文档</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" class="title">使用 pytest 让测试更高效</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/Pilchark/pilchark.github.io/2022/04/py_inner_function/"
+    >Python 嵌套函数</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://github.com/Pilchark/pilchark.github.io/2022/04/py_inner_function/" class="article-date">
+  <time datetime="2022-04-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-04-19</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/python/"> Python </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/python/"> python </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1098字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<ul>
+<li>参考 : <a href="https://realpython.com/inner-functions-what-are-they-good-for/">https://realpython.com/inner-functions-what-are-they-good-for/</a></li>
+</ul>
+<hr>
+<h2 id="1-创建-python-嵌套函数">1. 创建 python 嵌套函数</h2>
+<ol>
+<li>代码:</li>
+</ol>
+<pre><code class="language-py">def outer_func(who):
+    def inner_func():
+        print(&quot;Hello, {who}!&quot;)
+    inner_func()
+
+&gt;&gt;&gt; outer_func(&quot;World!&quot;)
+</code></pre>
+<h2 id="2-使用嵌套函数的基本方法">2. 使用嵌套函数的基本方法</h2>
+<h3 id="21-封装">2.1. 封装</h3>
+<p>保护和隐藏一个函数, 无法直接调用内部被隐藏的函数</p>
+<pre><code class="language-py">def increment(number):
+    def inner_increment():
+        return number + 1
+    return inner_increment()
+
+&gt;&gt;&gt; increment(10)
+#11
+&gt;&gt;&gt; inner_increment()
+# error
+</code></pre>
+<h3 id="22-辅助函数功能">2.2. 辅助函数功能</h3>
+<pre><code class="language-py"># hotspots.py
+
+import csv
+from collections import Counter
+
+def process_hotspots(file):
+    def most_common_provider(file_obj):
+        hotspots = []
+        with file_obj as csv_file:
+            content = csv.DictReader(csv_file)
+
+            for row in content:
+                hotspots.append(row[&quot;Provider&quot;])
+
+        counter = Counter(hotspots)
+        print(
+            f&quot;There are {len(hotspots)} Wi-Fi hotspots in NYC.\n&quot;
+            f&quot;{counter.most_common(1)[0][0]} has the most with &quot;
+            f&quot;{counter.most_common(1)[0][1]}.&quot;
+        )
+
+    if isinstance(file, str):
+        # Got a string-based filepath
+        file_obj = open(file, &quot;r&quot;)
+        most_common_provider(file_obj)
+    else:
+        # Got a file object
+        most_common_provider(file)
+
+&gt;&gt;&gt; from hotspots import process_hotspots
+
+&gt;&gt;&gt; file_obj = open(&quot;./NYC_Wi-Fi_Hotspot_Locations.csv&quot;, &quot;r&quot;)
+&gt;&gt;&gt; process_hotspots(file_obj)
+There are 3319 Wi-Fi hotspots in NYC.
+LinkNYC - Citybridge has the most with 1868.
+
+&gt;&gt;&gt; process_hotspots(&quot;./NYC_Wi-Fi_Hotspot_Locations.csv&quot;)
+There are 3319 Wi-Fi hotspots in NYC.
+LinkNYC - Citybridge has the most with 1868.
+</code></pre>
+<ul>
+<li>此时无论传入文件路径或一个变量都可以正确读取文件</li>
+</ul>
+<h2 id="3-闭包">3. 闭包</h2>
+<ol>
+<li>定义一个闭包
+<ul>
+<li>创建一个嵌套函数</li>
+<li>从封闭函数引用变量</li>
+<li>返回嵌套函数</li>
+</ul>
+</li>
+</ol>
+<h3 id="31-在闭包中保留状态">3.1. 在闭包中保留状态</h3>
+<ol>
+<li>
+<p>了解闭包工厂函数。闭包是由其他函数返回的动态创建的函数。 他们的主要特点是他们可以完全访问在创建闭包的本地命名空间中定义的变量和名称，即使封闭函数已经返回并完成执行。</p>
+</li>
+<li>
+<p>思考下列函数：</p>
+<pre><code class="language-py"># powers.py
+def generate_power(exponent):
+    def power(base):
+        return base ** exponent
+    return power
+</code></pre>
+</li>
+<li>
+<p>实现过程</p>
+<ul>
+<li>第 3 行 创建 generate_power()，这是一个闭包工厂函数。 这意味着它每次被调用时都会创建一个新的闭包，然后将其返回给调用者。</li>
+<li>第 4 行 定义 power()，这是一个内部函数，接受单个参数， base, 并返回表达式的结果 base ** exponent.</li>
+<li>第 6 行 返回 power作为函数对象，而不调用它。</li>
+</ul>
+</li>
+<li>
+<p>调用 <code>generate_power()</code> 时：</p>
+<ul>
+<li>定义一个新的实例 power()，它接受一个参数 base.</li>
+<li>拍摄 <code>power()</code>周围状态的快照， 包括 exponent 以其当前值</li>
+<li>返回 power()连同其整个周围的状态</li>
+</ul>
+</li>
+<li></li>
+</ol>
+<pre><code class="language-py">&gt;&gt;&gt; from powers import generate_power
+&gt;&gt;&gt; raise_two = generate_power(2)
+&gt;&gt;&gt; raise_three = generate_power(3)
+&gt;&gt;&gt; raise_two(4)
+16
+&gt;&gt;&gt; raise_two(5)
+25
+&gt;&gt;&gt; raise_three(4)
+64
+&gt;&gt;&gt; raise_three(5)
+125
+</code></pre>
+<h3 id="32-自定义闭包状态">3.2. 自定义闭包状态</h3>
+<ol>
+<li>通常，闭包变量对外界完全隐藏。 但是，您可以 提供 getter 和 setter 为它们 内部函数：</li>
+</ol>
+<pre><code class="language-py">def make_point(x, y):
+    def point():
+        print(f&quot;Point({x}, {y})&quot;)
+    def get_x():
+        return x
+    def get_y():
+        return y
+    def set_x(value):
+        nonlocal x
+        x = value
+    def set_y(value):
+        nonlocal y
+        y = value
+    # Attach getters and setters
+    point.get_x = get_x
+    point.set_x = set_x
+    point.get_y = get_y
+    point.set_y = set_y
+    return point
+</code></pre>
+<h2 id="4-使用内部函数添加行为装饰器">4. 使用内部函数添加行为：装饰器</h2>
+<ol>
+<li>
+<p>装饰器描述 <code>decorated_func = decorator(decorated_func)</code></p>
+<pre><code class="language-py">@decorator
+def decorated_func():
+    # Function body...
+    pass
+</code></pre>
+</li>
+<li>
+<p>装饰器的妙用</p>
+<ul>
+<li>调试 Python 代码的常见做法是插入对 print()检查变量的值，确认代码块被执行，等等。 添加和删​​除调用 print()可能会很烦人，而且您可能会忘记其中一些。 为了防止这种情况，你可以写一个这样的装饰器</li>
+</ul>
+<pre><code class="language-py">def debug(func):
+    def _debug(*args, **kwargs):
+        result = func(*args, **kwargs)
+        print(
+            f&quot;{func.__name__}(args: {args},kwargs: {kwargs}) -&gt; {result}&quot;
+        )
+        return result
+    return _debug
+
+@debug
+def add(a, b):
+    return a + b
+
+add(5, 6)
+# add(args: (5, 6), kwargs: {}) -&gt; 11
+# 11
+</code></pre>
+</li>
+<li>
+<p>重新实现 generate_power()作为装饰器函数</p>
+<pre><code class="language-py">def generate_power(exponent):
+    def power(func):
+        def inner_power(*args):
+            base = func(*args)
+            return base ** exponent
+        return inner_power
+    return power
+
+@generate_power(2)
+def raise_two(n):
+    return n
+
+raise_two(7)
+</code></pre>
+</li>
+</ol>
+<ul>
+<li>这个版本的 <code>generate_power()</code>产生与原始实现中相同的结果。 在这种情况下，您使用闭包来记住 <code>exponent</code>和一个装饰器，返回输入函数的修改版本， func().</li>
+<li>在这里，装饰器需要接受一个参数 <code>(exponent)</code>，因此您需要有两个嵌套级别的内部函数。 第一级表示为 <code>power()</code>，它将装饰函数作为参数。 第二级表示为 <code>inner_power()</code>, 将args中的参数<code>exponent</code>打包, 对幂进行最终计算，并返回结果。</li>
+</ul>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://github.com/Pilchark/pilchark.github.io/2022/04/py_inner_function/" title="Python 嵌套函数" target="_blank" rel="external">https://github.com/Pilchark/pilchark.github.io/2022/04/py_inner_function/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://github.com/Pilchark/pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2022/04/py_cmd_line_parsing/" title="python Command-line parsing tool"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2022/04/py_venv/"
+                    title="了解 python 虚拟环境"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://github.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://github.com/Pilchark/pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

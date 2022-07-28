@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        MySQL 基础使用 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="MySQL 安装，连接，使用" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>MySQL 基础使用 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://github.com/Pilchark/pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="MySQL 基础使用" />
+<meta property="og:description" content="MySQL 安装，连接，使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mysql/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-28T00:00:00+00:00" />
+<meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/06/py_pyenv_usage/" />
+
+<meta itemprop="name" content="MySQL 基础使用">
+<meta itemprop="description" content="MySQL 安装，连接，使用"><meta itemprop="datePublished" content="2021-12-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="3368">
+<meta itemprop="keywords" content="MySQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL 基础使用"/>
+<meta name="twitter:description" content="MySQL 安装，连接，使用"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://github.com/Pilchark/pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/Pilchark/pilchark.github.io/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/Pilchark/pilchark.github.io/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/Pilchark/pilchark.github.io/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/Pilchark/pilchark.github.io/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/Pilchark/pilchark.github.io/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="5">data_structure<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link" rel="35">python<span
+               class="tag-list-count">35</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">35</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">35</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" class="title">TOML : python 的好伙伴</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" class="title">使用 MkDocs 构建 python 项目的文档</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" class="title">使用 pytest 让测试更高效</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/Pilchark/pilchark.github.io/2021/12/sql_mysql/"
+    >MySQL 基础使用</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mysql/" class="article-date">
+  <time datetime="2021-12-28 00:00:00 &#43;0000 UTC" itemprop="datePublished">2021-12-28</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/database/"> Database </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/mysql/"> MySQL </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3368字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<h2 id="1-mysql-安装配置">1. MySQL 安装配置</h2>
+<h3 id="11-安装">1.1. 安装</h3>
+<ol>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04">安装</a></li>
+<li>linux ：<code>apt install mysql-server</code></li>
+<li><a href="https://dev.mysql.com/downloads/mysql/">windows</a></li>
+<li><a href="https://www.cnblogs.com/caiqilang/p/13356257.html">配置文件解析</a>
+<ul>
+<li>/etc/my.cnf 或者 /etc/my.cnf.d/server.cnf</li>
+<li><code>sudo mysql</code></li>
+<li><code>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';</code></li>
+</ul>
+</li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04">phpadmin</a></li>
+<li><a href="https://computingforgeeks.com/install-and-configure-dbeaver-on-ubuntu-debian/">dbeaver</a></li>
+</ol>
+<h3 id="12-连接数据库">1.2. 连接数据库</h3>
+<ol>
+<li>
+<p><strong>mysqlclient</strong> 连接(django ORM 依赖工具)</p>
+<ul>
+<li><code>sudo apt-get install libmysqlclient-dev</code></li>
+<li><code>sudo apt install libssl-dev</code></li>
+<li><code>sudo apt install libcrypto++-dev</code></li>
+<li><code>pip install mysqlclient</code></li>
+<li>测试连接</li>
+</ul>
+<pre><code class="language-py">import MySQLdb
+db= MySQLdb.connect(
+        host='localhost',
+        port = 3306,
+        user='root',
+        passwd='insert_password',
+        db ='test',
+        )
+cur = db.cursor()
+cur.execute(&quot;SELECT VERSION()&quot;)
+# 使用 fetchone() 方法获取一条数据库。
+data = cur.fetchone()
+print(&quot;Database version : %s &quot; % data)
+db.close()
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/sunnylinry/p/13597934.html">封装 mysql 操作</a></p>
+<pre><code class="language-py">import MySQLdb
+
+class mysql_base:
+_is_connect = False
+&quot;&quot;&quot;
+mysql 数据库连接, 对数据库操作类
+&quot;&quot;&quot;
+def __new__(cls, *args, **kwargs):
+    &quot;单例&quot;
+    if not hasattr(cls,&quot;_instance&quot;):
+        cls._instance = super(mysql_base,cls).__new__(cls)
+    return cls._instance
+
+def __init__(self,db_name,passwd,usr_name='root',host='localhost',port='3306'):
+    if mysql_base._is_connect is False:
+        try:
+            self.__db = MySQLdb.connect(host, usr_name, passwd, db_name)
+            print(&quot;success&quot;)
+            mysql_base._is_connect = True
+            # 获取游标
+            self.__cursor = self.__db.cursor()
+        except:
+            print('cannot connect db!')
+
+def execute(self,sql):
+    &quot;&quot;&quot;
+    执行sql语句
+    :param sql: sql语句
+    :return:
+    &quot;&quot;&quot;
+    try:
+        # 执行sql语句
+        self.__cursor.execute(sql)
+        # 提交到数据库执行
+        self.__db.commit()
+    except:
+        # 发生错误时回滚
+        print(&quot;execute error&quot;)
+        self.__db.rollback()
+
+def insert_opr(self,sql):
+    &quot;&quot;&quot;
+    查询操作
+    :param sql: SQL语句
+    :return: 所有记录列表
+    &quot;&quot;&quot;
+    try:
+        # 执行SQL语句
+        self.__cursor.execute(sql)
+        # 获取所有记录列表
+        return self.__cursor.fetchall()
+    except:
+        print(&quot;Error: unable to fecth data&quot;)
+
+def __del__(self):
+    # 关闭数据库
+    self.__db.close()
+</code></pre>
+</li>
+</ol>
+<h2 id="2-mysql-常用命令">2. MySQL 常用命令</h2>
+<h3 id="21-show-命令">2.1. show 命令</h3>
+<ol>
+<li>查看表结构<br>
+<code>show columns from &lt;table_name&gt;;</code><br>
+等同于 <code>desc &lt;table_name&gt;</code></li>
+<li>查看用户权限<br>
+<code>show grants;</code></li>
+</ol>
+<h3 id="22-select-命令">2.2. SELECT 命令</h3>
+<ol>
+<li><code>select select_list from table_name;</code></li>
+<li>返回不重复的值 : <strong>distinct</strong><br>
+<code>SELECT DISTINCT jobTitle FROM employees;</code></li>
+<li>限制结果 : <strong>limit (开始行,) 行数</strong><br>
+<code>SELECT DISTINCT jobTitle FROM employees limit 3;</code></li>
+</ol>
+<h3 id="23-排序数据-order-by">2.3. 排序数据 order by</h3>
+<ol>
+<li><code>select select_list from table_name order by prod_name;</code></li>
+<li>按多个列排列 : <code>order by list_a, list_b;</code></li>
+<li>降序排列 : <code>order by list_a, list_b DESC;</code><br>
+多个列 : <code>order by list_a DESC, list_b;</code></li>
+</ol>
+<h3 id="24-过滤数据-where">2.4. 过滤数据 where</h3>
+<ol>
+<li><code>select aaa from table where aaa = 'name';</code></li>
+<li>操作符 :
+<ul>
+<li><code>&lt;&gt;</code> : 不等于</li>
+<li><code>BETWEEN</code> : 在两个值之间</li>
+<li><code>IS NULL</code> : 为空值</li>
+</ul>
+</li>
+</ol>
+<h3 id="25-组合子句--and-or-操作符">2.5. 组合子句 : AND ,OR 操作符</h3>
+<ol>
+<li>
+<p>例:</p>
+<pre><code class="language-sql">select prod_name,prod_id
+from products
+where prod_price &lt;10 AND prod_id &gt; 1001;
+</code></pre>
+</li>
+<li>
+<p><code>AND</code> 计算优先级高，所以必要时用圆括号进行分组</p>
+</li>
+<li>
+<p><code>IN</code> 操作符表示范围，范围中的每个条件都可以匹配。<br>
+<code>where vend_id in (102,103)</code></p>
+</li>
+<li>
+<p><code>NOT</code> : 支持对 IN, BETWEEN, EXISTS 取反。</p>
+</li>
+</ol>
+<h3 id="26-通配符">2.6. 通配符</h3>
+<p>Like 操作符 : <code>where prod_name like '% auto'</code>
+通配符 : 用来匹配值的一部分<br>
+搜索模式 : 字面值或通配符或两者组合</p>
+<ol>
+<li><code>%</code> : 表示任何字符出现任意次数</li>
+<li><code>_</code> : 只匹配单个字符</li>
+</ol>
+<h3 id="27-正则匹配--regexp">2.7. 正则匹配 : REGEXP</h3>
+<ol>
+<li><code>where prod_name REGEXP '.000'</code></li>
+<li>匹配特殊字符 : <code>\\</code> (双反斜杠)</li>
+</ol>
+<h3 id="28-创建计算字段">2.8. 创建计算字段</h3>
+<ol>
+<li>
+<p>拼接字段 : <code>concat</code> : concat 需要指定一个或多个串，各串之间用逗号分隔。</p>
+<pre><code class="language-sql">SELECT CONCAT(lastName, '(', firstName, ')') 
+FROM employees
+order by lastName ;
+</code></pre>
+</li>
+<li>
+<p>删除多余的空格 : <code>Trim</code></p>
+<pre><code class="language-sql">SELECT CONCAT(Trim(lastName), '(', firstName, ')') 
+FROM employees
+order by lastName ;
+</code></pre>
+</li>
+<li>
+<p>别名 : as<br>
+<code>concat(a,b) as other_name</code></p>
+</li>
+</ol>
+<h3 id="29-数据处理函数">2.9. 数据处理函数</h3>
+<ol>
+<li>
+<p>文本处理函数 :</p>
+<ul>
+<li><code>Upper()</code> : 将文本转为大写</li>
+</ul>
+</li>
+<li>
+<p>日期时间函数 :</p>
+<ul>
+<li>日期格式 : yyyy-mm-dd</li>
+</ul>
+</li>
+<li>
+<p>在 datetime 列中筛选 date 日期 :</p>
+<pre><code class="language-sql">select order_num
+from orders
+where Date(order_date) = '2021-12-31';
+</code></pre>
+</li>
+<li>
+<p>匹配 2021 年 12 月份的所有订单？</p>
+<pre><code class="language-sql">select order_num
+from orders
+where Year(order_date) = 2021 AND Month(order_date) = 12;
+</code></pre>
+</li>
+<li>
+<p>数值处理函数 :</p>
+<ul>
+<li>绝对值 : <code>Abs()</code></li>
+<li>平方跟 : <code>Sqrt()</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="210-汇总数据">2.10. 汇总数据</h3>
+<ol>
+<li>聚集函数</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">AVG()</td>
+<td>返回某列平均值</td>
+</tr>
+<tr>
+<td style="text-align:center">Count()</td>
+<td>返回某列行数</td>
+</tr>
+<tr>
+<td style="text-align:center">Max()</td>
+<td>返回某列最大值</td>
+</tr>
+<tr>
+<td style="text-align:center">Sum()</td>
+<td>返回某列之和</td>
+</tr>
+</tbody>
+</table>
+<h3 id="211-分组数据--group-by">2.11. 分组数据 : <code>GROUP BY</code></h3>
+<ol>
+<li>
+<p>例子 :</p>
+<pre><code class="language-sql">SELECT officeCode, COUNT(*) as num
+FROM employees e 
+group by officeCode;
+</code></pre>
+<ul>
+<li>group by 子句不能使用别名。</li>
+<li>除聚集函数外，select 语句每个列必须在 group by 子句中给出。</li>
+</ul>
+</li>
+<li>
+<p>使用 <code>ROLLUP</code> 可以得到汇总值</p>
+</li>
+<li>
+<p>过滤分组 : <code>HAVING</code></p>
+<pre><code class="language-sql">select cust_id, count(*) as orders
+from orders
+group by cust_id
+having count(*)&gt;=2;
+</code></pre>
+</li>
+<li>
+<p>ORDER BY与GROUP BY 区别</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ORDER BY</th>
+<th style="text-align:center">GROUP BY</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">排序产生的输出</td>
+<td style="text-align:center">分组行。但输出可能不是分组的顺序</td>
+</tr>
+<tr>
+<td style="text-align:center">任意列都可以使用（甚至非选择的列也可以使用）</td>
+<td style="text-align:center">只可能使用选择列或表达式列，而且必须使用每个选择列表达式</td>
+</tr>
+<tr>
+<td style="text-align:center">不一定需要</td>
+<td style="text-align:center">如果与聚集函数一起使用列（或表达式），则必须使用</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<blockquote>
+<p>一般在使用GROUP BY子句时，应该也给出 ORDER BY 子句。这是保证数据正确排序的唯一方法。千万不要仅依赖GROUP BY排序数据。</p>
+</blockquote>
+<h3 id="212-使用子查询">2.12. 使用子查询</h3>
+<ol>
+<li>
+<p>检索包含物品TNT2的所有订单的编号。</p>
+<pre><code class="language-sql">select order_num
+from orderitems
+where prod_id = 'TNT2';
+</code></pre>
+</li>
+<li>
+<p>检索具有前一步骤列出的订单编号的所有客户的ID。</p>
+<pre><code class="language-sql">select cust_id
+from orders
+where order_num in (20005,20007);
+</code></pre>
+</li>
+<li>
+<p>使用子查询</p>
+<pre><code class="language-sql">select cust_id
+from orders
+where order_num in (
+    select order_num
+    from orderitems
+    where prod_id = 'TNT2'
+);
+</code></pre>
+</li>
+<li>
+<p>检索前一步骤返回的所有客户ID的客户信息。</p>
+<pre><code class="language-sql">SELECT cust_name, cust_contact
+from customers 
+WHERE cust_id IN (10001,10004);
+</code></pre>
+</li>
+<li>
+<p>作为计算字段使用子查询</p>
+<ul>
+<li>从customers表中检索客户列表。</li>
+</ul>
+<pre><code class="language-sql">SELECT COUNT(*) as orders
+from orders
+WHERE cust_id = '10002';
+</code></pre>
+<ul>
+<li>对于检索出的每个客户，统计其在orders表中的订单数目.</li>
+</ul>
+<pre><code class="language-sql">SELECT cust_name, cust_state,
+    (SELECT COUNT(*)
+    FROM orders
+    WHERE orders.cust_id = customers.cust_id) as orders
+FROM customers
+ORDER BY cust_name;
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>orders.cust_id = customers.cust_id 这种类型为外部子查询，只要列名可能有多义性，就必须使用这种语法。</p>
+</blockquote>
+<h3 id="213-联结表">2.13. 联结表</h3>
+<ol>
+<li>
+<p>关系表<br>
+例 :</p>
+<ul>
+<li>产品: 描述、价格、供应商</li>
+<li>供应商: 名字、地址、联系电话</li>
+</ul>
+</li>
+<li>
+<p>创建联结</p>
+<pre><code class="language-sql">SELECT vend_name, prod_name,prod_price 
+from vendors, products
+WHERE vendors.vend_id = products.vend_id
+order by vend_name;
+</code></pre>
+</li>
+</ol>
+<ul>
+<li>
+<p>内部联结 : (与上述输出相同)</p>
+<pre><code class="language-sql">SELECT vend_name, prod_name,prod_price 
+from vendors Inner join products
+ON vendors.vend_id = products.vend_id;
+</code></pre>
+</li>
+</ul>
+<h3 id="214-创建高级联结">2.14. 创建高级联结</h3>
+<ol>
+<li>
+<p>使用表别名</p>
+<ul>
+<li><code>from customers as c, orders as o, oderitems as oi</code></li>
+</ul>
+</li>
+<li>
+<p>使用表别名的主要原因之一是能在单条SELECT语句中不止一次引用相同的表.</p>
+<ul>
+<li>例: 找到生产 DTNTR 物品的供应商生产的其他物品</li>
+</ul>
+<pre><code class="language-sql">SELECT prod_id ,prod_name 
+FROM products
+WHERE vend_id = ( SELECT vend_id 
+                from products
+                WHERE prod_id = 'DTNTR');
+</code></pre>
+<ul>
+<li>改进 : 使用自联结</li>
+</ul>
+<pre><code class="language-sql">SELECT p1.prod_id , p1.prod_name 
+FROM products AS p1 , products AS p2
+WHERE p1.vend_id = p2.vend_id
+AND p2.prod_id = 'DTNTR';
+</code></pre>
+</li>
+<li>
+<p>自然联结 : 排除多次出现，使每个列只返回一次。</p>
+</li>
+<li>
+<p>外部联结 : 有时候会需要包含没有关联行的那些行。</p>
+<ul>
+<li>如: 对每个客户下了多少订单进行计数，包括那些至今尚未下订单的客户；</li>
+</ul>
+<pre><code class="language-sql">SELECT c.cust_id ,o.order_num 
+FROM customers c inner join orders o 
+on c.cust_id = o.cust_id ;
+</code></pre>
+<ul>
+<li>使用外联结检索所有客户</li>
+</ul>
+<pre><code class="language-sql">SELECT c.cust_id ,o.order_num 
+FROM customers c left outer join orders o 
+on c.cust_id = o.cust_id ;
+</code></pre>
+</li>
+</ol>
+<h3 id="215-组合查询">2.15. 组合查询</h3>
+<ol>
+<li>MySQL也允许执行多个查询（多条SELECT语句），并将结果作为单个查询结果集返回。这些组合查询通常称为并（union）或复合查询（compound query）。</li>
+<li>创建组合查询 : <code>UNION</code> (简化 <code>WHERE</code> 子句)
+<ul>
+<li><code>UNION</code> 必须由两条或以上的 select 语句组成，语句之间用 <code>union</code> 分离。</li>
+<li><code>union</code> 每个查询必须包含相同的列，表达式或聚集函数。</li>
+<li>列数据类型必须兼容。</li>
+<li>使用 <code>UNION</code> 时重复的行被自动取消。</li>
+</ul>
+</li>
+<li>UNION 查询时只能使用一种 <code>ORDER BY</code>.</li>
+</ol>
+<h3 id="216-全文本搜索">2.16. 全文本搜索</h3>
+<blockquote>
+<p>MyISAM 支持全文本搜索，InnoDB 不支持</p>
+</blockquote>
+<ol>
+<li>
+<p>在创建表时指定 FULLTEXT</p>
+<ul>
+<li>全文本搜索</li>
+</ul>
+<pre><code class="language-sql">SELECT note_text 
+FROM productnotes
+WHERE MATCH(note_text) against('rabbit');
+</code></pre>
+</li>
+</ol>
+<h3 id="217-插入数据">2.17. 插入数据</h3>
+<ol>
+<li>
+<p>安全插入数据(不受表的结构变化影响)</p>
+<pre><code class="language-sql">insert into customers(
+    cust_name,
+    cust_email,
+    cust_city,
+    ...)
+values(
+    'Bob',
+    NULL,
+    'LA',
+    ...);
+</code></pre>
+</li>
+<li>
+<p>插入检索的数据
+<code>insert into tableA(a1,a2,a3..) select b1,b2,b3.. from tableB;</code></p>
+</li>
+</ol>
+<h3 id="218-更新和删除数据">2.18. 更新和删除数据</h3>
+<ol>
+<li>
+<p><code>UPDATE</code> 语句参数</p>
+<ul>
+<li>要更新的表</li>
+<li>列名和新值</li>
+<li>确定要更新的行的过滤条件<br>
+例:</li>
+</ul>
+<pre><code class="language-sql">update customers
+set cust_email = &quot;new_email@ss.com&quot;
+where cust_id = 10001;
+</code></pre>
+<ul>
+<li>要删除某列的值，可设置为 NULL.</li>
+</ul>
+</li>
+<li>
+<p>删除整行数据<br>
+<code>delete from customers where cust_id = 10015;</code></p>
+</li>
+</ol>
+<h3 id="219-创建和操作表">2.19. 创建和操作表</h3>
+<ol>
+<li>
+<p><code>CREATE TABLE table_name(...) ENGINE=InnoDB;</code></p>
+</li>
+<li>
+<p>表的主键在创建表时用 <code>PRIMARY KEY</code> 指定。</p>
+</li>
+<li>
+<p>使用 NULL</p>
+<pre><code class="language-sql">CREATE TABLE orders(
+    order_num int       NOT NULL AUTO_INCREMENT,
+    order_date datetime NOT NULL,
+    cust_id int         NOT NULL,
+    primary key(order_num)
+) ENGINE=InnoDB;
+</code></pre>
+</li>
+<li>
+<p>若主键使用单个列，则值必须唯一；若使用多个列，这些列的组合必须唯一。</p>
+</li>
+<li>
+<p><code>AUTO_INCREMENT</code>:</p>
+<ul>
+<li>每个表只允许一个 <code>AUTO_INCREMENT</code> 列，而且必须被索引。</li>
+</ul>
+</li>
+<li>
+<p>指定默认值</p>
+<ul>
+<li><code>default 1</code>;</li>
+</ul>
+</li>
+<li>
+<p>更改表结构: <code>ALTER</code></p>
+<ul>
+<li>添加一个列 : <code>alter table stu add stu_name char(20);</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="220-使用视图">2.20. 使用视图</h3>
+<blockquote>
+<p>视图不应该包含表中应该有的任何列或数据，它包含的是一个SQL查询。</p>
+</blockquote>
+<ol>
+<li>
+<p>为什么使用视图？</p>
+<ul>
+<li>重用SQL语句</li>
+<li>使用表的组成部分而不是整个表</li>
+</ul>
+</li>
+<li>
+<p>例</p>
+<pre><code class="language-sql">CREATE view productcustomers AS
+select cust_name ,cust_contact, prod_id
+from customers c, orders o, orderitems oi
+WHERE c.cust_id = o.cust_id 
+and oi.order_num = o.order_num ;
+</code></pre>
+<ul>
+<li>此时检索订购了 &lsquo;TNT2&rsquo;的客户</li>
+</ul>
+<pre><code class="language-sql">select cust_name ,cust_contact 
+from productcustomers p 
+WHERE prod_id = 'TNT2';
+</code></pre>
+</li>
+<li>
+<p>将视图用于检索而非更新。</p>
+</li>
+</ol>
+<h3 id="221-存储过程">2.21. 存储过程</h3>
+<blockquote>
+<p>存储过程是保存的一条或多条MySQL语句的集合。</p>
+</blockquote>
+<ol>
+<li>
+<p>创建存储过程</p>
+<pre><code class="language-sql">delimiter //
+CREATE procedure productpricing()
+BEGIN
+ SELECT AVG (prod_price) AS priceaverage
+ from products;
+END //
+</code></pre>
+</li>
+<li>
+<p>执行存储过程<br>
+<code>CALL productpricing();</code></p>
+</li>
+<li>
+<p>删除(注意没有括号)
+<code>DROP procedure productpricing IF EXISTS;</code></p>
+</li>
+<li>
+<p>变量存储数据</p>
+<ul>
+<li>创建</li>
+</ul>
+<pre><code class="language-sql">delimiter //
+CREATE procedure productpricing(
+    OUT pl decimal(8,2),
+    OUT ph decimal(8,2),
+    OUT pa decimal(8,2)
+)
+BEGIN
+    SELECT Min(prod_price)
+    into pl
+    from products;
+    SELECT Max(prod_price)
+    into ph
+    from products;
+    SELECT AVG(prod_price)
+    into pa
+    from products;
+END //
+</code></pre>
+<ul>
+<li>调用:(不显示数据)</li>
+</ul>
+<pre><code class="language-sql">CALL productpricing(
+    @pricelow,
+    @pricehigh,
+    @priceavg);
+</code></pre>
+<ul>
+<li>显示:<br>
+<code>SELECT @pricelow,@pricehigh,@priceavg;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="222-使用游标">2.22. 使用游标</h3>
+<blockquote>
+<p>在检索的结果中使用游标前进或后退一行
+检索只能用于存储过程和函数</p>
+</blockquote>
+<ol>
+<li>使用
+<ul>
+<li>declare : 使用前必须声明。</li>
+<li>open : 声明后必须打开游标以供使用</li>
+<li>fetch : 检索，根据需要取出各行</li>
+<li>close : 结束后须关闭游标</li>
+</ul>
+</li>
+</ol>
+<h3 id="223-触发器">2.23. 触发器</h3>
+<blockquote>
+<p>需要某(多)条语句在发生时自动执行。</p>
+</blockquote>
+<ol>
+<li>创建触发器
+<ul>
+<li>唯一的名字</li>
+<li>触发器关联的表</li>
+<li>触发器响应的活动</li>
+<li>触发器何时执行</li>
+</ul>
+</li>
+<li>每个表每次事件只允许一个触发器，因此每个表最多支持6个触发器（insert,update,delete）</li>
+<li>如果 Before 触发器请求失败，mysql 将不执行 after 触发器。</li>
+<li>修改一个触发器必须删除在重新创建。</li>
+</ol>
+<h3 id="224-事务处理">2.24. 事务处理</h3>
+<ol>
+<li>术语
+<ul>
+<li>事务（transaction）指一组SQL语句；</li>
+<li>回退（rollback）指撤销指定SQL语句的过程；</li>
+<li>提交（commit）指将未存储的SQL语句结果写入数据库表；</li>
+<li>保留点（savepoint）指事务处理中设置的临时占位符（place-holder），你可以对它发布回退（与回退整个事务处理不同）。</li>
+</ul>
+</li>
+<li>事务处理模块中，提交不会隐含的进行。 为进行明确的提交使用 <code>COMMIT</code> 语句。</li>
+<li>commit 或 callback 语句执行后，事务会自动关闭。</li>
+<li>使用保留点 : 回退时可退的占位符。<br>
+<code>savepoint delete1;</code>
+回退到此保留点 : <code>rollback to delete1;</code></li>
+</ol>
+<h3 id="225-全球化和本地化">2.25. 全球化和本地化</h3>
+<ol>
+<li>数据库维护
+<code>CREATE DATABASE test_data DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</code></li>
+</ol>
+<h3 id="226-安全管理">2.26. 安全管理</h3>
+<ol>
+<li>管理用户
+<ul>
+<li>设置访问权限 : <code>show grants for name;</code></li>
+<li><code>grant select on data.* to Bob;</code> 允许用户 bob 在data数据库中的所有表上使用 SELECT.</li>
+</ul>
+</li>
+</ol>
+<h3 id="227-数据库维护">2.27. 数据库维护</h3>
+<h4 id="2271-备份数据库">2.27.1. 备份数据库</h4>
+<h5 id="22711-单库备份">2.27.1.1. 单库备份</h5>
+<ol>
+<li><strong>终端下</strong>输入 : <code>mysqldump -uroot -p test &gt;/download/testbak_$(date +%F).sql</code></li>
+<li>查看备份内容 : <code>egrep -v &quot;^--|\*|^$&quot; /download/testbak_2016-12-12.sql</code></li>
+<li>-B参数: 直接用此备份文件进行恢复<br>
+<code>mysqldump -uroot -p -B test &gt;/download/testbak_$(date +%F)_b.sql</code></li>
+</ol>
+<h5 id="22712-压缩备份">2.27.1.2. 压缩备份</h5>
+<ol>
+<li><code>mysqldump -uroot -p -B test|gzip &gt;/download/testbak_$(date +%F).sql.gz</code></li>
+</ol>
+<h4 id="数据库维护">数据库维护</h4>
+<ol>
+<li>检查表键是否正确 : <code>Analyze table table_name;</code></li>
+</ol>
+<h2 id="3-知识点">3. 知识点</h2>
+<h3 id="31-myisam-与-innodb-区别">3.1. MyISAM 与 InnoDB 区别</h3>
+<ol>
+<li>InnoDB 支持事务，MyISAM 不支持，这一点是非常之重要。事务是一种高级的处理方式，如在一些列增删改中只要哪个出错还可以回滚还原，而 MyISAM就不可以了；</li>
+<li>MyISAM 适合查询以及插入为主的应用，InnoDB 适合频繁修改以及涉及到安全性较高的应用；</li>
+<li>InnoDB 支持外键，MyISAM 不支持；</li>
+<li>对于自增长的字段，InnoDB 中必须包含只有该字段的索引，但是在 MyISAM 表中可以和其他字段一起建立联合索引；</li>
+<li>清空整个表时，InnoDB 是一行一行的删除，效率非常慢。MyISAM 则会重建表；</li>
+</ol>
+<h3 id="32-primary-key-与-unique">3.2. primary key 与 unique</h3>
+<p>区别 </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">XX</th>
+<th style="text-align:center">保证唯一性</th>
+<th style="text-align:center">是否允许为空</th>
+<th style="text-align:center">一个表中可以有多少个</th>
+<th style="text-align:center">能否组合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">primary key</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">至多一个</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">unique</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">可以有多个</td>
+<td style="text-align:center">是</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-练习--httpswwwmysqltutorialorgmysql-select-statement-query-dataaspx">4. 练习 : <a href="https://www.mysqltutorial.org/mysql-select-statement-query-data.aspx">https://www.mysqltutorial.org/mysql-select-statement-query-data.aspx</a></h2>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mysql/" title="MySQL 基础使用" target="_blank" rel="external">https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mysql/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://github.com/Pilchark/pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/pi/" title="树莓派入门玩法"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/sql_mongodb/"
+                    title="MongoDB 基础使用"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://github.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://github.com/Pilchark/pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

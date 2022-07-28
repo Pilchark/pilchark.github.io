@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        leetcode 练习题 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="使用 python 语言解答" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>leetcode 练习题 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://github.com/Pilchark/pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="leetcode 练习题" />
+<meta property="og:description" content="使用 python 语言解答" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/Pilchark/pilchark.github.io/2022/01/ds_practice/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-13T00:00:00+00:00" />
+<meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/06/py_pyenv_usage/" />
+
+<meta itemprop="name" content="leetcode 练习题">
+<meta itemprop="description" content="使用 python 语言解答"><meta itemprop="datePublished" content="2022-01-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-01-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="7594">
+<meta itemprop="keywords" content="python,data_structure," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="leetcode 练习题"/>
+<meta name="twitter:description" content="使用 python 语言解答"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://github.com/Pilchark/pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/Pilchark/pilchark.github.io/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/Pilchark/pilchark.github.io/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/Pilchark/pilchark.github.io/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/Pilchark/pilchark.github.io/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/Pilchark/pilchark.github.io/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="5">data_structure<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link" rel="35">python<span
+               class="tag-list-count">35</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">35</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">35</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" class="title">TOML : python 的好伙伴</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" class="title">使用 MkDocs 构建 python 项目的文档</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" class="title">使用 pytest 让测试更高效</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/Pilchark/pilchark.github.io/2022/01/ds_practice/"
+    >leetcode 练习题</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://github.com/Pilchark/pilchark.github.io/2022/01/ds_practice/" class="article-date">
+  <time datetime="2022-01-13 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-01-13</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/python/"> Python </a>
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/data_structure/"> Data_Structure </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/python/"> python </a>
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/data_structure/"> data_structure </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 7594字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 16分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<h2 id="1-经典题目">1. 经典题目</h2>
+<h3 id="11-判断闰年">1.1. 判断闰年</h3>
+<pre><code class="language-py">def is_leap_year(year):
+    return (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0)
+</code></pre>
+<h3 id="12-判断素数">1.2. 判断素数</h3>
+<ol>
+<li>方法 1</li>
+</ol>
+<pre><code class="language-py">from math import sqrt
+
+def isPrime(n):
+    if n &lt;= 1:
+        return False
+    for i in range(2, int(sqrt(n) + 1)):
+        if n%i == 0:
+            return False
+    return True
+</code></pre>
+<ol start="2">
+<li>方法 2</li>
+</ol>
+<pre><code class="language-py">def isPrime(n):
+    if n &lt;= 1:
+        return False
+    elif n == 2:
+        return True
+    elif n % 2 == 0:
+        return False
+    for i in range(3,int(n ** 0.5) + 1,2):
+        if n % i == 0:
+            return False
+    else:
+        return True
+</code></pre>
+<h3 id="13-回文素数">1.3. 回文素数</h3>
+<blockquote>
+<p>回文素数是指一个数既是素数又是回文数。例如：131 既是素数又是回文数。<br>
+用户输入一个正整数 n , 请你在一行内输出从小到大排列的的前 n 个回文素数，数字后面用一个空格进行分隔</p>
+</blockquote>
+<pre><code class="language-py">def isPrime():
+    pass  #见上题
+if __name__ == '__main__':
+    n = int(input())
+    i = 2
+    count = 0
+    while True:
+        if isPrime(i) and str(i) == str(i)[::-1]:
+            print(i,end = ' ')
+            count += 1
+            if count == n:
+                break
+        i += 1
+</code></pre>
+<h3 id="14-反素数">1.4. 反素数</h3>
+<blockquote>
+<p>反素数（逆向拼写的素数）是指一个将其逆向拼写后也是一个素数的非回文数。例如：13 和 31 都是素数，且 13 和 31 都不是回文数，所以，13 和 31 是反素数。</p>
+</blockquote>
+<pre><code class="language-py">def isPrime():
+    pass
+
+if __name__ == '__main__':
+    n = int(input())
+    i = 2
+    count = 0
+    while True:
+        if isPrime(i) and isPrime(int(str(i)[::-1])) and str(i) != str(i)[::-1]:
+            print(i,end = ' ')
+            count += 1
+            if count == n:
+                break
+        i += 1
+</code></pre>
+<h3 id="15-哥德巴赫猜想">1.5. 哥德巴赫猜想</h3>
+<blockquote>
+<p>数学领域著名的“哥德巴赫猜想”的大致意思是：任何一个大于 2 的偶数总能表示为两个素数之和。比如：24=5+19, 其中 5 和 19 都是素数。<br>
+本实验的任务是设计一个程序，验证 20 亿以内的偶数都可以分解成两个素数之和。输入一个大于 2 的正整数，当输入为偶数时，在一行中按照格式“N = p + q”输出 N 的素数分解，其中 p 、 q 均为素数且 p ≤ q。因为这样的分解可能不唯一（例如 24 还可以分解为 7+17）, 要求必须输出所有解中 p 最小的解。当输入为奇数时，输出&rsquo;Data error!'</p>
+</blockquote>
+<pre><code class="language-py">def isPrime():
+    pass
+
+n = int(input())
+flag = False
+if n % 2 == 0:
+    for i in range(n):
+        if isPrime(i) and isPrime(n-i):
+            print(f'N = {i} + {n-i}')
+            flag = True
+            break
+        if flag:
+            break
+else:
+    print('Data error!')
+</code></pre>
+<h3 id="16-汉诺塔">1.6. 汉诺塔</h3>
+<blockquote>
+<p>柱子编号为 a, b, c, 将所有圆盘从 a 移到 c 可以描述为：
+如果 a 只有一个圆盘，可以直接移动到 c;<br>
+如果 a 有 N 个圆盘，可以看成 a 有 1 个圆盘（底盘） + (N-1) 个圆盘，首先需要把 (N-1) 个圆盘移动到 b, 然后，将 a 的最后一个圆盘移动到 c, 再将 b 的 (N-1) 个圆盘移动到 c。<br>
+请编写一个函数 move(n, a, b, c) , 给定输入 n, a, b, c, 打印出移动的步骤：
+例如，输入 move(2, ‘A’, ‘B’, ‘C’), 打印出：
+A –&gt; B<br>
+A –&gt; C<br>
+B –&gt; C</p>
+</blockquote>
+<pre><code class="language-py">def move(n, a, b, c):
+    if n == 1:
+        print(a,'--&gt;',c)
+        return
+    else:
+        move(n-1, a, c, b)
+        move(1, a, b, c)
+        move(n-1, b, a, c)
+
+n = int(input())
+s1, s2, s3 = input().split()
+move(n, s1, s2, s3)
+</code></pre>
+<h3 id="17-构造水仙花数">1.7. 构造水仙花数</h3>
+<blockquote>
+<p>它是一个 3 位数，该数字每个位上数字的立方之和正好等于它本身，例如：1^3 + 5^3+ 3^3=153
+求 100-999 间的水仙花数</p>
+</blockquote>
+<pre><code class="language-py">for num in range(100,1000):
+    a = num // 100
+    b = num % 100 // 10
+    c = num % 10
+    if num == a**3 + b**3 + c**3:
+        print(num)
+</code></pre>
+<h3 id="18-斐波那契数列">1.8. 斐波那契数列</h3>
+<ol>
+<li>使用 python 生成器</li>
+</ol>
+<pre><code class="language-py">def fib(max):
+    n, a, b = 0, 0, 1
+    while n &lt; max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+</code></pre>
+<h3 id="19-打印杨辉三角">1.9. 打印杨辉三角</h3>
+<pre><code class="language-py">def yh(self, numRows):
+    result = []
+    for i in range(numRows):
+      now = [1] * (i+1)
+      if i &gt;= 2:
+        for n in range(1,i):
+          now[n] = pre[n-1] + pre[n]
+      result += now
+      pre = now
+    return result
+</code></pre>
+<h3 id="110-计算指定的年月日是这一年的第几天">1.10. 计算指定的年月日是这一年的第几天</h3>
+<pre><code class="language-py">def is_leap_year(year):
+    return (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0)
+
+def which_day(year,month,date):
+    days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    total = 0
+    for i in range(month - 1):
+        if is_leap_year(year):
+            days[1] = 29
+        total += days[i]
+    return total + date
+</code></pre>
+<h3 id="111-约瑟夫环问题">1.11. 约瑟夫环问题</h3>
+<blockquote>
+<p>据说著名历史学家 Josephus 有过以下的故事：Josephus 及他的朋友共 41 人围成一个圆圈，由第 1 个人开始报数，每数到 3 该人就必须出去，然后再由下一个人重新报数，直到圆圈上少于 3 人为止。Josephus 将朋友与自己安排在第 16 个与第 31 个位置，成为最后剩下的人。
+扩展这个问题，当人数为 n, 每次报数为 k 时，求解最后的 K-1 个剩下的人的位置</p>
+</blockquote>
+<pre><code class="language-py">def Josephus(n, k):
+    ls_n = list(range(1, n+1))
+    while len(ls_n) &gt; k-1:
+      ls_n = ls_n[k:] + ls_n[:k-1]
+    return ls_n
+
+n,k = map(int, input().split())
+if k &gt;= 2 and n &gt;=k:
+  print(Josephus(n, k))
+else:
+  print('Data Error!')
+</code></pre>
+<h3 id="112-自幂数">1.12. 自幂数</h3>
+<blockquote>
+<p>自幂数是指一个 n 位数，它的每个位上的数字的 n 次幂之和等于它本身，例如：1<strong>3 + 5</strong>3+ 3**3 = 153, 编程寻找并输出 n 位的自幂数，n 由用户输入，每行输出一个数字。
+n 为 1 时，自幂数称为独身数。显然，0,1,2,3,4,5,6,7,8,9 都是自幂数。
+n 为 2 时，没有自幂数。
+n 为 3 时，自幂数称为水仙花数，有 4 个
+n 为 4 时，自幂数称为四叶玫瑰数，共有 3 个
+n 为 5 时，自幂数称为五角星数，共有 3 个
+n 为 6 时，自幂数称为六合数，只有 1 个
+n 为 7 时，自幂数称为北斗七星数，共有 4 个
+n 为 8 时，自幂数称为八仙数，共有 3 个
+n 为 9 时，自幂数称为九九重阳数，共有 4 个
+n 为 10 时，自幂数称为十全十美数，只有 1 个
+输入一个大于或等于 3 且小于 7 的正整数 n,
+要求 ：按从小到大的顺序输出 n 位的自幂数，每行输出一个数字</p>
+</blockquote>
+<pre><code class="language-py">n = int(input())
+l = [x**n for x in range(10)]
+for num in range(10**(n-1), 10**n):
+    s = 0
+    for i in str(num):
+        s += l[int(i)]
+    if num == s:
+        print(num)
+</code></pre>
+<hr>
+<h2 id="2-栈">2. 栈</h2>
+<h3 id="21-python-使用列表定义一个栈">2.1. python 使用列表定义一个栈</h3>
+<pre><code class="language-py">from queue import Empty
+
+class ArrayStack:
+    def __init__(self) -&gt; None:
+        self._data = []
+    
+    def __len__(self):
+        return len(self._data)
+
+    def is_empty(self):
+        return len(self._data) == 0
+
+    def push(self, item):
+        self._data.append(item)
+
+    def top(self):
+        if self.is_empty():
+            raise Empty('Stack is empty')
+        return self._data[-1]
+
+    def pop(self):
+        if self.is_empty():
+            raise Empty('Stack is empty')
+        return self._data.pop()
+
+# 判断字符串的括号是否匹配正确
+def is_matched(expr):
+    lefty = '({['
+    righty = ')}]'
+    S = ArrayStack()
+    for c in expr:
+        if c in lefty:
+            S.push(c)
+        elif c in righty:
+            if S.is_empty():
+                return False
+            if righty.index(c) != lefty.index(S.pop()):
+                return False
+    return S.is_empty()
+
+# 判断 html 代码标签是否使用正确
+def is_matched_html(raw):
+    S = ArrayStack()
+    j = raw.find('&lt;')
+    while j != -1:
+        k = raw.find('&gt;', j+1)
+        if k == -1:
+            return False
+        tag = raw[j+1, k]
+        if not tag.startswith('/'):
+            S.push(tag)
+        else:
+            if S.is_empty():
+                return False
+            if tag[1:] != S.pop():
+                return False
+        j = raw.find('&lt;', k+1)
+    return S.is_empty()
+</code></pre>
+<hr>
+<h2 id="3-数组">3. 数组</h2>
+<hr>
+<h3 id="31-丢失的数字">3.1. 丢失的数字</h3>
+<p>(<a href="https://leetcode-cn.com/problems/missing-number/">https://leetcode-cn.com/problems/missing-number/</a>)</p>
+<blockquote>
+<p>给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。<br>
+input: nums = [3,0,1]<br>
+output: 2</p>
+</blockquote>
+<ol>
+<li>
+<p>排序</p>
+<pre><code class="language-py">class Solution:
+    def missingNumber(self, nums: List[int]) -&gt; int:
+        nums.sort()
+        for i, num in enumerate(nums):
+            if num != i:
+                return i
+        return len(nums)
+</code></pre>
+</li>
+<li>
+<p>哈希集合：总时间复杂度是 O(n)</p>
+<pre><code class="language-py">class Solution:
+    def missingNumber(self, nums: List[int]) -&gt; int:
+        s = set(nums)
+        for i in range(len(nums)+1):
+            if i not in s:
+                return i
+</code></pre>
+</li>
+<li>
+<p>异或运算</p>
+<pre><code class="language-py">class Solution:
+    def missingNumber(self, nums: List[int]) -&gt; int:
+        xor = 0
+        for i, num in enumerate(nums):
+            xor ^= i ^ num
+        return xor ^ len(nums)
+</code></pre>
+</li>
+</ol>
+<h3 id="32-快慢指针">3.2. 快慢指针</h3>
+<ol>
+<li>链接：<a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/solution/26-shan-chu-pai-xu-shu-zu-zhong-de-zhong-fle5/">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/solution/26-shan-chu-pai-xu-shu-zu-zhong-de-zhong-fle5/</a></li>
+</ol>
+<pre><code class="language-py">  class Solution:
+    def removeDuplicates(self, nums: List[int]) -&gt; int:
+        i = 0
+        for j in range(len(nums)):
+            if nums[j] != nums[i]:
+                i += 1
+                nums[i] = nums[j]
+        return i + 1
+</code></pre>
+<h3 id="33-旋转数组">3.3. 旋转数组</h3>
+<ol>
+<li>链接：<a href="https://leetcode-cn.com/problems/rotate-array/solution/pythonku-han-shu-fan-zhuan-lie-biao-by-r-1rju/">https://leetcode-cn.com/problems/rotate-array/solution/pythonku-han-shu-fan-zhuan-lie-biao-by-r-1rju/</a></li>
+</ol>
+<ul>
+<li>因此这道题需要使用自定义函数进行两两交换实现反转列表的操作：</li>
+</ul>
+<pre><code class="language-py">class Solution:
+    def rotate(self, nums: List[int], k: int) -&gt; None:
+        k %= len(nums)
+        self.reverse(nums, 0, len(nums) - 1)
+        self.reverse(nums, 0, k - 1)
+        self.reverse(nums, k, len(nums) - 1)
+
+    def reverse(self, nums, i, j):
+        while i &lt;= j:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            j -= 1
+</code></pre>
+<h3 id="34-存在重复元素">3.4. 存在重复元素</h3>
+<ol>
+<li>链接：<a href="https://leetcode-cn.com/problems/contains-duplicate/solution/217-cun-zai-zhong-fu-yuan-su-pai-xu-ha-x-kol5/">https://leetcode-cn.com/problems/contains-duplicate/solution/217-cun-zai-zhong-fu-yuan-su-pai-xu-ha-x-kol5/</a></li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def containsDuplicate(self, nums: List[int]) -&gt; bool:
+        # 声明集合
+        s = set()
+        # 遍历数组，将元素添加到集合中
+        for num in nums:
+            # 若元素存在于集合中，表示存在重复元素
+            if num in s:
+                return True
+            s.add(num)
+        return False
+</code></pre>
+<h3 id="35-两个数组的交集-ii">3.5. 两个数组的交集 II</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii">https://leetcode-cn.com/problems/intersection-of-two-arrays-ii</a></li>
+</ol>
+<pre><code class="language-py">import collections
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:
+        num1 = collections.Counter(nums1)
+        num2 = collections.Counter(nums2)
+        num = num1 &amp; num2
+        return list(num.elements())
+</code></pre>
+<h3 id="36-加一">3.6. <strong>加一</strong></h3>
+<ol>
+<li>链接：<a href="https://leetcode-cn.com/problems/plus-one/solution/python-jie-zhe-dao-ti-hen-jian-dan-by-balconyang/">https://leetcode-cn.com/problems/plus-one/solution/python-jie-zhe-dao-ti-hen-jian-dan-by-balconyang/</a></li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def plusOne(self, digits: List[int]) -&gt; List[int]:
+        for i in range(len(digits)-1,-1,-1):
+            digits[i] += 1
+            digits[i] %= 10
+            if digits[i] != 0:
+                return digits
+        digits.insert(0,1)
+        return digits
+</code></pre>
+<h3 id="37-删除排序数组中的重复项">3.7. 删除排序数组中的重复项</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/submissions/">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/submissions/</a></li>
+</ul>
+<blockquote>
+<p>给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。
+不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
+</blockquote>
+<ol>
+<li>
+<p>双指针</p>
+<pre><code class="language-py">class Solution:
+    def removeDuplicates(self, nums: List[int]) -&gt; int:
+        if not nums: return 0
+        n = len(nums)
+        fast = slow = 1
+        while fast &lt; n:
+            if nums[fast] != nums[fast - 1]:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        return slow
+</code></pre>
+</li>
+<li>
+<p>优化 : 对于一个有序的非重复数组（如: 1,2,3,4,5,6）,每次比较时 <code>nums[fast]</code> 都不等于 <code>nums[slow]</code>,此时就不需要每次都复制一遍。<br>
+因此可添加判断，当 fast - slow &gt; 1 时，才进行复制</p>
+<pre><code class="language-py">class Solution:
+    def removeDuplicates(self, nums: List[int]) -&gt; int:
+        if not nums: return 0
+        n = len(nums)
+        fast = slow = 1
+        while fast &lt; n:
+            if nums[fast] != nums[fast - 1] and fast - slow &gt; 1:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        return slow
+</code></pre>
+</li>
+</ol>
+<h3 id="38-合并两个有序数组">3.8. 合并两个有序数组</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/leetbook/read/top-interview-questions/xmi2l7/">https://leetcode-cn.com/leetbook/read/top-interview-questions/xmi2l7/</a></li>
+</ul>
+<blockquote>
+<p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。你可以假设 nums1 的空间大小等于 m + n，这样它就有足够的空间保存来自 nums2 的元素。</p>
+</blockquote>
+<ol>
+<li>从后向前的双指针</li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+        p1, p2 = m - 1, n - 1
+        tail = m + n - 1
+        while p1 &gt;= 0 or p2 &gt;= 0:
+            if p1 == -1:
+                nums1[tail] = nums2[p2]
+                p2 -= 1
+            elif p2 == -1:
+                nums1[tail] = nums1[p1]
+                p1 -= 1
+            elif nums1[p1] &gt; nums2[p2]:
+                nums1[tail] = nums1[p1]
+                p1 -= 1
+            else:
+                nums1[tail] = nums2[p2]
+                p2 -= 1
+            tail -= 1
+</code></pre>
+<hr>
+<h3 id="39-乘积最大子数组">3.9. 乘积最大子数组</h3>
+<blockquote>
+<p>给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。<br>
+输入: [2,3,-2,4]
+输出: 6
+解释: 子数组 [2,3] 有最大乘积 6。</p>
+</blockquote>
+<pre><code class="language-py"># 优化空间
+class Solution:
+    def maxProduct(self, nums: List[int]) -&gt; int:
+        maxF, minF, ans = nums[0], nums[0], nums[0]
+        length = len(nums)
+        for i in range(1, length):
+            mx, mn = maxF, minF # 只用两个变量来维护i−1时刻的状态,优化空间
+            maxF = max(mx * nums[i], nums[i], mn * nums[i])
+            minF = min(mn * nums[i], nums[i], mx * nums[i])
+            ans = max(maxF, ans)
+        
+        return ans
+</code></pre>
+<h2 id="4-字符串">4. 字符串</h2>
+<h3 id="41-反转字符串httpsleetcode-cncomleetbookreadtop-interview-questions-easyxnx13t">4.1. <a href="https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xnx13t/">反转字符串</a></h3>
+<blockquote>
+<p>给你一个 32 位的有符号整数 x , 返回将 x 中的数字部分反转后的结果。
+如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] , 就返回 0。
+假设环境不允许存储 64 位整数（有符号或无符号）。</p>
+</blockquote>
+<pre><code class="language-py">class Solution:
+    def reverse(self, x: int) -&gt; int:
+        res = 0
+        x1 = abs(x)
+        while(x1!=0):
+            temp = x1%10
+            if res &gt; 214748364 or (res==214748364 and temp&gt;7):
+                return 0
+            if res&lt;-214748364 or (res==-214748364 and temp&lt;-8):
+                return 0
+            res = res*10 +temp
+            x1 //=10
+        return res if x &gt;0 else -res
+</code></pre>
+<h3 id="42-实现-strstr-双指针">4.2. 实现 strStr() 双指针</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/implement-strstr/solution/shi-xian-strstr-by-leetcode/">https://leetcode-cn.com/problems/implement-strstr/solution/shi-xian-strstr-by-leetcode/</a></li>
+</ul>
+<blockquote>
+<p>实现 strStr() 函数。
+给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 （从 0 开始）。如果不存在，则返回  -1。
+例 1:
+输入：haystack = &ldquo;hello&rdquo;, needle = &ldquo;ll&rdquo;
+输出：2
+示例 2:
+输入：haystack = &ldquo;aaaaa&rdquo;, needle = &ldquo;bba&rdquo;
+输出：-1</p>
+</blockquote>
+<ol>
+<li>
+<p>暴力解法</p>
+<pre><code class="language-py">class Solution:
+    def strStr(self, haystack: str, needle: str) -&gt; int:
+        L, n = len(needle), len(haystack)
+        for start in range(n - L + 1):
+            if haystack[start: start + L] == needle:
+                return start
+        return -1
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p>KMP 算法：<a href="https://www.bilibili.com/video/BV1jb411V78H">https://www.bilibili.com/video/BV1jb411V78H</a></p>
+</blockquote>
+<blockquote>
+<p>发生不匹配时，如果最长公共前后缀长度为 n, 那么 n+1 号位与主串当前位进行比较</p>
+</blockquote>
+<h3 id="43-字符串中第一个唯一字符httpsleetcode-cncomproblemsfirst-unique-character-in-a-string">4.3. <a href="https://leetcode-cn.com/problems/first-unique-character-in-a-string/">字符串中第一个唯一字符</a></h3>
+<blockquote>
+<p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</p>
+</blockquote>
+<ol>
+<li>
+<p>解法 1 : 哈希表存频数<br>
+两次遍历，统计每个字符出现次数；第二次只要遍历到只出现一次的字符，便返回其索引。</p>
+<pre><code class="language-py">class Solution:
+    def firstUniqChar(self, s: str) -&gt; int:
+        frequency = collections.Counter(s)
+        for i, ch in enumerate(s):
+            if frequency[ch] == 1:
+                return i
+        return -1
+</code></pre>
+<ul>
+<li>复杂度分析
+<ul>
+<li>时间复杂度：O(n)，其中 nnn 是字符串 sss 的长度。我们需要进行两次遍历。</li>
+<li>空间复杂度：O(∣Σ∣)，其中 Σ 是字符集，在本题中 sss 只包含小写字母，因此 ∣Σ∣≤26。我们需要 O(∣Σ∣)的空间存储哈希映射。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>解法 2 : 使用哈希表存储索引
+对方法一进行修改，使得第二次遍历一个哈希映射。
+键表示一个字符，值表示它的首次出现的索引（如果该字符只出现一次）或者 −1（如果该字符出现多次）;
+第一次遍历时，遇到字符 c 若不在哈希中，则将 c: 索引 作为键值对添加至哈希映射；若已出现，则将 c 在哈希映射中的值改为 -1；
+第一次遍历后，只要再遍历一次哈希映射中的所有值，找出其中不为 −1 的最小值，即为第一个不重复字符的索引。如果哈希映射中的所有值均为 −1，就返回 −1。</p>
+</li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def firstUniqChar(self, s: str) -&gt; int:
+        position = dict()
+        n = len(s)
+        for i, ch in enumerate(s):
+            if ch in position:
+                position[ch] = -1
+            else:
+                position[ch] = i
+        first = n
+        for pos in position.values():
+            if pos != -1 and pos &lt; first:
+                first = pos
+        if first == n:
+            first = -1
+        return first
+</code></pre>
+<ul>
+<li>复杂度分析
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(∣Σ∣)</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-链表">5. 链表</h2>
+<h3 id="51-删除链表的倒数第-n-个节点">5.1. 删除链表的倒数第 N 个节点</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/</a></li>
+</ul>
+<blockquote>
+<p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+输入：head = [1,2,3,4,5], n = 2
+输出：[1,2,3,5]</p>
+</blockquote>
+<ul>
+<li>双指针</li>
+</ul>
+<pre><code class="language-py">class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
+        dummy = ListNode(0, head)
+        first = head
+        second = dummy
+        for i in range(n):
+            first = first.next
+
+        while first:
+            first = first.next
+            second = second.next
+        
+        second.next = second.next.next
+        return dummy.next
+</code></pre>
+<h3 id="52-反转链表">5.2. 反转链表</h3>
+<ul>
+<li>
+<p><a href="https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/">https://leetcode-cn.com/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/</a></p>
+</li>
+<li>
+<p>双指针</p>
+</li>
+</ul>
+<pre><code class="language-py"># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -&gt; ListNode:
+        newHead = None
+        while head != None:
+            # 先保存访问的节点的下一个节点，保存起来
+            # 留着下一步访问的
+            temp = head.next
+            # 每次访问的原链表节点都会成为新链表的头结点，
+            # 其实就是把新链表挂到访问的原链表节点的
+            # 后面就行了
+            head.next = newHead
+            # 更新新链表
+            newHead = head
+            # 重新赋值，继续访问
+            head = temp
+        # 返回新链表
+        return newHead
+</code></pre>
+<hr>
+<h2 id="6-树">6. 树</h2>
+<h3 id="61-二叉树的最大深度">6.1. 二叉树的最大深度</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/</a></li>
+</ul>
+<blockquote>
+<p>给定一个二叉树，找出其最大深度。
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+说明：叶子节点是指没有子节点的节点。
+示例
+给定二叉树 [3,9,20,null,null,15,7]
+返回它的最大深度 3 。</p>
+</blockquote>
+<pre><code class="language-py"># class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxDepth(self, root: TreeNode) -&gt; int:
+        if root is None:
+            return 0
+        else:
+            left_height = self.maxDepth(root.left)
+            right_height = self.maxDepth(root.right)
+            return max(left_height, right_height) + 1
+</code></pre>
+<h3 id="62-验证二叉搜索树">6.2. 验证二叉搜索树</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/validate-binary-search-tree/solution/yan-zheng-er-cha-sou-suo-shu-by-leetcode-solution/">https://leetcode-cn.com/problems/validate-binary-search-tree/solution/yan-zheng-er-cha-sou-suo-shu-by-leetcode-solution/</a></li>
+</ul>
+<blockquote>
+<p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+假设一个二叉搜索树具有如下特征：</p>
+<blockquote>
+<p>节点的左子树只包含小于当前节点的数。
+节点的右子树只包含大于当前节点的数。
+所有左子树和右子树自身必须也是二叉搜索树。</p>
+</blockquote>
+</blockquote>
+<ol>
+<li>方法 1 : 递归</li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def isValidBST(self, root: TreeNode) -&gt; bool:
+        def helper(node, lower = float('-inf'), upper = float('inf')) -&gt; bool:
+            if not node:
+                return True
+            
+            val = node.val
+            if val &lt;= lower or val &gt;= upper:
+                return False
+
+            if not helper(node.right, val, upper):
+                return False
+            if not helper(node.left, lower, val):
+                return False
+            return True
+
+        return helper(root)
+</code></pre>
+<ol>
+<li>方法 2 : 中序遍历</li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def isValidBST(self, root: TreeNode) -&gt; bool:
+        stack, inorder = [], float('-inf')
+        
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            # 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+            if root.val &lt;= inorder:
+                return False
+            inorder = root.val
+            root = root.right
+
+        return True
+</code></pre>
+<h3 id="63-对称二叉树">6.3. 对称二叉树</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/symmetric-tree/solution/dong-hua-yan-shi-101-dui-cheng-er-cha-shu-by-user7/">https://leetcode-cn.com/problems/symmetric-tree/solution/dong-hua-yan-shi-101-dui-cheng-er-cha-shu-by-user7/</a></li>
+</ul>
+<blockquote>
+<p>给定一个二叉树，检查它是否是镜像对称的。
+例如，二叉树 <code>[1,2,2,3,4,4,3]</code> 是对称的。
+但是下面这个 <code>[1,2,2,null,3,null,3]</code> 则不是镜像对称的：</p>
+</blockquote>
+<ul>
+<li>递归</li>
+</ul>
+<pre><code class="language-py"># Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        &quot;&quot;&quot;
+        : type root: TreeNode
+        : rtype: bool
+        &quot;&quot;&quot;
+        if not root:
+            return True
+        def dfs(left, right):
+            # 递归的终止条件是两个节点都为空
+            # 或者两个节点中有一个为空
+            # 或者两个节点的值不相等
+            if not (left or right):
+                return True
+            if not (left and right):
+                return False
+            if left.val!=right.val:
+                return False
+            return dfs(left.left, right.right) and dfs(left.right,right.left):
+
+        # 用递归函数，比较左节点，右节点
+        return dfs(root.left,root.right)
+</code></pre>
+<ul>
+<li>队列</li>
+</ul>
+<pre><code class="language-py"># Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        if not root or not(root.left or root.right):
+            return True
+        # 用队列保存节点
+        queue = [root.left, root.right]
+        while queue:
+            #从队列中取出两个节点，再比较这两个节点
+            left = queue.pop(0)
+            right = queue.pop(0)
+            # 如果两个节点都为空就继续循环，两者有一个为空就返回 false
+            if not (left or right):
+                continue
+            if not (left and right):
+                return False
+            if left.val != right.val:
+                return False
+            # 将左节点的左孩子， 右节点的右孩子放入队列
+            queue.append(left.left)
+            queue.append(right.right)
+            # 将左节点的右孩子，右节点的左孩子放入队列
+            queue.append(left.right)
+            queue.append(right.left)
+        return True
+</code></pre>
+<h3 id="64-二叉树的层序遍历">6.4. 二叉树的层序遍历</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/bfs-de-shi-yong-chang-jing-zong-jie-ceng-xu-bian-l/">https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/bfs-de-shi-yong-chang-jing-zong-jie-ceng-xu-bian-l/</a></li>
+<li><a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/python3-er-cha-shu-ceng-xu-bian-li-by-jo-nlx3/">https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/python3-er-cha-shu-ceng-xu-bian-li-by-jo-nlx3/</a></li>
+</ul>
+<blockquote>
+<p>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+示例：
+二叉树：[3,9,20,null,null,15,7],
+<code>[ [3], [9,20], [15,7] ]</code></p>
+</blockquote>
+<pre><code class="language-py"># Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
+        if not root: return []
+        #跟结点入 queue
+        queue = [root]
+        res = []
+        while queue:
+            res.append([node.val for node in queue])
+            #存储当前层的孩子节点列表
+            ll = []
+            #对当前层的每个节点遍历
+            for node in queue:
+                #如果左子节点存在，入队列
+                if node.left:
+                    ll.append(node.left)
+                #如果右子节点存在，入队列
+                if node.right:
+                    ll.append(node.right)
+            #后把 queue 更新成下一层的结点，继续遍历下一层
+            queue = ll
+        return res
+</code></pre>
+<hr>
+<h3 id="65-翻转二叉树">6.5 翻转二叉树</h3>
+<ul>
+<li><a href="https://leetcode.cn/problems/invert-binary-tree/solution/fan-zhuan-er-cha-shu-by-leetcode-solution/">https://leetcode.cn/problems/invert-binary-tree/solution/fan-zhuan-er-cha-shu-by-leetcode-solution/</a></li>
+</ul>
+<blockquote>
+<p>给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点.
+输入：root = [4,2,7,1,3,6,9]
+输出：[4,7,2,9,6,3,1]</p>
+</blockquote>
+<ol>
+<li>
+<p>递归</p>
+<pre><code class="language-py">class Solution:
+    def invertTree(self, root: TreeNode) -&gt; TreeNode:
+        if not root:
+            return root
+        left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
+        root.left, root.right = right, left
+        return root
+</code></pre>
+<ul>
+<li>时间复杂度 : O(N),N 为二叉树节点的数目</li>
+<li>空间复杂度 : O(h),h 是树的高度</li>
+</ul>
+</li>
+<li>
+<p>广度优先遍历</p>
+<pre><code class="language-py">class Solution(object):
+    def invertTree(self, root):
+        &quot;&quot;&quot;
+        :type root: TreeNode
+        :rtype: TreeNode
+        &quot;&quot;&quot;
+        if not root:
+            return None
+        # 将二叉树中的节点逐层放入队列中，再迭代处理队列中的元素
+        queue = [root]
+        while queue:
+            # 每次都从队列中拿一个节点，并交换这个节点的左右子树
+            tmp = queue.pop(0)
+            tmp.left,tmp.right = tmp.right,tmp.left
+            # 如果当前节点的左子树不为空，则放入队列等待后续处理
+            if tmp.left:
+                queue.append(tmp.left)
+            # 如果当前节点的右子树不为空，则放入队列等待后续处理
+            if tmp.right:
+                queue.append(tmp.right)
+        # 返回处理完的根节点
+        return root
+</code></pre>
+<ul>
+<li>时间复杂度 : O(n)</li>
+<li>空间复杂度 : O(n)</li>
+</ul>
+</li>
+</ol>
+<h2 id="7-排序和搜索">7. 排序和搜索</h2>
+<h3 id="71-合并两个有序数组">7.1. 合并两个有序数组</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/merge-sorted-array/solution/he-bing-liang-ge-you-xu-shu-zu-by-leetco-rrb0/">https://leetcode-cn.com/problems/merge-sorted-array/solution/he-bing-liang-ge-you-xu-shu-zu-by-leetco-rrb0/</a></li>
+</ul>
+<blockquote>
+<p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。你可以假设 nums1 的空间大小等于 m + n，这样它就有足够的空间保存来自 nums2 的元素。</p>
+</blockquote>
+<ol>
+<li>
+<p>方法 1: 直接合并后排序</p>
+<pre><code class="language-py">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+        nums1[m:] = nums2
+        nums1.sort()
+</code></pre>
+</li>
+<li>
+<p>双指针</p>
+<pre><code class="language-py">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+    sorted = []
+        p1, p2 = 0, 0
+        while p1 &lt; m or p2 &lt; n:
+            if p1 == m:
+                sorted.append(nums2[p2])
+                p2 += 1
+            elif p2 == n:
+                sorted.append(nums1[p1])
+                p1 += 1
+            elif nums1[p1] &lt; nums2[p2]:
+                sorted.append(nums1[p1])
+                p1 += 1
+            else:
+                sorted.append(nums2[p2])
+                p2 += 1
+        nums1[:] = sorted
+</code></pre>
+</li>
+<li>
+<p>逆向双指针</p>
+<pre><code class="language-py">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+        p1, p2 = m - 1, n - 1
+        tail = m + n - 1
+        while p1 &gt;= 0 or p2 &gt;= 0:
+            if p1 == -1:
+                nums1[tail] = nums2[p2]
+                p2 -= 1
+            elif p2 == -1:
+                nums1[tail] = nums1[p1]
+                p1 -= 1
+            elif nums1[p1] &gt; nums2[p2]:
+                nums1[tail] = nums1[p1]
+                p1 -= 1
+            else:
+                nums1[tail] = nums2[p2]
+                p2 -= 1
+            tail -= 1
+</code></pre>
+</li>
+</ol>
+<h3 id="72-二分查找">7.2. 二分查找</h3>
+<h3 id="73-搜索旋转排序数组">7.3. 搜索旋转排序数组</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/sou-suo-xuan-zhuan-pai-xu-shu-zu-by-leetcode-solut/">https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/sou-suo-xuan-zhuan-pai-xu-shu-zu-by-leetcode-solut/</a></li>
+</ul>
+<blockquote>
+<p>整数数组 nums 按升序排列，数组中的值 互不相同 。
+在传递给函数之前，nums 在预先未知的某个下标 k（0 &lt;= k &lt; nums.length）上进行了 旋转，使数组变为 <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code>（下标 从 0 开始 计数）。例如，<code>[0,1,2,4,5,6,7]</code> 在下标 3 处经旋转后可能变为 <code>[4,5,6,7,0,1,2]</code> 。
+给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。</p>
+</blockquote>
+<ol>
+<li>二分法</li>
+</ol>
+<pre><code class="language-py">class Solution:
+    def search(self, nums: List[int], target: int) -&gt; int:
+        if not nums:
+            return -1
+        l, r = 0, len(nums) - 1
+        while l &lt;= r:
+            mid = (l + r)//2:
+            if nums[mid] == target:
+                return mid
+            if nums[0] &lt;= nums[mid]:
+                if nums[0] &lt;= target &lt; nums[mid]:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+            else:
+                if nums[mid] &lt; target &lt;= nums[len(nums) - 1]:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        return -1
+</code></pre>
+<h3 id="74-搜索旋转排序数组">7.4. 搜索旋转排序数组</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/find-peak-element/solution/xun-zhao-feng-zhi-by-leetcode/">https://leetcode-cn.com/problems/find-peak-element/solution/xun-zhao-feng-zhi-by-leetcode/</a></li>
+</ul>
+<blockquote>
+<p>峰值元素是指其值大于左右相邻值的元素。
+给你一个输入数组 nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回 任何一个峰值 所在位置即可。
+你可以假设 nums[-1] = nums[n] = -∞ 。
+输入：nums = [1,2,1,3,5,6,4]
+输出：1 或 5
+解释：你的函数可以返回索引 1，其峰值元素为 2；或者返回索引 5， 其峰值元素为 6。</p>
+</blockquote>
+<pre><code class="language-py">class Solution:
+    def findPeakElement(self, nums: List[int]) -&gt; int:
+        l, r = 0, len(nums) - 1
+        while l &lt; r:
+            mid = (l + r) &gt;&gt; 1
+            if nums[mid] &gt; nums[mid + 1]:
+                r = mid
+            else:
+                l = mid + 1
+        return l
+</code></pre>
+<hr>
+<h2 id="8-动态规划">8. 动态规划</h2>
+<h3 id="81-爬楼梯">8.1. 爬楼梯</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/climbing-stairs/solution/python3-fei-bo-na-qi-shu-by-bo-na-wu-na-naf1w/">https://leetcode-cn.com/problems/climbing-stairs/solution/python3-fei-bo-na-qi-shu-by-bo-na-wu-na-naf1w/</a></li>
+</ul>
+<blockquote>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+注意：给定 n 是一个正整数。</p>
+</blockquote>
+<ol>
+<li>
+<p>解法 1 : 递归</p>
+<pre><code class="language-py">class Solution:
+    def climbStairs(self, n: int) -&gt; int:
+        if n==1:return 1
+
+        elif n==2:return 2
+
+        else:return self.climbStairs(n-1)+self.climbStairs(n-2)
+</code></pre>
+</li>
+<li>
+<p>解法 2 : 尾递归调用</p>
+<pre><code class="language-py">class Solution:
+    def climbStairs(self, n: int) -&gt; int:
+        def fib(n: int, a: int, b: int):
+            if n &lt;= 1:
+                return b
+            else:
+                return fib(n-1, b, a+b)
+        return fib(n, 1, 1)
+</code></pre>
+</li>
+<li>
+<p>非递归</p>
+<pre><code class="language-py">class Solution:
+    def climbStairs(self, n: int) -&gt; int:
+        dp = {}
+        dp[1] = 1
+        dp[2] = 2
+        for i in range(3, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+        return dp[n]
+</code></pre>
+</li>
+<li>
+<p>非递归优化</p>
+<pre><code class="language-py">class Solution:
+    def climbStairs(self, n: int) -&gt; int:
+        if n &lt;= 2:
+            return n
+        a, b, temp = 1, 2, 0
+        for i in range(3, n+1):
+            temp = a+b
+            a = b
+            b = temp
+        return temp
+</code></pre>
+</li>
+</ol>
+<h3 id="82-买股票问题">8.2. 买股票问题</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/gu-piao-wen-ti-python3-c-by-z1m/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/gu-piao-wen-ti-python3-c-by-z1m/</a></li>
+</ul>
+<blockquote>
+<p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
+返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。</p>
+</blockquote>
+<ol>
+<li>
+<p>动态规划</p>
+<pre><code class="language-py">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        n = len(prices)
+        if n == 0: return 0 # 边界条件
+        dp = [0] * n
+        minprice = prices[0] 
+
+        for i in range(1, n):
+            minprice = min(minprice, prices[i])
+            dp[i] = max(dp[i-1], prices[i] - minprice)
+
+        return dp[-1]
+</code></pre>
+</li>
+<li>
+<p>优化</p>
+<pre><code class="language-py">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        minprice = float('inf')
+        maxprofit = 0
+        for price in prices:
+            minprice = min(minprice, price)
+            maxprofit = max(maxprofit, price - minprice)
+        return maxprofit
+</code></pre>
+</li>
+</ol>
+<h3 id="83-买股票问题-2">8.3. 买股票问题 2</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/</a></li>
+</ul>
+<blockquote>
+<p>给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
+设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
+注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+</blockquote>
+<ol>
+<li>
+<p>动态规划</p>
+<pre><code class="language-py">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        if not prices: return 0
+        n = len(prices)
+        if n &lt; 2: return 0
+        dp = [[0]*2 for i in range(n)]
+        dp[0][1] = -prices[0]
+        dp[0][0] = 0
+        for i in range(1, n):
+            dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i])
+            dp[i][1] = max(dp[i-1][1],dp[i-1][0]-prices[i])
+        return dp[-1][0]
+</code></pre>
+</li>
+<li>
+<p>优化</p>
+<pre><code class="language-py">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        dp0,dp1=0,-prices[0]
+        for i in range(1,len(prices)):
+            newdp0=max(dp0,dp1+prices[i])
+            newdp1=max(dp1,dp0-prices[i])
+            dp0=newdp0
+            dp1=newdp1
+        return dp0
+</code></pre>
+</li>
+<li>
+<p>贪心算法</p>
+<pre><code class="language-py">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        profit = 0
+        for i in range(1, len(prices)):
+            tmp = prices[i] - prices[i - 1]
+            if tmp &gt; 0: profit += tmp
+        return profit
+</code></pre>
+</li>
+</ol>
+<h3 id="84-最大字序和">8.4. 最大字序和</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/maximum-subarray/submissions/">https://leetcode-cn.com/problems/maximum-subarray/submissions/</a></li>
+</ul>
+<blockquote>
+<p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+</blockquote>
+<ol>
+<li>
+<p>动态规划</p>
+<pre><code class="language-py">class Solution:
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        n = len(nums)
+        dp = [0] * n
+        dp[0] = nums[0]
+        maxsum = dp[0]
+        for i in range(1,n):
+            dp[i] = nums[i] + max(dp[i-1], 0)
+            maxsum = max(maxsum, dp[i])
+        return maxsum
+</code></pre>
+</li>
+<li>
+<p>优化</p>
+<pre><code class="language-py">class Solution:
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        n = len(nums)
+        cur = nums[0]
+        maxsum = cur
+        for i in range(1,n):
+            cur = nums[i] + max(cur, 0)
+            maxsum = max(maxsum, cur)
+        return maxsum
+</code></pre>
+</li>
+</ol>
+<h3 id="85-打家劫舍">8.5. 打家劫舍</h3>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/">https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/</a></li>
+</ul>
+<blockquote>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。</p>
+</blockquote>
+<ol>
+<li>
+<p>动态规划</p>
+<pre><code class="language-py">class Solution:
+    def rob(self, nums: List[int]) -&gt; int:
+        if not nums: return 0
+        n = len(nums)
+        if n == 1: return nums[0]
+
+        dp = [0] * n
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+        for i in range(2,n):
+            dp[i] = max(dp[i-2] + nums[i], dp[i-1])
+
+        return dp[n-1]
+</code></pre>
+</li>
+<li>
+<p>优化</p>
+<pre><code class="language-py">class Solution:
+    def rob(self, nums: List[int]) -&gt; int:
+        if not nums: return 0
+        n = len(nums)
+        if n == 1: return nums[0]
+
+        first, second = nums[0], max(nums[0], nums[1])
+        for i in range(2,n):
+            first, second = second, max(first+nums[i], second)
+        return second
+</code></pre>
+</li>
+</ol>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://github.com/Pilchark/pilchark.github.io/2022/01/ds_practice/" title="leetcode 练习题" target="_blank" rel="external">https://github.com/Pilchark/pilchark.github.io/2022/01/ds_practice/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://github.com/Pilchark/pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2022/01/regex/" title="正则表达式"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2022/01/docker_toturial/"
+                    title="Docker 笔记"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://github.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://github.com/Pilchark/pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

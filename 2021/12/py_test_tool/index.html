@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        # Python 常用的测试框架 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="doctest; unittest; pytest" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title># Python 常用的测试框架 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://github.com/Pilchark/pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="# Python 常用的测试框架" />
+<meta property="og:description" content="doctest; unittest; pytest" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/Pilchark/pilchark.github.io/2021/12/py_test_tool/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-06T00:00:00+00:00" />
+<meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" /><meta property="og:see_also" content="https://github.com/Pilchark/pilchark.github.io/2022/06/py_pyenv_usage/" />
+
+<meta itemprop="name" content="# Python 常用的测试框架">
+<meta itemprop="description" content="doctest; unittest; pytest"><meta itemprop="datePublished" content="2021-12-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-12-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1907">
+<meta itemprop="keywords" content="python,pytest," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="# Python 常用的测试框架"/>
+<meta name="twitter:description" content="doctest; unittest; pytest"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://github.com/Pilchark/pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/Pilchark/pilchark.github.io/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/Pilchark/pilchark.github.io/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/Pilchark/pilchark.github.io/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/Pilchark/pilchark.github.io/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/Pilchark/pilchark.github.io/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="5">data_structure<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link" rel="35">python<span
+               class="tag-list-count">35</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">35</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://github.com/Pilchark/pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">35</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_toml/" class="title">TOML : python 的好伙伴</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-19</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_build_project_doc/" class="title">使用 MkDocs 构建 python 项目的文档</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://github.com/Pilchark/pilchark.github.io/2022/07/py_pytest_usage/" class="title">使用 pytest 让测试更高效</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/Pilchark/pilchark.github.io/2021/12/py_test_tool/"
+    ># Python 常用的测试框架</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://github.com/Pilchark/pilchark.github.io/2021/12/py_test_tool/" class="article-date">
+  <time datetime="2021-12-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">2021-12-06</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/Pilchark/pilchark.github.io/categories/python/"> Python </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/python/"> python </a>
+    <a class="article-tag-link" href="/Pilchark/pilchark.github.io/tags/pytest/"> pytest </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1907字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<hr>
+<h2 id="单元测试与模块测试">单元测试与模块测试</h2>
+<ol>
+<li>单元测试
+<ul>
+<li>是应用程序中的最小可测试部分</li>
+<li>在面向过程中，单元可以是整个模块，但常见的是单个函数或过程</li>
+<li>在面向对象中，单元通常是整个接口，例如类，但也可以是单独的方法</li>
+<li>单元测试多数情况下有程序员自己完成</li>
+</ul>
+</li>
+<li>模块测试
+<ul>
+<li>模块测试是针对具有明显功能特征的代码块进行的测试</li>
+<li>单元测试可能只涉及一小部分的功能</li>
+</ul>
+</li>
+<li>程序接口
+<ul>
+<li>提供了输入输出的类,方法或函数</li>
+</ul>
+</li>
+<li>协议接口
+<ul>
+<li>对地层代码进行了封装，通过协议对外提供调用</li>
+</ul>
+</li>
+<li>意义
+<ul>
+<li>单元测试和接口测试是更早介入测试的两个方面</li>
+</ul>
+</li>
+</ol>
+<h2 id="doctest">doctest</h2>
+<h3 id="功能">功能</h3>
+<ol>
+<li>doctest 模块会寻找类似于 Python 交互式代码(linux 中输入 python3 后显示的交互窗口)的文本, 然后代替交互窗口执行这些命令, 并判断是否与预期相同.</li>
+</ol>
+<h3 id="使用方法">使用方法</h3>
+<ol>
+<li>
+<p>方法1</p>
+<ul>
+<li>创建一个 test.py</li>
+</ul>
+<pre><code class="language-py"># test.py
+def my_function(a, b):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; my_function(2, 3)
+    6
+    &gt;&gt;&gt; my_function('a', 3)
+    'aaa'
+    &quot;&quot;&quot;
+    return a * b
+</code></pre>
+<ul>
+<li>执行 <code>&gt; python3 -m doctest test.py</code> (如果测试全通过不会有任何显示)</li>
+<li>或 <code>&gt; python3 -m doctest -v test.py</code> (-v 表示 verbose, 总是显示测试结果)</li>
+<li>输出</li>
+</ul>
+<pre><code class="language-py">Trying:
+    my_function(2, 3)
+Expecting:
+    6
+ok
+Trying:
+    my_function('a', 3)
+Expecting:
+    'aaa'
+ok
+1 items had no tests:
+    __main__
+1 items passed all tests:
+   2 tests in __main__.my_function
+2 tests in 2 items.
+2 passed and 0 failed.
+Test passed.
+</code></pre>
+</li>
+<li>
+<p>方法2 : 导入 doctest</p>
+<ul>
+<li>创建一个 test2.py</li>
+</ul>
+<pre><code class="language-py"># test.py
+def my_function(a, b):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; my_function(2, 3)
+    6
+    &gt;&gt;&gt; my_function('a', 3)
+    'aaa'
+    &quot;&quot;&quot;
+    return a * b
+
+if __name__ == &quot;__main__&quot;:
+    import doctest
+    doctest.testmod()
+</code></pre>
+<ul>
+<li>执行 <code>&gt; python3 test2.py -v</code></li>
+<li>输出同上</li>
+</ul>
+</li>
+<li>
+<p>方法3 : 单独创建测试用例</p>
+<ul>
+<li>创建一个 test3.py</li>
+</ul>
+<pre><code class="language-py">def my_function(a, b):
+    return a * b
+
+if __name__ == &quot;__main__&quot;:
+    import doctest
+    doctest.testfile(&quot;example.txt&quot;)
+</code></pre>
+<ul>
+<li>创建一个 example.txt</li>
+</ul>
+<pre><code class="language-py">The ``example`` module
+======================
+
+test ``my_function``
+-------------------
+
+从 test3 中 导入 my_function 函数
+
+    &gt;&gt;&gt; from test3 import my_function
+
+测试用例:
+
+    &gt;&gt;&gt; my_function(2, 3)
+    6
+    &gt;&gt;&gt; my_function('a', 3)
+    'aaa'
+</code></pre>
+<ul>
+<li>输出(多了一个 import 的测试)</li>
+</ul>
+<pre><code class="language-py"> Trying:
+    from test3 import my_function
+Expecting nothing
+ok
+Trying:
+    my_function(2, 3)
+Expecting:
+    6
+ok
+Trying:
+    my_function('a', 3)
+Expecting:
+    'aaa'
+ok
+1 items passed all tests:
+   3 tests in example.txt
+3 tests in 1 items.
+3 passed and 0 failed.
+Test passed.
+</code></pre>
+</li>
+</ol>
+<p>!&gt; 注意事项</p>
+<ol>
+<li>
+<p>关于 &lsquo;' 反斜杠</p>
+<ul>
+<li>使用 r 来保留 &lsquo;'</li>
+</ul>
+<pre><code class="language-py">&gt;&gt;&gt; def f(x):
+...     r'''Backslashes in a raw docstring: m\n'''
+&gt;&gt;&gt; print(f.__doc__)
+</code></pre>
+<ul>
+<li>或使用 &lsquo;' 将 &lsquo;' 取义</li>
+</ul>
+<pre><code class="language-py">&gt;&gt;&gt; def f(x):
+...     '''Backslashes in a raw docstring: m\\n'''
+&gt;&gt;&gt; print(f.__doc__)
+Backslashes in a raw docstring: m\n
+</code></pre>
+</li>
+</ol>
+<h2 id="unittest">unittest</h2>
+<h3 id="功能-1">功能</h3>
+<ol>
+<li>测试用例
+<ul>
+<li>一个测试用例是一个独立的测试单元。它检查输入特定的数据时的响应。 unittest 提供一个基类： TestCase ，用于新建测试用例</li>
+</ul>
+</li>
+<li>不同分类
+<ul>
+<li>单元测试 : unittest</li>
+<li>HTTP 接口自动化 : unittest + Request</li>
+<li>Web UI 自动化 : unittest + Selenium</li>
+<li>移动自动化 : unittest + Appium</li>
+</ul>
+</li>
+</ol>
+<h3 id="基本实例">基本实例</h3>
+<ol>
+<li>
+<p>测试 3 种字符串</p>
+<pre><code class="language-py"># test4.py
+import unittest
+
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+    def test_split(self):
+        s = 'hello world'
+        self.assertEqual(s.split(), ['hello', 'world'])
+        # check that s.split fails when the separator is    not a string
+        with self.assertRaises(TypeError):
+            s.split(2)
+
+if __name__ == '__main__':
+    #默认运行当前测试文件中所有测试用例，直接使用 main() 方法
+    unittest.main()
+</code></pre>
+<ul>
+<li><code>python test4.py -v</code></li>
+</ul>
+<pre><code class="language-py">test_isupper (__main__.TestStringMethods) ... ok
+test_split (__main__.TestStringMethods) ... ok
+test_upper (__main__.TestStringMethods) ... ok
+
+------------------------------------------------------------    ----------
+Ran 3 tests in 0.001s
+
+OK
+</code></pre>
+</li>
+<li>
+<p>unittest 模块可以通过命令行运行模块、类和独立测试方法的测试</p>
+<ul>
+<li><code>python -m unittest test_module1 test_module2</code></li>
+<li><code>python -m unittest test_module.TestClass</code></li>
+<li><code>python -m unittest test_module.TestClass.test_method</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="pytest">pytest</h2>
+<h3 id="1-基础">1. 基础</h3>
+<ol>
+<li>安装 <code>pip install -U pytest</code></li>
+<li>断言 : <code>assert a == b</code></li>
+<li>运行 : <code>pytest test.py</code></li>
+<li>详细打印 : <code>pytest -v test.py</code></li>
+<li>捕获异常 <code>raise</code></li>
+<li>使用 class 包装成组</li>
+</ol>
+<h3 id="2-操作">2. 操作</h3>
+<ol>
+<li><code>python -m pytest</code> 调用时 将当前路径加入 sys.path</li>
+<li>结束代码 : <code>from pytest import ExitCode</code>
+<ul>
+<li>0 : 所有 tests 被收集并成功通过</li>
+<li>1 : tests 被收集和运行，但一些 test 失败</li>
+<li>2 : Test 执行被用户打断</li>
+<li>3 : 执行测试时发生内部错误</li>
+<li>4 : pytest 命令用法错误</li>
+<li>5 : 未采集到 tests</li>
+</ul>
+</li>
+<li>pytest &ndash;version</li>
+<li>失败后停止
+<ul>
+<li>第一次 <code>pytest -x</code></li>
+<li>第 n 次 : <code>pytest --maxfail=2</code></li>
+</ul>
+</li>
+<li>指定某个测试用例
+<ul>
+<li>显式指定函数名，通过 :: 标记(一次只能指定一个测试函数)。<code>pytest test_no_mark.py::test_func1</code></li>
+<li>使用模糊匹配， 使用 -k 选项标识。(可以批量操作，但需要所有测试的函数名包含相同的模式) <code>pytest -k func1 test.py</code></li>
+<li>使用 pytest.mark 在函数上进行标记,测试时使用 -m 选择标记的测试函数
+<ul>
+<li>一个函数可以打多个标记，多个函数也可以打相同的标记</li>
+<li>运行测试时使用 -m 选项可以加上逻辑</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Modifying Python traceback printing</li>
+<li>-r : 详细总结报告
+<ul>
+<li>f : failed</li>
+<li>s : skipped</li>
+</ul>
+</li>
+<li>使用 debugger 调试失败的 test
+<ul>
+<li><code>pytest --pdb</code></li>
+</ul>
+</li>
+<li>在开始时调用 PDB ： <code>pytest --trace</code></li>
+<li>breakpoint
+<ul>
+<li>###TODO</li>
+</ul>
+</li>
+<li>持续时间
+<ul>
+<li>获取执行时间超过1s的10个test : <code>pytest --durations=10 --durations-min=1.0</code></li>
+</ul>
+</li>
+<li>使用 faulthandler 模块获取运行中进程的 traceback 信息</li>
+<li><code>python -m pytest [...]</code>
+<ul>
+<li>会将当前目录也添加到sys.path</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-异常">3. 异常</h3>
+<ol>
+<li>
+<p>断言</p>
+<ul>
+<li><code>assert a == b</code></li>
+<li></li>
+</ul>
+</li>
+<li>
+<p>捕获异常</p>
+<pre><code class="language-py"># test_raises.py
+def test_raises():
+with pytest.raises(TypeError) as e:
+connect('localhost', '6379')
+exec_msg = e.value.args[0]
+assert exec_msg == 'port type must be int'
+</code></pre>
+</li>
+<li>
+<p>标记函数</p>
+<ul>
+<li>
+<p>显式指定函数名，通过 :: 标记(一次只能指定一个测试函数)。<code>pytest test_no_mark.py::test_func1</code></p>
+</li>
+<li>
+<p>使用模糊匹配， 使用 -k 选项标识。(可以批量操作，但需要所有测试的函数名包含相同的模式) <code>pytest -k func1 test.py</code></p>
+</li>
+<li>
+<p>使用 pytest.mark 在函数上进行标记,测试时使用 -m 选择标记的测试函数</p>
+<ul>
+<li>一个函数可以打多个标记，多个函数也可以打相同的标记</li>
+<li>运行测试时使用 -m 选项可以加上逻辑</li>
+</ul>
+<pre><code class="language-py">@pytest.mark.finished
+def test_func1():
+    assert 1 == 1
+
+@pytest.mark.unfinished
+def test_func2():
+    assert 1 != 1
+
+# $ pytest -m finished test.py
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>跳过测试</p>
+<ul>
+<li>使用 s 表示测试被跳过</li>
+</ul>
+<pre><code class="language-py">@pytest.mark.skip(reason='out-of-date api')
+def test_connect():
+    pass
+</code></pre>
+<ul>
+<li>使用 pytest.mark.skipif 指定被忽略的条件</li>
+</ul>
+<pre><code class="language-py">@pytest.mark.skipif(conn.__version__ &lt; '0.2.0',
+reason='not supported until v0.2.0')
+def test_api():
+pass
+</code></pre>
+</li>
+<li>
+<p>预见的错误</p>
+<ul>
+<li>使用 <strong>xfail</strong> 实现预见错误功能</li>
+</ul>
+</li>
+<li>
+<p>参数化</p>
+<ul>
+<li>每组参数都独立执行一次测试 <code>pytest.mark.parametrize(argnames, argvalues)</code></li>
+<li>使用 pytest.param 的 id 参数进行自定义</li>
+</ul>
+</li>
+<li>
+<p>固件 : <strong>fixture()</strong></p>
+<ul>
+<li>pytest 在执行测试函数前(后)加载运行他们</li>
+<li>常见使用为数据库的初始链接和最后关闭操作</li>
+<li>Pytest一次只会缓存一个fixture实例</li>
+<li>较高范围的fixture(例如session会话级)较低范围的fixture(例如function函数级或class类级优先执行</li>
+</ul>
+<pre><code class="language-py"># test_postcode.py
+@pytest.fixture()
+def postcode():
+    return '010'
+
+def test_postcode(postcode):
+    assert postcode == '010'
+</code></pre>
+<ul>
+<li>使用 <strong>conftest.py</strong> 集中管理固件</li>
+</ul>
+</li>
+<li>
+<p>预处理和后处理</p>
+<ul>
+<li>使用 <strong>yeild</strong> 关键词
+<ul>
+<li>yield 之前代码属于预处理，会在测试前执行</li>
+<li>yield 之后代码将在测试完成后执行</li>
+<li>执行时使用 -s 防止消息被吞</li>
+<li>更详细: &ndash;setup-show</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>作用域 : <strong>scope</strong> 参数</p>
+<ul>
+<li>function 函数级</li>
+<li>class 类级别</li>
+<li>module 模块级</li>
+<li>session 会话级</li>
+</ul>
+<pre><code class="language-py">@pytest.fixture(scope='function')
+def func_scope():
+    pass
+</code></pre>
+</li>
+<li>
+<p>自动执行 : <strong>autouse</strong> 参数</p>
+<ul>
+<li>两个自动计时固件，一个用于统计每个函数运行时间，一个用于计算总耗时</li>
+</ul>
+<pre><code class="language-py"># test_autouse.py
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+@pytest.fixture(scope='session', autouse=True)
+def timer_session_scope():
+    start = time.time()
+    print('\nstart: {}'.format(time.strftime(DATE_FORMAT, time.localtime(start))))
+
+    yield
+
+    finished = time.time()
+    print('finished: {}'.format(time.strftime(DATE_FORMAT, time.localtime(finished)))
+    print('Total time cost: {:.3f}s'.format(finished - start))
+
+
+@pytest.fixture(autouse=True)
+    def timer_function_scope():
+        start = time.time()
+        yield
+        print(' Time cost: {:.3f}s'.format(time.time() - start))
+</code></pre>
+</li>
+<li>
+<p>重命名</p>
+<ul>
+<li>通过 <code>name</code> 选项指定名称</li>
+</ul>
+</li>
+<li>
+<p>参数化</p>
+</li>
+</ol>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/py_test_tool/" title="# Python 常用的测试框架" target="_blank" rel="external">https://github.com/Pilchark/pilchark.github.io/2021/12/py_test_tool/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://github.com/Pilchark/pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/py_super_init/" title="# python 中 super.init 用法"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://github.com/Pilchark/pilchark.github.io/2021/12/py_data_classes/"
+                    title="Python Dataclass 简介"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://github.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://github.com/Pilchark/pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/github.com\/Pilchark\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://github.com/Pilchark/pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>
