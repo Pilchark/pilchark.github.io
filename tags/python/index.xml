@@ -6,10 +6,37 @@
     <description>Recent content in python on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Aug 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python 项目的配置文件</title>
+      <link>https://pilchark.github.io/2022/08/py_config_file/</link>
+      <pubDate>Wed, 10 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/08/py_config_file/</guid>
+      <description>参考文章 : https://hackersandslackers.com/simplify-your-python-projects-configuration/ 我们可以使用许多文件类型来存储和访问整个项目中的基本变量。文件类型（如 ini、yaml 等）都具有在结构化（或非结构化）层次结构中</description>
+    </item>
+    
+    <item>
+      <title>leetcode 习题解题思路</title>
+      <link>https://pilchark.github.io/2022/08/ds_leetcode/</link>
+      <pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/08/ds_leetcode/</guid>
+      <description>参考 : https://github.com/youngyangyang04/leetcode-master 数组 二分查找 思路 左闭右闭的区间，也就是 [left, right] while (left &amp;lt;= right) 要使用 &amp;lt;= ，因为left == right是有意义的， 所以使用 &amp;lt;= if (nums[middle] &amp;gt; target) right 要赋值为 middle - 1，</description>
+    </item>
+    
+    <item>
+      <title>python 中的线程</title>
+      <link>https://pilchark.github.io/2022/07/py_threading/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/07/py_threading/</guid>
+      <description>参考文章: https://realpython.com/intro-to-python-threading/ https://xie.infoq.cn/article/1e151c24367abe8cad18130f4 什么是线程 同时使用两个线程跑一个程序，两个线程实际上是两个「处理器」， 但他们同时只有一个在执行。 创建一个线程 使用 threading 库 import logging import threading import</description>
+    </item>
     
     <item>
       <title>python 的栈，队列和优先队列</title>
@@ -162,33 +189,6 @@
       
       <guid>https://pilchark.github.io/2022/01/ds_practice/</guid>
       <description>1. 经典题目 1.1. 判断闰年 def is_leap_year(year): return (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0) 1.2. 判断素数 方法 1 from math import sqrt def isPrime(n): if n &amp;lt;= 1: return False for i in range(2, int(sqrt(n) + 1)): if n%i == 0: return False return True 方法 2 def isPrime(n):</description>
-    </item>
-    
-    <item>
-      <title>正则表达式</title>
-      <link>https://pilchark.github.io/2022/01/regex/</link>
-      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2022/01/regex/</guid>
-      <description>参考： https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md https://segmentfault.com/a/1190000013084624 1. 元字符 正则表达式主要依赖于元字符。 元字符不代表他们本身的字面意思，他们都有特殊的含义。一些元字符写在方括号中的时候有一些特殊的意</description>
-    </item>
-    
-    <item>
-      <title>Cython vs Python vs CPython</title>
-      <link>https://pilchark.github.io/2022/01/py_pythoncpythoncython/</link>
-      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2022/01/py_pythoncpythoncython/</guid>
-      <description>参考 : https://eduwyre.com/article/cython-vs-python-vs-cpython Python在学生和初学者中很受欢迎，并因其简单的语法而受到青睐。您可以在许多领域使用Python，包括机器学习，Web开发，人工智</description>
-    </item>
-    
-    <item>
-      <title>Python re 模块</title>
-      <link>https://pilchark.github.io/2022/01/python_re_module/</link>
-      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2022/01/python_re_module/</guid>
-      <description>参考 : https://wiki.jikexueyuan.com/project/explore-python/Regular-Expressions/re.html 1. re 模块 在 Python 中，我们可以使用内置的 re 模块来使用正则表达式。 有一点需要特别注意的是，正则表达式使用 \ 对特殊字符进行转义，比如，为了匹配</description>
     </item>
     
   </channel>

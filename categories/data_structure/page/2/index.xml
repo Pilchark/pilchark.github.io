@@ -6,10 +6,37 @@
     <description>Recent content in Data_Structure on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/categories/data_structure/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>正则表达式</title>
+      <link>https://pilchark.github.io/2022/01/regex/</link>
+      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/01/regex/</guid>
+      <description>参考： https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md https://segmentfault.com/a/1190000013084624 1. 元字符 正则表达式主要依赖于元字符。 元字符不代表他们本身的字面意思，他们都有特殊的含义。一些元字符写在方括号中的时候有一些特殊的意</description>
+    </item>
+    
+    <item>
+      <title>Cython vs Python vs CPython</title>
+      <link>https://pilchark.github.io/2022/01/py_pythoncpythoncython/</link>
+      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/01/py_pythoncpythoncython/</guid>
+      <description>参考 : https://eduwyre.com/article/cython-vs-python-vs-cpython Python在学生和初学者中很受欢迎，并因其简单的语法而受到青睐。您可以在许多领域使用Python，包括机器学习，Web开发，人工智</description>
+    </item>
+    
+    <item>
+      <title>Python re 模块</title>
+      <link>https://pilchark.github.io/2022/01/python_re_module/</link>
+      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/01/python_re_module/</guid>
+      <description>参考 : https://wiki.jikexueyuan.com/project/explore-python/Regular-Expressions/re.html 1. re 模块 在 Python 中，我们可以使用内置的 re 模块来使用正则表达式。 有一点需要特别注意的是，正则表达式使用 \ 对特殊字符进行转义，比如，为了匹配</description>
+    </item>
     
     <item>
       <title>Python 单例模式(Singleton) 的N种实现</title>
@@ -162,33 +189,6 @@
       
       <guid>https://pilchark.github.io/2021/12/py_copy_and_deepcopy/</guid>
       <description>参考文章 : https://www.cnblogs.com/semon-code/p/8231041.html 对象赋值 对象赋值不会复制对象，它只会复制一个对象引用，不会开辟新的内存空间. test = [&amp;quot;test&amp;quot;, 18, [&amp;quot;python&amp;quot;,&amp;quot;java&amp;quot;]] copytest = test print(id(test)) # 4559314816 print(id(copytest)) # 4559314816 # 将test赋值给cop</description>
-    </item>
-    
-    <item>
-      <title>使用 namedtuple 写出简练的代码</title>
-      <link>https://pilchark.github.io/2021/12/py_namedtuple/</link>
-      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2021/12/py_namedtuple/</guid>
-      <description>原文 : https://realpy.thoncom/python-namedtuple/ 1. 使用 namedtuple 编写 Pythonic 代码 Pythonnamedtuple()是工厂函数，可在中使用collections。它允许您tuple使用命名字段创</description>
-    </item>
-    
-    <item>
-      <title>python 的基本数据结构</title>
-      <link>https://pilchark.github.io/2021/12/ds_python_data_structure/</link>
-      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2021/12/ds_python_data_structure/</guid>
-      <description>参考 : http://codingdict.com/article/4851 单链表 : https://zhuanlan.zhihu.com/p/95090717 1. 链表 1.1. 单链表 add_first(L,e): newest = Node(e) newest.next = L.head L.head = newest L.size += 1 class Node(object): def __init__(self, item): self.item = item self.next = None class SingleLinkList(object): def __init__(self, node=None): self.__head = node def is_empty(self): return self.__head is None def length(self): &amp;quot;&amp;quot;&amp;q</description>
-    </item>
-    
-    <item>
-      <title>python 的数据类型</title>
-      <link>https://pilchark.github.io/2021/12/ds_python_data_type/</link>
-      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2021/12/ds_python_data_type/</guid>
-      <description>参考 : https://docs.python.org/zh-cn/3/library/stdtypes.html?highlight=isalnum#bytearray.isalnum 内置数据类型 类型 缩写 文本类型： str 数值类型： int, float, complex 序列类型： list, tuple, range 映射类型： dict 集合类型： set, frozenset 布尔类型： bool 二进制类型： bytes, bytearray, memoryview python 查看数据类</description>
     </item>
     
   </channel>

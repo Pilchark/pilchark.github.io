@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        python 项目的配置文件 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="Python Projects config : INI, TOML, YAML, and ENV files" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>python 项目的配置文件 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="python 项目的配置文件" />
+<meta property="og:description" content="Python Projects config : INI, TOML, YAML, and ENV files" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pilchark.github.io/2022/08/py_config_file/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-10T00:00:00+00:00" />
+<meta property="og:see_also" content="https://pilchark.github.io/2022/08/ds_leetcode/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/07/py_threading/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/07/py_poetry/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/07/py_toml/" />
+
+<meta itemprop="name" content="python 项目的配置文件">
+<meta itemprop="description" content="Python Projects config : INI, TOML, YAML, and ENV files"><meta itemprop="datePublished" content="2022-08-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-08-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2566">
+<meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="python 项目的配置文件"/>
+<meta name="twitter:description" content="Python Projects config : INI, TOML, YAML, and ENV files"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="6">data_structure<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pi/" class="tag-list-link" rel="1">pi<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/python/" class="tag-list-link" rel="38">python<span
+               class="tag-list-count">38</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">6</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/geek/" class="category-list-link">geek</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">38</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">6</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pi/" class="tag-list-link">pi</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">38</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/08/py_config_file/" class="title">python 项目的配置文件</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-08-10 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-08-10</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/08/ds_leetcode/" class="title">leetcode 习题解题思路</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-08-08 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-08-08</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/07/py_threading/" class="title">python 中的线程</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-29 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-29</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/07/py_stack_queues_and_priority_queues/" class="title">python 的栈，队列和优先队列</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-25</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/07/py_poetry/" class="title">使用 Poetry 管理 python 依赖</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-07-22 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-07-22</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2022/08/py_config_file/"
+    >python 项目的配置文件</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://pilchark.github.io/2022/08/py_config_file/" class="article-date">
+  <time datetime="2022-08-10 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-08-10</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/python/"> Python </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/python/"> python </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2566字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<ul>
+<li>参考文章 :
+<ul>
+<li><a href="https://hackersandslackers.com/simplify-your-python-projects-configuration/">https://hackersandslackers.com/simplify-your-python-projects-configuration/</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>我们可以使用许多文件类型来存储和访问整个项目中的基本变量。文件类型（如 <code>ini</code>、<code>yaml</code> 等）都具有在结构化（或非结构化）层次结构中存储信息的独特方式。根据项目的性质，这些文件结构中的每一个都可以很好地为您服务或妨碍您。我们将研究所有这些选项的优点，并使用适当的Python库解析这些配置。</p>
+<h3 id="meet-the-contenders">Meet The Contenders</h3>
+<p>现代软件中格式化配置文件的方法很多。我们将介绍一些用于处理项目配置的最常见文件格式（<code>ini</code>，<code>toml</code>，<code>yaml</code>，<code>json</code>，.<code>env</code>）以及解析它们的Python库。</p>
+<h2 id="configure-from-ini"><strong>Configure from .ini</strong></h2>
+<p><code>ini</code> 文件可能是我们可用的最直接的配置文件。<code>ini</code> 文件非常适合较小的项目，主要是因为这些文件仅支持 1 级深度的层次结构。<code>ini</code> 文件本质上是平面文件，但变量可以属于组。以下示例演示了共享公共主题的变量如何属于公共标题，例如 <code>[DATABASE]</code> 或 <code>[LOGS]</code>：</p>
+<pre><code class="language-ini"># config.ini
+[APP]
+ENVIRONMENT = development
+DEBUG = False
+
+[DATABASE]
+USERNAME = root
+PASSWORD = p@ssw0rd
+HOST = 127.0.0.1
+PORT = 5432
+DB = my_database
+
+[LOGS]
+ERRORS = logs/errors.log
+INFO = data/info.log
+
+[FILES]
+STATIC_FOLDER = static
+TEMPLATES_FOLDER = templates
+</code></pre>
+<p>这种结构无疑使人类更容易理解，但这种结构的实用性超出了美学。让我们用Python的<a href="https://docs.python.org/3/library/configparser.html">configparser</a> 库来解析这个文件，看看到底发生了什么。我们首先将 <code>test.ini</code> 的内容保存到一个名为 <code>config</code> 的变量中：</p>
+<pre><code class="language-py">&quot;&quot;&quot;Load configuration from .ini file.&quot;&quot;&quot;
+import configparser
+
+# Read local file `config.ini`.
+config = configparser.ConfigParser()
+config.read('settings/config.ini')
+</code></pre>
+<p>在<code>ini</code>文件上调用 <code>read()</code> 不仅仅是存储普通数据;我们的<code>config</code>变量现在是一个独特的数据结构，允许我们使用各种方法将值读取和写入我们的配置。尝试运行 <code>print(config)</code> 来亲眼看看：</p>
+<p><code>&lt;configparser.ConfigParser object at 0x10e58c390&gt;</code></p>
+<p>配置文件的存在是为了提取值的简单目的。<code>configparser</code> 允许我们以多种方式执行此操作。以下每一行都返回值 <code>127.0.0.1</code>：</p>
+<pre><code class="language-py">&quot;&quot;&quot;Load configuration from .ini file.&quot;&quot;&quot;
+import configparser
+
+# Read local `config.ini` file.
+config = configparser.ConfigParser()
+config.read('settings/config.ini')
+
+# Get values from our .ini file
+config.get('DATABASE', 'HOST')
+config['DATABASE']['HOST']
+</code></pre>
+<p>对于我们希望接收特定数据类型的值，<code>configparser</code> 有几种类型检查方法来检索我们要查找的数据结构中的值。命令 <code>config</code>。</p>
+<p>getboolean<code>('APP'，'DEBUG')</code> 将正确返回布尔值<code>False</code>，而不是读取<code>False</code>的字符串，这显然对我们的应用程序是有问题的。如果我们的值<code>DEBUG</code>被设置为布尔值以外的值，<code>config。getboolean()</code>将抛出一个错误.<code>configparser</code>还有一系列其他类型检查方法，如&rsquo;getint()&rsquo;、&lsquo;getfloat()&lsquo;等等。</p>
+<p><code>configparser</code>的功能还不止于此。我们可以详细介绍该库编写新配置值、检查键的存在等等的能力，但我们不能这样做。</p>
+<h2 id="configure-from-toml"><strong>Configure from .toml</strong></h2>
+<p><code>TOML</code> files may seem to share <em>some</em> syntax similarities with <code>ini</code> files at first glance, but support a much wider variety of data types, as well as relationships between values themselves. <code>TOML</code> files also force us to be more explicit about data structures upfront, as opposed to determining them <em>after</em> parsing as <code>configparser</code> does.</p>
+<p>Parsing TOML files in Python is handled by a library appropriately dubbed <a href="https://pypi.org/project/toml/">toml</a>, Before we even go there, let&rsquo;s see what the TOML hype is about.</p>
+<h3 id="toml-variable-types">TOML Variable Types</h3>
+<p><code>TOML</code> files define variables via key/value pairs in a similar manner to that of <code>ini</code> files. <code>T</code>hese pairs are referred to as <em>keys</em>. Unlike <code>ini</code> files, however, <code>TOML</code> expects that the values of keys to be stored as the data type they&rsquo;re intended to be utilized as. Variables intended to be parsed as strings <em>must</em> be stored as values in quotes, whereas booleans must be stored as either raw <code>true</code> or <code>false</code> values. This removes a lot of ambiguity around our configurations: we have no need for methods such as <code>getboolean()</code> with TOML files.</p>
+<p><code>TOML</code> files can support an impressive catalog of variable types. Some of the more impressive variable types of TOML include <code>DateTime</code>, <code>local time</code>, <code>arrays</code>, <code>floats</code>, and even <code>hexadecimal values</code>:</p>
+<pre><code>[project]
+name = &quot;Faceback&quot;
+description = &quot;Powerful AI which renders the back of somebody's head, based on their face.&quot;
+version = &quot;1.0.0&quot;
+updated = 1979-05-27T07:32:00Z
+author = &quot;Todd Birchard&quot;
+
+...
+</code></pre>
+<p>config.toml</p>
+<h3 id="toml-file-structures">TOML File Structures</h3>
+<p>The bracketed sections in TOML files are referred to as <code>tables</code>. <code>Keys</code> can live either inside or outside of tables, as we can see in the example below. You&rsquo;ll notice that these aren&rsquo;t the only two elements of TOML files, either:</p>
+<pre><code class="language-yml"># Keys
+title = &quot;My TOML Config&quot;
+
+# Tables
+[project]
+name = &quot;Faceback&quot;
+description = &quot;Powerful AI which renders the back of somebody's head, based on their face.&quot;
+version = &quot;1.0.0&quot;
+updated = 1979-05-27T07:32:00Z
+author = &quot;Todd Birchard&quot;
+
+[database]
+host = &quot;127.0.0.1&quot;
+password = &quot;p@ssw0rd&quot;
+port = 5432
+name = &quot;my_database&quot;
+connection_max = 5000
+enabled = true
+
+# Nested `tables`
+[environments]
+  [environments.dev]
+    ip = &quot;10.0.0.1&quot;
+    dc = &quot;eqdc10&quot;
+  [environments.staging]
+    ip = &quot;10.0.0.2&quot;
+    dc = &quot;eqdc10&quot;
+  [environments.production]
+    ip = &quot;10.0.0.3&quot;
+    dc = &quot;eqdc10&quot;
+
+# Array of Tables
+[[testers]]
+id = 1
+username = &quot;JohnCena&quot;
+password = &quot;YouCantSeeMe69&quot;
+
+[[testers]]
+id = 3
+username = &quot;TheRock&quot;
+password = &quot;CantCook123&quot;
+</code></pre>
+<p>config.toml</p>
+<p>TOML supports the concept of <code>&quot;nested tables,&quot;</code> as seen in the <code>[environments]</code> table, preceded by multiple sub-tables. Using dot-notation enables us to create associations of tables, which imply they&rsquo;re different instances of the same element.</p>
+<p>Equally impressive is the concept of <code>&quot;arrays of tables,&quot;</code> which what&rsquo;s happening with <code>[[testers]]</code>. Tables in double-brackets are automatically added to an array, where each item in the array is a table with the same name. The best way to visualize what&rsquo;s happening here is with the JSON equivalent:</p>
+<pre><code>{
+  &quot;testers&quot;: [
+    { &quot;id&quot;: 1, &quot;username&quot;: &quot;JohnCena&quot;, &quot;password&quot;: &quot;YouCantSeeMe69&quot; },
+    { &quot;id&quot;: 2, &quot;username&quot;: &quot;TheRock&quot;, &quot;password&quot;: &quot;CantCook123&quot; }
+  ]
+}
+</code></pre>
+<p>config.json</p>
+<h3 id="parsing-toml">Parsing TOML</h3>
+<p>Enough about TOML as a standard, let&rsquo;s get our data:</p>
+<pre><code class="language-py">&quot;&quot;&quot;Load configuration from .toml file.&quot;&quot;&quot;
+import toml
+
+# Read local `config.toml` file.
+config = toml.load('settings/config.toml')
+print(config)
+</code></pre>
+<p>toml_config.py</p>
+<p>Loading <code>TOML</code> files immediately returns a dictionary:</p>
+<pre><code class="language-py">{'title': 'My TOML Config',
+ 'project': {'name': 'Faceback',
+  'description': &quot;Powerful AI which renders the back of somebody's head, based on their face.&quot;,
+  'version': '1.0.0',
+  'updated': datetime.datetime(1979, 5, 27, 7, 32, tzinfo=&lt;toml.tz.TomlTz object at 0x107b82390&gt;),
+  'author': 'Todd Birchard'},
+ 'database': {'host': '127.0.0.1',
+  'password': 'p@ssw0rd',
+  'port': 5432,
+  'name': 'my_database',
+  'connection_max': 5000,
+  'enabled': True},
+ 'environments': {'dev': {'ip': '10.0.0.1', 'dc': 'eqdc10'},
+  'staging': {'ip': '10.0.0.2', 'dc': 'eqdc10'},
+  'production': {'ip': '10.0.0.3', 'dc': 'eqdc10'}},
+ 'testers': [{'id': 1, 'username': 'JohnCena', 'password': 'YouCantSeeMe69'},
+  {'id': 1, 'username': 'TheRock', 'password': 'CantCook123'}]}
+</code></pre>
+<p>Python dict parsed from <code>config.toml</code></p>
+<p>Grabbing values from <code>config</code> is as easy as working with any dictionary:</p>
+<pre><code class="language-py">&quot;&quot;&quot;Load configuration from .toml file.&quot;&quot;&quot;
+import toml
+
+# Read local `config.toml` file.
+config = toml.load('settings/config.toml')
+print(config)
+
+# Retrieving a dictionary of values
+config['project']
+config.get('project')
+
+# Retrieving a value
+config['project']['author']
+config.get('project').get('author')
+</code></pre>
+<p>toml_config.py</p>
+<h2 id="configure-from-yaml"><strong>Configure from .yaml</strong></h2>
+<p><code>YAML</code> file formats have become a crowd favorite for configurations, presumably for their ease of readability. Those familiar with the YAML specification will tell you that YAML is <em>far</em> from an elegant file format, but this hasn&rsquo;t stopped anybody.</p>
+<p><code>YAML</code> files utilize white space to define variable hierarchies, which seems to have resonated with many developers. Check out what a sample YAML config might look like:</p>
+<pre><code class="language-yml">appName: appName
+logLevel: WARN
+
+AWS:
+    Region: us-east-1
+    Resources:
+      EC2:
+        Type: &quot;AWS::EC2::Instance&quot;
+        Properties:
+          ImageId: &quot;ami-0ff8a91507f77f867&quot;
+          InstanceType: t2.micro
+          KeyName: testkey
+          BlockDeviceMappings:
+            -
+              DeviceName: /dev/sdm
+              Ebs:
+                VolumeType: io1
+                Iops: 200
+                DeleteOnTermination: false
+                VolumeSize: 20
+      Lambda:
+          Type: &quot;AWS::Lambda::Function&quot;
+          Properties:
+            Handler: &quot;index.handler&quot;
+            Role:
+              Fn::GetAtt:
+                - &quot;LambdaExecutionRole&quot;
+                - &quot;Arn&quot;
+            Runtime: &quot;python3.7&quot;
+            Timeout: 25
+            TracingConfig:
+              Mode: &quot;Active&quot;
+
+routes:
+  admin:
+    url: /admin
+    template: admin.html
+    assets:
+        templates: /templates
+        static: /static
+  dashboard:
+    url: /dashboard
+    template: dashboard.html
+    assets:
+        templates: /templates
+        static: /static
+  account:
+    url: /account
+    template: account.html
+    assets:
+        templates: /templates
+        static: /static
+
+databases:
+  cassandra:
+    host: example.cassandra.db
+    username: user
+    password: password
+  redshift:
+    jdbcURL: jdbc:redshift://&lt;IP&gt;:&lt;PORT&gt;/file?user=username&amp;password=pass
+    tempS3Dir: s3://path/to/redshift/temp/dir/
+  redis:
+    host: hostname
+    port: port-number
+    auth: authentication
+    db: databaseconfig.yaml
+</code></pre>
+<p>config.yaml</p>
+<p>It should be immediately apparent that YAML configurations are <em>easy to write and understand</em>. The YAML file above can accomplish the same types of complex hierarchies we saw in our TOML file. However, we didn&rsquo;t need to explicitly set the variable data types, nor did we need to take a moment to understand concepts such as <code>tables</code> or <code>arrays of tables</code>. One could easily argue that YAML&rsquo;s ease-of-use doesn&rsquo;t justify the downsides. Don&rsquo;t spend too much time thinking about this: we&rsquo;re talking about config files here.</p>
+<p>I think we can all agree that YAML sure beats the hell out of a JSON config. Here&rsquo;s the same config as above as a JSON file:</p>
+<pre><code class="language-py">{
+   &quot;appName&quot;: &quot;appName&quot;,
+   &quot;logLevel&quot;: &quot;WARN&quot;,
+   &quot;AWS&quot;: {
+      &quot;Region&quot;: &quot;us-east-1&quot;,
+      &quot;Resources&quot;: {
+         &quot;EC2&quot;: {
+            &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+            &quot;Properties&quot;: {
+               &quot;ImageId&quot;: &quot;ami-0ff8a91507f77f867&quot;,
+               &quot;InstanceType&quot;: &quot;t2.micro&quot;,
+               &quot;KeyName&quot;: &quot;testkey&quot;,
+               &quot;BlockDeviceMappings&quot;: [
+                  {
+                     &quot;DeviceName&quot;: &quot;/dev/sdm&quot;,
+                     &quot;Ebs&quot;: {
+                        &quot;VolumeType&quot;: &quot;io1&quot;,
+                        &quot;Iops&quot;: 200,
+                        &quot;DeleteOnTermination&quot;: false,
+                        &quot;VolumeSize&quot;: 20
+                     }
+                  }
+               ]
+            }
+         },
+         &quot;Lambda&quot;: {
+            &quot;Type&quot;: &quot;AWS::Lambda::Function&quot;,
+            &quot;Properties&quot;: {
+               &quot;Handler&quot;: &quot;index.handler&quot;,
+               &quot;Role&quot;: {
+                  &quot;Fn::GetAtt&quot;: [
+                     &quot;LambdaExecutionRole&quot;,
+                     &quot;Arn&quot;
+                  ]
+               },
+               &quot;Runtime&quot;: &quot;python3.7&quot;,
+               &quot;Timeout&quot;: 25,
+               &quot;TracingConfig&quot;: {
+                  &quot;Mode&quot;: &quot;Active&quot;
+               }
+            }
+         }
+      }
+   },
+   &quot;routes&quot;: {
+      &quot;admin&quot;: {
+         &quot;url&quot;: &quot;/admin&quot;,
+         &quot;template&quot;: &quot;admin.html&quot;,
+         &quot;assets&quot;: {
+            &quot;templates&quot;: &quot;/templates&quot;,
+            &quot;static&quot;: &quot;/static&quot;
+         }
+      },
+      &quot;dashboard&quot;: {
+         &quot;url&quot;: &quot;/dashboard&quot;,
+         &quot;template&quot;: &quot;dashboard.html&quot;,
+         &quot;assets&quot;: {
+            &quot;templates&quot;: &quot;/templates&quot;,
+            &quot;static&quot;: &quot;/static&quot;
+         }
+      },
+      &quot;account&quot;: {
+         &quot;url&quot;: &quot;/account&quot;,
+         &quot;template&quot;: &quot;account.html&quot;,
+         &quot;assets&quot;: {
+            &quot;templates&quot;: &quot;/templates&quot;,
+            &quot;static&quot;: &quot;/static&quot;
+         }
+      }
+   },
+   &quot;databases&quot;: {
+      &quot;cassandra&quot;: {
+         &quot;host&quot;: &quot;example.cassandra.db&quot;,
+         &quot;username&quot;: &quot;user&quot;,
+         &quot;password&quot;: &quot;password&quot;
+      },
+      &quot;redshift&quot;: {
+         &quot;jdbcURL&quot;: &quot;jdbc:redshift://&lt;IP&gt;:&lt;PORT&gt;/file?user=username&amp;password=pass&quot;,
+         &quot;tempS3Dir&quot;: &quot;s3://path/to/redshift/temp/dir/&quot;
+      },
+      &quot;redis&quot;: {
+         &quot;host&quot;: &quot;hostname&quot;,
+         &quot;port&quot;: &quot;port-number&quot;,
+         &quot;auth&quot;: &quot;authentication&quot;,
+         &quot;db&quot;: &quot;database&quot;
+      }
+   }
+}
+</code></pre>
+<p>config.json</p>
+<p>Show me somebody who prefers JSON over YAML, and I&rsquo;ll show you a masochist in denial of their vendor-lock with AWS.</p>
+<h3 id="parsing-yaml-in-python">Parsing YAML in Python</h3>
+<p>I recommend the <a href="https://github.com/sampsyo/confuse">Python <em>Confuse</em> library</a> (a package name that&rsquo;s sure to raise some eyebrows by your company&rsquo;s information security team).</p>
+<p><code>Confuse</code> allows us to interact with YAML files in a way that is nearly identical to how we would with JSON. The exception to this is that the <code>confuse</code> library needs to specify <code>.get()</code> on a key to extract its value, like so:</p>
+<pre><code class="language-py">&quot;&quot;&quot;Load configuration from .yaml file.&quot;&quot;&quot;
+import confuse
+
+config = confuse.Configuration('MyApp', __name__)
+runtime = config['AWS']['Lambda']['Runtime'].get()
+print(runtime)
+</code></pre>
+<p>yaml_config.py</p>
+<p><code>.get()</code> can accept a datatype value such as <em>int.</em> Doing so ensures that the value we&rsquo;re getting is actually of the schema we&rsquo;re expecting, which is a neat feature.</p>
+<h4 id="validators">Validators</h4>
+<p><a href="https://confuse.readthedocs.io/en/latest/">Confuse&rsquo;s documentation</a> details additional validation methods for values we pull from YAML files. Methods like <code>as_filename()</code>, <code>as_number()</code>, and <code>as_str_seq()</code> do basically what you&rsquo;d expect them to.</p>
+<h4 id="cli-configuration">CLI Configuration</h4>
+<p>Confuse also gets into the realm of building CLIs, allowing us to use our YAML file to inform arguments which can be passed to a CLI and their potential values:</p>
+<pre><code class="language-py">config = confuse.Configuration('myapp')
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--foo', help='a parameter')
+
+args = parser.parse_args()
+config.set_args(args)
+
+print(config['foo'].get())
+</code></pre>
+<p>cli_config.py</p>
+<p>There&rsquo;s plenty of things you can go nuts with here.</p>
+<h2 id="configure-from-env"><strong>Configure from .env</strong></h2>
+<p>Environment variables are a great way of keeping sensitive information out of your project&rsquo;s codebase. We can store environment variables in numerous different ways, the easiest of which is via command line:</p>
+<pre><code>$ export MY_VARIABLE=AAAAtpl%2Bkvro%2BoQ9wRg77VUEpQv%2F
+</code></pre>
+<p>export MY_VARIABLE</p>
+<p>Variables stored in this way will only last as long as your current terminal session is open, so this doesn&rsquo;t help us much outside of testing. If we wanted <code>MY_VARIABLE</code> to persist, we could add the above <code>export</code> line to our <code>.bash_profile</code> (or equivalent) to ensure <code>MY_VARIABLE</code> will always exist system-wide.</p>
+<p>Project-specific variables are better suited for <code>.env</code> files living in our project&rsquo;s directory. FOR THE LOVE OF GOD, DON&rsquo;T COMMIT THESE FILES TO GITHUB.</p>
+<p>Let&rsquo;s say we have a <code>.env</code> file with project-related variables like so:</p>
+<pre><code class="language-ini">FLASK_ENV=development
+FLASK_APP=wsgi.py
+COMPRESSOR_DEBUG=True
+STATIC_FOLDER=static
+TEMPLATES_FOLDER=templates
+</code></pre>
+<p>.env</p>
+<p>We can now extract these values in Python using the built-in <code>os.environ</code>:</p>
+<pre><code class="language-py">&quot;&quot;&quot;App configuration.&quot;&quot;&quot;
+from os import environ, path
+from dotenv import load_dotenv
+
+# Find .env file
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv(path.join(basedir, '.env'))
+
+# General Config
+SECRET_KEY = environ.get('SECRET_KEY')
+FLASK_APP = environ.get('FLASK_APP')
+FLASK_ENV = environ.get('FLASK_ENV')
+</code></pre>
+<p>env_config.py</p>
+<h2 id="just-use-what-you-want">Just Use What You Want</h2>
+<p>There are clearly plenty of ways to set environment and project variables in Python. We could spend all day dissecting the pros and cons of configuration file types. This is one aspect of life we surely don&rsquo;t want to overthink.</p>
+<p>Besides, I need to reflect on my life. I just wrote two thousand words about the pros and cons of configuration files, which I&rsquo;d rather forget before becoming aware of how meaningless my life is.</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://pilchark.github.io/2022/08/py_config_file/" title="python 项目的配置文件" target="_blank" rel="external">https://pilchark.github.io/2022/08/py_config_file/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://pilchark.github.io/2022/08/ds_leetcode/" title="leetcode 习题解题思路"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://pilchark.github.io/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>
