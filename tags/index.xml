@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Wed, 10 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Aug 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>排序 python 字典</title>
+      <link>https://pilchark.github.io/2022/08/py_dict/</link>
+      <pubDate>Tue, 23 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/08/py_dict/</guid>
+      <description>参考文章 : https://realpython.com/sort-python-dictionary/ 简介 如何使用 sorted() 函数 views 转为 iterate 字典排序时的 key 字典的结构 考虑可替代 key-value 的数据结构 理解字典中的排序是什么 字典实际上没有排序函数，几乎不会就</description>
+    </item>
     
     <item>
       <title>python 项目的配置文件</title>
@@ -35,7 +44,7 @@
       <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://pilchark.github.io/2022/07/py_threading/</guid>
-      <description>参考文章: https://realpython.com/intro-to-python-threading/ https://xie.infoq.cn/article/1e151c24367abe8cad18130f4 什么是线程 同时使用两个线程跑一个程序，两个线程实际上是两个「处理器」， 但他们同时只有一个在执行。 创建一个线程 使用 threading 库 import logging import threading import</description>
+      <description>参考文章: https://realpython.com/intro-to-python-threading/ https://xie.infoq.cn/article/1e151c24367abe8cad18130f4 https://towardsdatascience.com/multithreading-multiprocessing-python-180d0975ab29 什么是线程 同时使用两个线程跑一个程序，两个线程实际上是两个「处理器」， 但他们同时只有一个在执行。 创建一个线程 使用 threading 库 import logging import threading</description>
     </item>
     
     <item>
@@ -180,15 +189,6 @@
       
       <guid>https://pilchark.github.io/2022/01/docker_toturial/</guid>
       <description>参考 : https://ruanyifeng.com/blog/2018/02/docker-tutorial.html 1. Docker 基础用法 1.1. Docker 是什么 Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。 Docker 的主要用途 提供一次性的环境。比如，本地测试他人的软件、持</description>
-    </item>
-    
-    <item>
-      <title>leetcode 练习题</title>
-      <link>https://pilchark.github.io/2022/01/ds_practice/</link>
-      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2022/01/ds_practice/</guid>
-      <description>1. 经典题目 1.1. 判断闰年 def is_leap_year(year): return (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0) 1.2. 判断素数 方法 1 from math import sqrt def isPrime(n): if n &amp;lt;= 1: return False for i in range(2, int(sqrt(n) + 1)): if n%i == 0: return False return True 方法 2 def isPrime(n):</description>
     </item>
     
   </channel>

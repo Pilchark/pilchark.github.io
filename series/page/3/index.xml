@@ -6,10 +6,19 @@
     <description>Recent content in Series on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Wed, 10 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Aug 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>浅拷贝和深拷贝</title>
+      <link>https://pilchark.github.io/2021/12/py_copy_and_deepcopy/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_copy_and_deepcopy/</guid>
+      <description>参考文章 : https://www.cnblogs.com/semon-code/p/8231041.html 对象赋值 对象赋值不会复制对象，它只会复制一个对象引用，不会开辟新的内存空间. test = [&amp;quot;test&amp;quot;, 18, [&amp;quot;python&amp;quot;,&amp;quot;java&amp;quot;]] copytest = test print(id(test)) # 4559314816 print(id(copytest)) # 4559314816 # 将test赋值给cop</description>
+    </item>
     
     <item>
       <title>使用 namedtuple 写出简练的代码</title>
