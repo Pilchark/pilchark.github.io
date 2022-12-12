@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>python 中的 *args 与 **kwargs</title>
+      <link>https://pilchark.github.io/2021/12/py_args_and_kwargs/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_args_and_kwargs/</guid>
+      <description>参考文章 : https://www.cnblogs.com/Zi-Lai-Ye/p/9651213.html 描述 *args：任意个无名参数，类型为tuple或list.用于向函数发送没有关键字的可变长度参数列表 **kwargs：任意个关</description>
+    </item>
+    
+    <item>
       <title>浅拷贝和深拷贝</title>
       <link>https://pilchark.github.io/2021/12/py_copy_and_deepcopy/</link>
       <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>

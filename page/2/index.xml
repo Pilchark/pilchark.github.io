@@ -6,10 +6,19 @@
     <description>Recent content on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Tue, 23 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker 笔记</title>
+      <link>https://pilchark.github.io/2022/01/docker_toturial/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/01/docker_toturial/</guid>
+      <description>参考 : https://ruanyifeng.com/blog/2018/02/docker-tutorial.html 1. Docker 基础用法 1.1. Docker 是什么 Docker 属于 Linux 容器的一种封装，提供简单易用的容器使用接口。 Docker 的主要用途 提供一次性的环境。比如，本地测试他人的软件、持</description>
+    </item>
     
     <item>
       <title>leetcode 练习题</title>
@@ -180,15 +189,6 @@
       
       <guid>https://pilchark.github.io/2021/12/py_mapfilterreduce/</guid>
       <description>参考文章 : http://c.biancheng.net/view/5342.html https://stackabuse.com/map-filter-and-reduce-in-python-with-examples/ Python 仅对函数式编程提供了部分支持，主要包括 map()、filter() 和 reduce() 这 3 个函数，它们通常都结合 lambda 匿名函数一起使用。 lambda 匿名函</description>
-    </item>
-    
-    <item>
-      <title>python 中的 *args 与 **kwargs</title>
-      <link>https://pilchark.github.io/2021/12/py_args_and_kwargs/</link>
-      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2021/12/py_args_and_kwargs/</guid>
-      <description>参考文章 : https://www.cnblogs.com/Zi-Lai-Ye/p/9651213.html 描述 *args：任意个无名参数，类型为tuple或list.用于向函数发送没有关键字的可变长度参数列表 **kwargs：任意个关</description>
     </item>
     
   </channel>

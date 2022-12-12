@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Tue, 23 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python 中的 *args 与 **kwargs</title>
+      <link>https://pilchark.github.io/2021/12/py_args_and_kwargs/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_args_and_kwargs/</guid>
+      <description>参考文章 : https://www.cnblogs.com/Zi-Lai-Ye/p/9651213.html 描述 *args：任意个无名参数，类型为tuple或list.用于向函数发送没有关键字的可变长度参数列表 **kwargs：任意个关</description>
+    </item>
     
     <item>
       <title>浅拷贝和深拷贝</title>
