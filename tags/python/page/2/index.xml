@@ -6,10 +6,19 @@
     <description>Recent content in python on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Jan 2023 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>django for professional</title>
+      <link>https://pilchark.github.io/2022/01/django_pro/</link>
+      <pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/01/django_pro/</guid>
+      <description>1. hello_project 参考 : 为 docker image 选择合适的 python 源 https://cloud.tencent.com/developer/article/1632598 创建 DockerFile # Pull base image FROM python:3.8-slim-buster # set environemnt variables ENV PYTHONDONTWRITEBYTECODE 1 ENV PYTHONUNBUFFERED 1 # Set work directory WORKDIR /code # Install dependencies COPY Pipfile Pipfile.lock /code/ RUN pip install pipenv &amp;amp;&amp;amp; pipenv install --system # Copy project COPY . /code/ 创建 image : docker build . 创</description>
+    </item>
     
     <item>
       <title>Docker 笔记</title>
@@ -81,15 +90,6 @@
       
       <guid>https://pilchark.github.io/2021/12/sql_mysql/</guid>
       <description>1. MySQL 安装配置 1.1. 安装 安装 linux ：apt install mysql-server windows 配置文件解析 /etc/my.cnf 或者 /etc/my.cnf.d/server.cnf sudo mysql ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;root&#39;; phpadmin dbeaver 1.2. 连接数据库 mysqlclient 连接(django ORM 依赖工具) sudo apt-get install libmysqlclient-dev sudo apt install</description>
-    </item>
-    
-    <item>
-      <title>树莓派入门玩法</title>
-      <link>https://pilchark.github.io/2021/12/pi/</link>
-      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2021/12/pi/</guid>
-      <description>安装系统 下载镜像 下载格式化软件: SD Card Fomatter 下载烧录软件: Win32DiskImager 烧录 tf 卡 配置 ssh : 进入到根目录，新建一个名为ssh的空白文件 配置时区：sudo raspi-config 配置 apt 源</description>
     </item>
     
     <item>

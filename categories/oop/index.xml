@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>python 编写优雅的 CLI 接口工具</title>
+      <link>https://pilchark.github.io/2023/01/py_write_user-friendly_command_line_interfaces/</link>
+      <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2023/01/py_write_user-friendly_command_line_interfaces/</guid>
+      <description>参考文章 : https://towardsdatascience.com/how-to-write-user-friendly-command-line-interfaces-in-python-cc3a6444af8e 前言 Python 中最重要的技能之一是如何使用命令行界面（CLI）运行 Python 代码，这本质上是您 Python 旅程的起点。命令行应用程序最好的地方是它与其他应</description>
+    </item>
+    
+    <item>
       <title>面向对象编程的 SOLID 原则 (python 语言)</title>
       <link>https://pilchark.github.io/2022/12/oop_solid_principles/</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
@@ -180,15 +189,6 @@
       
       <guid>https://pilchark.github.io/2022/03/py_assert_usage/</guid>
       <description>参考文章 : https://realpython.com/python-assert-statement/ assert 的概念 什么是 assert 除非您的程序中有错误，否则断言条件应始终为真。 如果条件结果为假，则断言会引发异常并终止程序的执行。 断言的作用 确保</description>
-    </item>
-    
-    <item>
-      <title>django for professional</title>
-      <link>https://pilchark.github.io/2022/01/django_pro/</link>
-      <pubDate>Mon, 24 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2022/01/django_pro/</guid>
-      <description>1. hello_project 参考 : 为 docker image 选择合适的 python 源 https://cloud.tencent.com/developer/article/1632598 创建 DockerFile # Pull base image FROM python:3.8-slim-buster # set environemnt variables ENV PYTHONDONTWRITEBYTECODE 1 ENV PYTHONUNBUFFERED 1 # Set work directory WORKDIR /code # Install dependencies COPY Pipfile Pipfile.lock /code/ RUN pip install pipenv &amp;amp;&amp;amp; pipenv install --system # Copy project COPY . /code/ 创建 image : docker build . 创</description>
     </item>
     
   </channel>
