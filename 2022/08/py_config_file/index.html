@@ -40,7 +40,7 @@
 <meta itemprop="name" content="python 项目的配置文件">
 <meta itemprop="description" content="Python Projects config : INI, TOML, YAML, and ENV files"><meta itemprop="datePublished" content="2022-08-10T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-08-10T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2566">
+<meta itemprop="wordCount" content="3191">
 <meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="python 项目的配置文件"/>
 <meta name="twitter:description" content="Python Projects config : INI, TOML, YAML, and ENV files"/>
@@ -399,8 +399,8 @@ function tagCloud(where, min, max) {
     <a class="article-tag-link" href="/tags/python/"> python </a>
   </span>
 
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2566字</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6分 </span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3191字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7分 </span>
       </div>
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
@@ -463,13 +463,13 @@ config['DATABASE']['HOST']
 <p>对于我们希望接收特定数据类型的值，<code>configparser</code> 有几种类型检查方法来检索我们要查找的数据结构中的值。命令 <code>config</code>。</p>
 <p>getboolean<code>('APP'，'DEBUG')</code> 将正确返回布尔值<code>False</code>，而不是读取<code>False</code>的字符串，这显然对我们的应用程序是有问题的。如果我们的值<code>DEBUG</code>被设置为布尔值以外的值，<code>config。getboolean()</code>将抛出一个错误.<code>configparser</code>还有一系列其他类型检查方法，如&rsquo;getint()&rsquo;、&lsquo;getfloat()&lsquo;等等。</p>
 <p><code>configparser</code>的功能还不止于此。我们可以详细介绍该库编写新配置值、检查键的存在等等的能力，但我们不能这样做。</p>
-<h2 id="configure-from-toml"><strong>Configure from .toml</strong></h2>
-<p><code>TOML</code> files may seem to share <em>some</em> syntax similarities with <code>ini</code> files at first glance, but support a much wider variety of data types, as well as relationships between values themselves. <code>TOML</code> files also force us to be more explicit about data structures upfront, as opposed to determining them <em>after</em> parsing as <code>configparser</code> does.</p>
-<p>Parsing TOML files in Python is handled by a library appropriately dubbed <a href="https://pypi.org/project/toml/">toml</a>, Before we even go there, let&rsquo;s see what the TOML hype is about.</p>
+<h2 id="使用-toml-进行配置"><strong>使用 Toml 进行配置</strong></h2>
+<p>乍一看，<code>TOML</code> 文件似乎与 <code>ini</code> 文件有 <em>一些</em> 语法相似之处，但支持更广泛的数据类型以及值本身之间的关系。 <code>TOML</code> 文件还迫使我们预先更明确地了解数据结构，而不是像 <code>configparser</code> 那样<em>在</em>之后*确定它们。</p>
+<p>在 Python 中解析 TOML 文件是由一个名为 <a href="https://pypi.org/project/toml/">toml</a> 的库处理的，在我们去那里之前，让我们看看 TOML 是关于什么的。</p>
 <h3 id="toml-variable-types">TOML Variable Types</h3>
-<p><code>TOML</code> files define variables via key/value pairs in a similar manner to that of <code>ini</code> files. <code>T</code>hese pairs are referred to as <em>keys</em>. Unlike <code>ini</code> files, however, <code>TOML</code> expects that the values of keys to be stored as the data type they&rsquo;re intended to be utilized as. Variables intended to be parsed as strings <em>must</em> be stored as values in quotes, whereas booleans must be stored as either raw <code>true</code> or <code>false</code> values. This removes a lot of ambiguity around our configurations: we have no need for methods such as <code>getboolean()</code> with TOML files.</p>
-<p><code>TOML</code> files can support an impressive catalog of variable types. Some of the more impressive variable types of TOML include <code>DateTime</code>, <code>local time</code>, <code>arrays</code>, <code>floats</code>, and even <code>hexadecimal values</code>:</p>
-<pre><code>[project]
+<p><code>TOML</code> 文件以类似于 <code>ini</code> 文件的方式通过键/值对定义变量。 这些对被称为<em>键</em>。然而，与 ini 文件不同的是，TOML 期望键的值存储为它们打算用作的数据类型。旨在被解析为字符串的变量<em>必须</em>存储为引号中的值，而布尔值必须存储为原始“true”或“false”值。这消除了我们配置的许多歧义：我们不需要 TOML 文件的方法，例如 <code>getboolean()</code> 。</p>
+<p><code>TOML</code> 文件可以支持令人印象深刻的变量类型目录。一些更令人印象深刻的 TOML 变量类型包括<code>DateTime</code>、<code>local time</code>、<code>arrays</code>、<code>floats</code>，甚至<code>hexadecimal values</code>：</p>
+<pre><code class="language-yml">[project]
 name = &quot;Faceback&quot;
 description = &quot;Powerful AI which renders the back of somebody's head, based on their face.&quot;
 version = &quot;1.0.0&quot;
@@ -480,7 +480,7 @@ author = &quot;Todd Birchard&quot;
 </code></pre>
 <p>config.toml</p>
 <h3 id="toml-file-structures">TOML File Structures</h3>
-<p>The bracketed sections in TOML files are referred to as <code>tables</code>. <code>Keys</code> can live either inside or outside of tables, as we can see in the example below. You&rsquo;ll notice that these aren&rsquo;t the only two elements of TOML files, either:</p>
+<p>TOML 文件中括号内的部分称为“表格”。 <code>Keys</code> 可以存在于表的内部或外部，正如我们在下面的示例中看到的那样。您会注意到，这不是 TOML 文件的仅有的两个元素：</p>
 <pre><code class="language-yml"># Keys
 title = &quot;My TOML Config&quot;
 
@@ -582,8 +582,8 @@ config.get('project').get('author')
 </code></pre>
 <p>toml_config.py</p>
 <h2 id="configure-from-yaml"><strong>Configure from .yaml</strong></h2>
-<p><code>YAML</code> file formats have become a crowd favorite for configurations, presumably for their ease of readability. Those familiar with the YAML specification will tell you that YAML is <em>far</em> from an elegant file format, but this hasn&rsquo;t stopped anybody.</p>
-<p><code>YAML</code> files utilize white space to define variable hierarchies, which seems to have resonated with many developers. Check out what a sample YAML config might look like:</p>
+<p><code>YAML</code> 文件格式已成为人们最喜欢的配置文件格式，大概是因为它们易于阅读。熟悉 YAML 规范的人会告诉您，YAML 远不是一种优雅的文件格式，但这并没有阻止任何人去使用。</p>
+<p><code>YAML</code> 文件利用空白来定义变量层次结构，这似乎引起了许多开发人员的共鸣。查看示例 YAML 配置可能是什么样子：</p>
 <pre><code class="language-yml">appName: appName
 logLevel: WARN
 
@@ -652,8 +652,8 @@ databases:
     db: databaseconfig.yaml
 </code></pre>
 <p>config.yaml</p>
-<p>It should be immediately apparent that YAML configurations are <em>easy to write and understand</em>. The YAML file above can accomplish the same types of complex hierarchies we saw in our TOML file. However, we didn&rsquo;t need to explicitly set the variable data types, nor did we need to take a moment to understand concepts such as <code>tables</code> or <code>arrays of tables</code>. One could easily argue that YAML&rsquo;s ease-of-use doesn&rsquo;t justify the downsides. Don&rsquo;t spend too much time thinking about this: we&rsquo;re talking about config files here.</p>
-<p>I think we can all agree that YAML sure beats the hell out of a JSON config. Here&rsquo;s the same config as above as a JSON file:</p>
+<p>显而易见，YAML 配置<em>易于编写和理解</em>。上面的 YAML 文件可以完成我们在 TOML 文件中看到的相同类型的复杂层次结构。但是，我们不需要显式设置变量数据类型，也不需要花时间去理解诸如“表”或“表数组”之类的概念。人们很容易争辩说 YAML 的易用性并不能证明其缺点。不要花太多时间考虑这个：我们在这里谈论的是配置文件。</p>
+<p>我想我们都同意 YAML 确实比 JSON 配置更胜一筹。这是与上面相同的配置作为 JSON 文件：</p>
 <pre><code class="language-py">{
    &quot;appName&quot;: &quot;appName&quot;,
    &quot;logLevel&quot;: &quot;WARN&quot;,
@@ -744,10 +744,10 @@ databases:
 }
 </code></pre>
 <p>config.json</p>
-<p>Show me somebody who prefers JSON over YAML, and I&rsquo;ll show you a masochist in denial of their vendor-lock with AWS.</p>
-<h3 id="parsing-yaml-in-python">Parsing YAML in Python</h3>
-<p>I recommend the <a href="https://github.com/sampsyo/confuse">Python <em>Confuse</em> library</a> (a package name that&rsquo;s sure to raise some eyebrows by your company&rsquo;s information security team).</p>
-<p><code>Confuse</code> allows us to interact with YAML files in a way that is nearly identical to how we would with JSON. The exception to this is that the <code>confuse</code> library needs to specify <code>.get()</code> on a key to extract its value, like so:</p>
+<p>向我展示一个更喜欢 JSON 而不是 YAML 的人，我将向您展示一个否认他们与 AWS 的供应商锁定的受虐狂。</p>
+<h3 id="在-python-中解析-yaml">在 Python 中解析 YAML</h3>
+<p>我推荐 <a href="https://github.com/sampsyo/confuse">Python <em>Confuse</em> 库</a>（肯定会引起贵公司信息安全团队的注意的包名称）。</p>
+<p><code>Confuse</code> 允许我们以与我们与 JSON 几乎相同的方式与 YAML 文件进行交互。例外情况是 <code>confuse</code> 库需要在键上指定 <code>.get()</code> 以提取其值，如下所示：</p>
 <pre><code class="language-py">&quot;&quot;&quot;Load configuration from .yaml file.&quot;&quot;&quot;
 import confuse
 
@@ -756,11 +756,11 @@ runtime = config['AWS']['Lambda']['Runtime'].get()
 print(runtime)
 </code></pre>
 <p>yaml_config.py</p>
-<p><code>.get()</code> can accept a datatype value such as <em>int.</em> Doing so ensures that the value we&rsquo;re getting is actually of the schema we&rsquo;re expecting, which is a neat feature.</p>
-<h4 id="validators">Validators</h4>
-<p><a href="https://confuse.readthedocs.io/en/latest/">Confuse&rsquo;s documentation</a> details additional validation methods for values we pull from YAML files. Methods like <code>as_filename()</code>, <code>as_number()</code>, and <code>as_str_seq()</code> do basically what you&rsquo;d expect them to.</p>
-<h4 id="cli-configuration">CLI Configuration</h4>
-<p>Confuse also gets into the realm of building CLIs, allowing us to use our YAML file to inform arguments which can be passed to a CLI and their potential values:</p>
+<p><code>.get()</code> 可以接受数据类型值，例如 <em>int。</em> 这样做可以确保我们获得的值实际上是我们期望的模式，这是一个很好的功能。</p>
+<h4 id="验证者">验证者</h4>
+<p><a href="https://confuse.readthedocs.io/en/latest/">Confuse 的文档</a> 详细介绍了我们从 YAML 文件中提取的值的其他验证方法。 <code>as_filename()</code>、<code>as_number()</code> 和 <code>as_str_seq()</code> 等方法基本上可以满足您的期望。</p>
+<h4 id="命令行配置">命令行配置</h4>
+<p>Confuse 还进入了构建 CLI 的领域，允许我们使用我们的 YAML 文件来通知可以传递给 CLI 的参数及其潜在值：</p>
 <pre><code class="language-py">config = confuse.Configuration('myapp')
 parser = argparse.ArgumentParser()
 
@@ -774,13 +774,13 @@ print(config['foo'].get())
 <p>cli_config.py</p>
 <p>There&rsquo;s plenty of things you can go nuts with here.</p>
 <h2 id="configure-from-env"><strong>Configure from .env</strong></h2>
-<p>Environment variables are a great way of keeping sensitive information out of your project&rsquo;s codebase. We can store environment variables in numerous different ways, the easiest of which is via command line:</p>
-<pre><code>$ export MY_VARIABLE=AAAAtpl%2Bkvro%2BoQ9wRg77VUEpQv%2F
+<p>环境变量是将敏感信息排除在项目代码库之外的好方法。我们可以通过多种不同的方式存储环境变量，其中最简单的是通过命令行：</p>
+<pre><code class="language-sh">$ export MY_VARIABLE=AAAAtpl%2Bkvro%2BoQ9wRg77VUEpQv%2F
 </code></pre>
 <p>export MY_VARIABLE</p>
-<p>Variables stored in this way will only last as long as your current terminal session is open, so this doesn&rsquo;t help us much outside of testing. If we wanted <code>MY_VARIABLE</code> to persist, we could add the above <code>export</code> line to our <code>.bash_profile</code> (or equivalent) to ensure <code>MY_VARIABLE</code> will always exist system-wide.</p>
-<p>Project-specific variables are better suited for <code>.env</code> files living in our project&rsquo;s directory. FOR THE LOVE OF GOD, DON&rsquo;T COMMIT THESE FILES TO GITHUB.</p>
-<p>Let&rsquo;s say we have a <code>.env</code> file with project-related variables like so:</p>
+<p>以这种方式存储的变量只会在您当前的终端会话打开时持续存在，因此这在测试之外对我们没有太大帮助。如果我们希望 <code>MY_VARIABLE</code> 持续存在，我们可以将上面的 <code>export</code> 行添加到我们的 <code>.bash_profile</code>（或等效文件）以确保 <code>MY_VARIABLE</code> 将始终存在于系统范围内。</p>
+<p>项目特定的变量更适合位于我们项目目录中的 .env 文件。看在上帝的份上，不要将这些文件提交给 GITHUB。</p>
+<p>假设我们有一个 .env 文件，其中包含与项目相关的变量，如下所示：</p>
 <pre><code class="language-ini">FLASK_ENV=development
 FLASK_APP=wsgi.py
 COMPRESSOR_DEBUG=True
@@ -803,9 +803,9 @@ FLASK_APP = environ.get('FLASK_APP')
 FLASK_ENV = environ.get('FLASK_ENV')
 </code></pre>
 <p>env_config.py</p>
-<h2 id="just-use-what-you-want">Just Use What You Want</h2>
-<p>There are clearly plenty of ways to set environment and project variables in Python. We could spend all day dissecting the pros and cons of configuration file types. This is one aspect of life we surely don&rsquo;t want to overthink.</p>
-<p>Besides, I need to reflect on my life. I just wrote two thousand words about the pros and cons of configuration files, which I&rsquo;d rather forget before becoming aware of how meaningless my life is.</p>
+<h2 id="随心所欲">随心所欲</h2>
+<p>显然有很多方法可以在 Python 中设置环境和项目变量。我们可以花一整天的时间来剖析配置文件类型的优缺点。这是生活的一个方面，我们当然不想考虑太多。</p>
+<p>此外，我需要反思我的生活。关于配置文件的优缺点，我刚刚写了两千字，我宁愿在意识到我的生活是多么毫无意义之前就忘记了。</p>
 
     </div>
     <div class="article-footer">
