@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        使用并发编程提高 python 速度 - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="多线程，多进程，异步" />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title>使用并发编程提高 python 速度 - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="使用并发编程提高 python 速度" />
+<meta property="og:description" content="多线程，多进程，异步" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pilchark.github.io/2023/03/python_concurrency/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-03-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-13T00:00:00+00:00" />
+<meta property="og:see_also" content="https://pilchark.github.io/2023/01/py_write_user-friendly_command_line_interfaces/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/12/oop_solid_principles/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/08/py_dict/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/08/py_config_file/" /><meta property="og:see_also" content="https://pilchark.github.io/2022/08/ds_leetcode/" />
+
+<meta itemprop="name" content="使用并发编程提高 python 速度">
+<meta itemprop="description" content="多线程，多进程，异步"><meta itemprop="datePublished" content="2023-03-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-03-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="9132">
+<meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用并发编程提高 python 速度"/>
+<meta name="twitter:description" content="多线程，多进程，异步"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="6">data_structure<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/oop/" class="tag-list-link" rel="1">oop<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/python/" class="tag-list-link" rel="42">python<span
+               class="tag-list-count">42</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">6</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/oop/" class="category-list-link">oop</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">42</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">6</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/oop/" class="tag-list-link">oop</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">42</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2023/03/python_concurrency/" class="title">使用并发编程提高 python 速度</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2023-03-13 00:00:00 &#43;0000 UTC" itemprop="datePublished">2023-03-13</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2023/01/py_write_user-friendly_command_line_interfaces/" class="title">python 编写优雅的 CLI 接口工具</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2023-01-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2023-01-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/12/oop_solid_principles/" class="title">面向对象编程的 SOLID 原则 (python 语言)</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-12-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-12-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/08/py_dict/" class="title">排序 python 字典</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-08-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-08-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/08/py_config_file/" class="title">python 项目的配置文件</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-08-10 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-08-10</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2023/03/python_concurrency/"
+    >使用并发编程提高 python 速度</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://pilchark.github.io/2023/03/python_concurrency/" class="article-date">
+  <time datetime="2023-03-13 00:00:00 &#43;0000 UTC" itemprop="datePublished">2023-03-13</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/python/"> Python </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/python/"> python </a>
+  </span>
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 9132字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 19分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <!-- raw HTML omitted -->
+<ul>
+<li>翻译自 : <a href="https://realpython.com/python-concurrency/">https://realpython.com/python-concurrency/</a></li>
+</ul>
+<h2 id="什么是并发-concurrency-">什么是并发 (Concurrency) ？</h2>
+<p>并发的字典定义是同时发生的。在 Python 中，同时发生的事情被不同的名称（线程、任务、进程）调用，但在高层次上，它们都指的是按顺序运行的指令序列。</p>
+<p>我喜欢把它们看作是不同的思路。每个都可以在某些点停止，正在处理它们的 CPU 或大脑可以切换到不同的点。每个的状态都会被保存，以便可以在中断的地方重新启动。</p>
+<p>您可能想知道为什么 Python 对同一概念使用不同的单词。事实证明，只有当你从高层次上查看它们时，线程、任务和进程才是相同的。一旦你开始挖掘细节，它们都代表着略有不同的东西。随着示例的进展，您将看到更多它们的不同之处。</p>
+<p>现在让我们来谈谈该定义的同步部分。我们需要注意，当我们仔细分析时，
+实际只有多进程才是同时分别执行任务。线程和异步都在单个处理器上运行，因此一次只运行一个。他们只是巧妙地找到轮流加快整体过程的方法。即使它们没有同时运行不同的思想列车，我们仍然称之为并发。</p>
+<p>线程或任务轮流的方式是线程和异步之间的巨大区别。在线程中，操作系统实际上知道每个线程，并且可以随时中断它以开始运行不同的线程。这被称为先发制人的多任务处理，因为操作系统可以抢占您的线程进行切换。</p>
+<p>先发制人的多任务处理很方便，因为线程中的代码不需要做任何事情来进行切换。由于那个“随时”的短语，它也可能很困难。这种切换可以发生在单个 Python 语句的中间，即使是像 x = x + 1 这样的琐碎语句。</p>
+<p>另一方面，Asyncio 使用合作多任务处理。这些任务的合作方式是明确声明何时去切换。这意味着任务中的代码必须略有变化才能做到这一点。</p>
+<p>提前做这些额外工作的好处是，你总是知道你的任务将在哪里被交换。除非标记该语句，否则它不会在 Python 语句的中间被交换。您稍后会看到这如何简化设计的某些部分。</p>
+<h2 id="什么是并行-parallelism-">什么是并行 (parallelism) ？</h2>
+<p>到目前为止，您已经研究了在单个处理器上发生的并发性。你那酷炫的新笔记本电脑的那些 CPU 核心呢？你如何利用它们？多进程是答案。</p>
+<p>通过多进程，Python 创建了新的进程。这里的进程可以被认为是一个几乎完全不同的程序，尽管从技术上讲，它们通常被定义为资源的集合，其中资源包括内存、文件句柄和类似的东西。一种思考方式是，每个进程都在自己的 Python 解释器中运行。</p>
+<p>因为它们是不同的过程，您在多进程程序中的每个思路都可以在不同的核心上运行。在不同的核心上运行意味着它们实际上可以同时运行，这太棒了。这样做会带来一些复杂情况，但 Python 在大多数情况下在平滑它们方面做得很好。</p>
+<p>现在您已经了解了什么是并发性和并行性，让我们回顾一下它们的差异，然后我们可以看看为什么它们会有用：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">并发类型</th>
+<th style="text-align:center">切换决策</th>
+<th style="text-align:center">处理器数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Pre-emptive multitasking (threading)</td>
+<td style="text-align:center">操作系统决定何时切换到 Python 外部的任务。</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">Cooperative multitasking (asyncio)</td>
+<td style="text-align:center">任务决定了何时放弃控制权。</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">Multiprocessing (multiprocessing)</td>
+<td style="text-align:center">这些进程在不同的处理器上同时运行。</td>
+<td style="text-align:center">Many</td>
+</tr>
+</tbody>
+</table>
+<h2 id="什么时候并发最有用">什么时候并发最有用？</h2>
+<p>并发可以对两种类型的问题产生很大的影响。这些通常被称为 CPU 绑定和 I/O 绑定。</p>
+<p>I/O 绑定问题会导致您的程序变慢，因为它经常必须等待来自某些外部资源的输入/输出（I/O）。当您的程序处理比 CPU 慢得多的东西时，它们经常出现。</p>
+<p>您的程序最常交互的慢东西是文件系统和网络连接。</p>
+<p>另一方面，有些程序在不与网络交谈或访问文件的情况下进行重要计算。这些是 CPU 绑定的程序，因为限制程序速度的资源是 CPU，而不是网络或文件系统。</p>
+<h2 id="如何给-io-密集型程序提速">如何给 I/O 密集型程序提速？</h2>
+<p>让我们从专注于 I/O 绑定程序和一个常见问题开始：通过网络下载内容。例如，您将从几个网站下载网页，但它实际上可能是任何网络流量。只是更容易对网页进行可视化和设置。</p>
+<h3 id="同步版本">同步版本</h3>
+<pre><code class="language-py">import requests
+import time
+
+def download_site(url, session):
+    with session.get(url) as response:
+        print(f&quot;Read {len(response.content)} from {url}&quot;)
+
+def download_all_sites(sites):
+    with requests.Session() as session:
+        for url in sites:
+            download_site(url, session)
+
+if __name__ == &quot;__main__&quot;:
+    sites = [
+        &quot;https://www.jython.org&quot;,
+        &quot;http://olympus.realpython.org/dice&quot;,
+    ] * 80
+    start_time = time.time()
+    download_all_sites(sites)
+    duration = time.time() - start_time
+    print(f&quot;Downloaded {len(sites)} in {duration} seconds&quot;)
+</code></pre>
+<p>如您所见，这是一个相当短的程序。download_site() 只需从 URL 下载内容并打印大小。需要指出的是，我们正在使用 <code>requests</code> 模块的 <code>Session</code> 对象。</p>
+<p>可以简单地直接从 <code>requests</code> 中使用 <code>get()</code>，但创建 <code>Session</code> 会话对象允许请求做一些花哨的网络技巧，并真正加快速度。</p>
+<p>Download_all_sites() 创建会话，然后浏览网站列表，依次下载每个网站。最后，它打印了这个过程花了多长时间，这样您就可以满意地看到以下示例中并发对我们有多大帮助。</p>
+<p>该程序的处理图将与最后一节中的 I/O 绑定图非常相似。</p>
+<h3 id="thread-版本"><code>thread</code> 版本</h3>
+<pre><code class="language-py">import concurrent.futures
+import requests
+import threading
+import time
+
+thread_local = threading.local()
+
+def get_session():
+    if not hasattr(thread_local, &quot;session&quot;):
+        thread_local.session = requests.Session()
+    return thread_local.session
+
+def download_site(url):
+    session = get_session()
+    with session.get(url) as response:
+        print(f&quot;Read {len(response.content)} from {url}&quot;)
+
+def download_all_sites(sites):
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        executor.map(download_site, sites)
+
+if __name__ == &quot;__main__&quot;:
+    sites = [
+        &quot;https://www.jython.org&quot;,
+        &quot;http://olympus.realpython.org/dice&quot;,
+    ] * 80
+
+    start_time = time.time()
+    download_all_sites(sites)
+    duration = time.time() - start_time
+    print(f&quot;Downloaded {len(sites)} in {duration} seconds&quot;)
+</code></pre>
+<p>当您添加线程时，整体结构是相同的，您只需要进行一些更改。<code>download_all_sites()</code>从每个站点调用一次函数更改为更复杂的结构。</p>
+<p>在这个版本中，您正在创建一个 <code>ThreadPoolExecutor</code>，这似乎是一件复杂的事情。让我们分解一下：<code>ThreadPoolExecutor = Thread + Pool + Executor</code>。</p>
+<p>你已经知道线程部分了。这只是我们之前提到的一连串想法。泳池部分是它开始变得有趣的地方。此对象将创建一个线程池，每个线程都可以并发运行。最后，执行者是控制池中每个线程如何以及何时运行的部分。它将在池中执行请求。</p>
+<p>有用的是，标准库将 <code>ThreadPoolExecutor</code> 作为上下文管理器，因此您可以使用 <code>with</code> 语法来管理创建和释放线程池。</p>
+<p>一旦有了 <code>ThreadPoolExecutor</code>，您可以使用其方便的 <code>map()</code> 方法。此方法在列表中的每个站点上运行传入函数。最棒的是它使用它正在管理的线程池自动同时运行它们。</p>
+<p>那些来自其他语言，甚至 Python 2 的人可能想知道通常管理您在处理线程时习惯的细节的对象和函数在哪里，例如 Thread.start()、Thread.join() 和 Queue。</p>
+<p>这些都还在那里，您可以使用它们来对线程的运行方式进行细粒度控制。但是，从 Python 3.2 开始，标准库添加了一个名为 <code>Executors</code> 的更高级别的抽象，如果您不需要细粒度控制，该抽象可以为您管理许多细节。</p>
+<p>我们示例中另一个有趣的变化是，每个线程都需要创建自己的请求。<code>Session()</code> 对象。当您查看请求文档时，不一定容易分辨，但阅读这个问题，似乎相当清楚的是，您需要为每个线程准备单独一个会话。</p>
+<p>这是线程中有趣而困难的问题之一。由于操作系统可以控制您的任务何时中断和另一个任务启动，因此线程之间共享的任何数据都需要保护或线程安全。不幸的是，<code>requests.Session()</code> 不是线程安全的。</p>
+<p>根据数据是什么以及您如何使用数据，有几种策略可以使数据访问线程安全。其中之一是使用线程安全的数据结构，如 Python 队列模块的 <code>Queue</code>。</p>
+<p>这些对象使用低级原语如 <code>threading.Lock</code>，以确保只有一个线程可以同时访问一个代码块或一点内存。而您正在通过 <code>ThreadPoolExecutor</code> 对象间接使用此策略。</p>
+<p>这里使用的另一种策略是称为线程本地存储的东西。<code>threading.local()</code> 创建一个看起来像全局但特定于每个线程的对象。在您的示例中，这是用 <code>thread_local</code> 和 <code>get_session()</code> 完成的：</p>
+<pre><code class="language-py">thread_local = threading.local()
+def get_session():
+    if not hasattr(thread_local, &quot;session&quot;):
+        thread_local.session = requests.Session()
+    return thread_local.session
+</code></pre>
+<p><code>local()</code> 在线程模块中专门解决这个问题。它看起来有点奇怪，但你只想创建其中一个对象，而不是为每个线程创建一个。对象本身负责将访问从不同的线程分离到不同的数据。</p>
+<p>当调用 <code>get_session()</code> 时，查找的 <code>session</code> 特定于它正在运行的特定线程。因此，每个线程将在第一次调用 <code>get_session()</code> 时创建单个会话，然后在其整个生命周期内只需在每次后续调用中使用该会话。</p>
+<p>最后，关于选择线程数量的快速说明。你可以看到示例代码使用 5 个线程。您可随意选择这个数字，看看整体时间是如何变化的。你可能认为每次下载一个线程是最快的，但至少在我的系统上不是。我发现最快的结果在 5 到 10 个线程之间。如果您比这更高，那么创建和销毁线程的额外开销会消除任何时间节省。</p>
+<p>麻烦的事，一个合适的线程数不是从一个任务到另一个任务的常数。需要一些实验。</p>
+<h3 id="为什么使用-threading-更可靠">为什么使用 <code>threading</code> 更可靠？</h3>
+<pre><code class="language-mermaid">gantt
+    title io_threading.py
+    dateFormat YYYY-MM-DD
+    section I/0 Waiting
+        Request 1:r1, after t1, 5d
+        Request 2:r2, after t2, 5d
+        Request 3:r3, after t3, 5d
+    section CPU Processing
+        Thread 1 :t1, 2014-01-01, 5d
+        Thread 2 :t2, 2014-01-03, 5d
+        Thread 3 :t3, 2014-01-05, 5d
+</code></pre>
+<p>好吧，正如你从示例中看到的，这需要更多的代码，你真的必须考虑在线程之间共享哪些数据。</p>
+<p>线程可以以微妙且难以检测的方式进行交互。这些相互作用可能导致竞争条件，这些条件经常导致随机、间歇性的错误，这些错误可能很难找到。那些不熟悉比赛条件概念的人可能想扩展并阅读下面的部分。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>竞争条件</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>竞争条件是一整类微妙的错误，这些错误可能并且经常发生在多线程代码中。竞争条件的发生是因为程序员没有充分保护数据访问，以防止线程相互干扰。在编写线程代码时，您需要采取额外的步骤，以确保线程安全。</p>
+<p>这里的情况是，操作系统正在控制您的线程何时运行，以及何时交换出来让另一个线程运行。这种线程交换可以在任何时候发生，即使在执行 Python 语句的子步骤时也是如此。作为一个快速的例子，看看这个函数：</p>
+<pre><code class="language-py">import concurrent.futures
+
+counter = 0
+
+def increment_counter(fake_value):
+    global counter
+    for _ in range(100):
+        counter += 1
+
+if __name__ == &quot;__main__&quot;:
+    fake_data = [x for x in range(5000)]
+    counter = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5000) as executor:
+        executor.map(increment_counter, fake_data)
+</code></pre>
+<p>此代码与您在上面的线程示例中使用的结构非常相似。区别在于，每个线程都在访问相同的全局变量计数器并增加它。计数器不受任何保护，因此它不是线程安全的。</p>
+<p>为了增加计数器，每个线程都需要读取当前值，在其中添加一个，然后将该值保存回变量中。这发生在这行中：计数器+= 1。</p>
+<p>由于操作系统对您的代码一无所知，并且可以在执行的任何时候交换线程，因此在线程读取值后，但在有机会回写之前，可能会发生这种交换。如果正在运行的新代码也修改了计数器，那么第一个线程有一个过时的数据副本，麻烦将随之而来。</p>
+<p>你可以想象，遇到这种情况是相当罕见的。你可以运行这个程序数千次，但永远不会看到问题。这使得这种类型的问题很难调试，因为它可能很难重现，并可能导致出现随机错误。</p>
+<h3 id="asyncio-版本">asyncio 版本</h3>
+<h4 id="asyncio-基本知识">asyncio 基本知识</h4>
+<p>这将是 asyncio 的简化版本。这里有很多细节，但它仍然传达了它如何运作的想法。</p>
+<p>asyncio 的一般概念是，一个称为事件循环的 Python 对象控制每个任务的运行方式和时间。事件循环知道每个任务，并知道它处于什么状态。实际上，任务可能处于许多状态，但现在让我们想象一个只有两种状态的简化事件循环。</p>
+<p>准备状态将表示任务有工作要做并准备运行，等待状态意味着任务正在等待一些外部事情完成，例如网络操作。</p>
+<p>您的简化事件循环维护两个任务列表，每个状态一个。它选择其中一个就绪任务，然后重新开始运行。该任务处于完全控制状态，直到它合作将控件交回事件循环。</p>
+<p>当运行任务将控制权传回事件循环时，事件循环将该任务放入准备就绪或等待列表中，然后浏览等待列表中的每个任务，看看它是否在 I/O 操作完成后准备就绪。它知道就绪列表中的任务仍然准备就绪，因为它知道它们尚未运行。</p>
+<p>一旦所有任务再次被排序到正确的列表中，事件循环会选择要运行的下一个任务，并且过程会重复。您的简化事件循环选择等待时间最长的任务并运行它。此过程重复，直到事件循环完成。</p>
+<p>异步的一个重要点是，如果不故意这样做，任务永远不会放弃控制。在手术过程中，他们从不被打断。这使我们能够在异步中比在线程中更容易共享资源。您不必担心使您的代码线程安全。</p>
+<p>这是对 asyncio 正在发生的事情的高级视图。如果你想要更多细节，如果你想深入挖掘，这个 <a href="https://stackoverflow.com/a/51116910/6843734">StackOverflow</a> 答案会提供一些很好的细节。</p>
+<h4 id="async-与-await">async 与 await</h4>
+<p>现在我们来谈谈添加到 Python 中的两个新关键字：<code>async</code> 与 <code>await</code>。根据上面的讨论，您可以将 <code>await</code> 视为允许任务手动控制回事件循环的魔法。当您的代码 <code>await</code> 函数调用时，这是一个信号，即调用可能需要一段时间，任务应该放弃控制。</p>
+<p>最简单的方法是将 <code>async</code> 视为 Python 的标志，告诉它即将定义的函数使用 <code>await</code>。在某些情况下，这并不完全正确，比如异步生成器，但它适用于许多情况，并在您开始时为您提供一个简单的模型。</p>
+<p>您将在下一个代码中看到的一个例外是 <code>async with</code> 语句，它从您通常等待的对象创建上下文管理器。虽然语义略有不同，但想法是一样的：将此上下文管理器标记为可以交换的东西。</p>
+<p>我相信你可以想象，管理事件循环和任务之间的交互有一些复杂性。对于从 <code>asyncio</code> 开始的开发人员来说，这些细节并不重要，但您确实需要记住，任何调用 <code>await</code> 的函数都需要用 <code>async</code> 标记。否则，您将收到语法错误。</p>
+<h4 id="代码">代码</h4>
+<p>现在你已经对什么是 <code>asyncio</code> 有了基本的了解，让我们浏览一下示例代码的 <code>asyncio</code> 版本，并弄清楚它是如何工作的。请注意，此版本添加了 <code>aiohttp</code>。在运行之前，您应该运行 <code>pip install aiohttp</code>：</p>
+<pre><code class="language-py">import asyncio
+import time
+import aiohttp
+
+async def download_site(session, url):
+    async with session.get(url) as response:
+        print(&quot;Read {0} from {1}&quot;.format(response.content_length, url))
+
+async def download_all_sites(sites):
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        for url in sites:
+            task = asyncio.ensure_future(download_site(session, url))
+            tasks.append(task)
+        await asyncio.gather(*tasks, return_exceptions=True)
+
+if __name__ == &quot;__main__&quot;:
+    sites = [
+        &quot;https://www.jython.org&quot;,
+        &quot;http://olympus.realpython.org/dice&quot;,
+    ] * 80
+    start_time = time.time()
+    asyncio.get_event_loop().run_until_complete(download_all_sites(sites))
+    duration = time.time() - start_time
+    print(f&quot;Downloaded {len(sites)} sites in {duration} seconds&quot;)
+</code></pre>
+<p>这个版本比前两个版本更复杂一些。它具有类似的结构，但设置任务的工作比创建 ThreadPoolExecutor 要多一点。让我们从示例的顶部开始。</p>
+<h4 id="download_site"><code>download_site()</code></h4>
+<p>顶部的 <code>download_site()</code> 与线程版本几乎相同，但函数定义行上的异步关键字和实际调用 <code>session.get()</code> 时与关键字的异步关键字除外。您稍后会看到为什么会话可以在这里传递，而不是使用线程本地存储。</p>
+<h4 id="download_all_sites"><code>download_all_sites()</code></h4>
+<p><code>Download_all_sites()</code> 是您将看到线程示例中最大变化的地方。</p>
+<p>您可以在所有任务之间共享会话，因此会话在这里作为上下文管理器创建。这些任务可以共享会话，因为它们都在同一个线程上运行。当会话处于不良状态时，一个任务不可能中断另一个任务。</p>
+<p>在该上下文管理器中，它使用 <code>asyncio.ensure_future()</code> 创建一个任务列表，该列表也负责启动它们。创建所有任务后，此函数使用 <code>asyncio.gather()</code> 来保持会话上下文的活力，直到所有任务完成。</p>
+<p>线程代码与此类似，但细节在 <code>ThreadPoolExecutor</code> 中可以方便地处理。目前没有 <code>AsyncioPoolExecutor</code> 类。</p>
+<p>然而，这里有一个微小但重要的变化埋藏在细节中。还记得我们是如何讨论要创建的线程数量的吗？在线程示例中，线程的最佳数量并不明显。</p>
+<p><code>Asyncio</code> 的一个很酷的优点是，它的缩放比线程要好得多。与线程相比，每个任务所需的资源和创建时间都少得多，因此创建和运行更多线程效果良好。这个例子只是为每个网站创建一个单独的任务供下载，效果相当不错。</p>
+<h4 id="__main__"><code>__main__</code></h4>
+<p>最后，<code>asyncio</code> 的性质意味着您必须启动事件循环并告诉它要运行哪些任务。文件底部的<code>__main__</code>部分包含 <code>get_event_loop()</code> 的代码，然后 <code>run_until_complete()</code>。他们在命名这些功能方面做得很好。</p>
+<p>如果您已更新到 Python 3.7，Python 核心开发人员会为您简化此语法。您可以使用 <code>asyncio.run()</code>，而不是 <code>asyncio.get_event_loop().run_until_complete()</code>.</p>
+<h3 id="为什么使用-asyncio-更可靠">为什么使用 <code>asyncio</code> 更可靠？</h3>
+<p>执行时序图看起来与线程示例中发生的事情非常相似。只是 I/O 请求都由同一线程完成：</p>
+<p><img src="../../assets/Asyncio.webp" alt=""></p>
+<p>缺乏像 <code>ThreadPoolExecutor</code> 这样的漂亮包装器，这使得此代码比线程示例更复杂一些。在这种情况下，你必须做一些额外的工作才能获得更好的性能。</p>
+<p>还有一个常见的论点是，必须添加 <code>async</code> 并在适当的位置 <code>await</code> 是一个额外的复杂因素。在很小程度上，这是真的。这个论点的另一面是，它迫使你思考给定的任务何时被交换，这可以帮助你创建一个更好、更快的设计。</p>
+<p>缩放问题在这里也迫在眉睫。给每个站点的开一个线程比使用少数线程运行要慢得多。而使用数百个任务运行 <code>asyncio</code> 示例根本没有减慢速度。</p>
+<h3 id="asyncio-版本存在的问题"><code>asyncio</code> 版本存在的问题</h3>
+<p>在这一点上， <code>asyncio</code> 存在一些问题 。您需要特殊的<code>asyncio</code> 版本的库来获得异步功能的全部优势。如果您刚刚使用 <code>requests</code> 下载网站，速度会慢得多，因为 <code>requests</code> 在设计之初就不会通知循环事件它被阻塞。随着时间的推移，这个问题越来越小，越来越多的库接受异步。</p>
+<p>另一个更微妙的问题是，如果其中一项任务不合作，合作多任务的所有优势都会被抛弃。代码中的一个小错误可能会导致任务运行并长时间占用处理器，从而使其他需要运行的任务挨饿。如果任务不手动控制，则无法强制退出循环事件。</p>
+<p>考虑到这一点，让我们采取一种截然不同的并发、多处理方法。</p>
+<h3 id="多进程版本-multiprocessing">多进程版本 (multiprocessing)</h3>
+<p>与之前的方法不同，代码的多处理版本充分利用了您酷炫的新计算机拥有的多个 CPU。或者，就我而言，我笨重的旧笔记本电脑有。让我们从代码开始：</p>
+<pre><code class="language-py">import requests
+import multiprocessing
+import time
+
+session = None
+
+def set_global_session():
+    global session
+    if not session:
+        session = requests.Session()
+
+def download_site(url):
+    with session.get(url) as response:
+        name = multiprocessing.current_process().name
+        print(f&quot;{name}:Read {len(response.content)} from {url}&quot;)
+
+def download_all_sites(sites):
+    with multiprocessing.Pool(initializer=set_global_session) as pool:
+        pool.map(download_site, sites)
+
+if __name__ == &quot;__main__&quot;:
+    sites = [
+        &quot;https://www.jython.org&quot;,
+        &quot;http://olympus.realpython.org/dice&quot;,
+    ] * 80
+    start_time = time.time()
+    download_all_sites(sites)
+    duration = time.time() - start_time
+    print(f&quot;Downloaded {len(sites)} in {duration} seconds&quot;)
+</code></pre>
+<p>这比异步示例短得多，实际上看起来与线程示例非常相似，但在我们深入研究代码之前，让我们快速浏览一下多处理为您做什么。</p>
+<h4 id="简述-multiprocessing">简述 <code>multiprocessing</code></h4>
+<p>到目前为止，本文中的所有并发示例仅在计算机中的单个 CPU 或内核上运行。原因与 CPython 的当前设计和称为全局解释器锁（GIL）有关。</p>
+<p>这篇文章不会深入探讨 GIL 的方式和原因。现在知道此示例的同步、线程和异步版本都在单个 CPU 上运行就足够了。</p>
+<p>标准库中的 <code>multiprocessing</code> 旨在打破该障碍，并在多个 CPU 上运行代码。在高层次上，它通过创建一个新的 Python 解释器实例在每个 CPU 上运行，然后抽出部分程序在上面运行来做到这一点。</p>
+<p>你可以想象，启动一个单独的 Python 解释器并不像在当前的 Python 解释器中启动新线程那么快。这是一个重量级的操作，有一些限制和困难，但对于某些问题，它可以产生巨大的优势。</p>
+<h4 id="multiprocessing-代码"><code>multiprocessing</code> 代码</h4>
+<p>该代码与我们的同步版本有一些小的更改。第一个在 <code>download_all_sites()</code> 中。它不是简单地重复调用 <code>download_site()</code>，而是创建一个 <code>multiprocessing.Pool</code> 对象，并使其将 <code>download_site</code> 映射到可迭代站点。从线程示例来看，这应该看起来很熟悉。</p>
+<p>这里发生的情况是，<code>Pool</code> 创建了许多单独的 Python 解释器进程，并让每个进程在可迭代器中的一些项目上运行指定的函数，在我们的案例中，这是站点列表。主进程与其他进程之间的通信由多处理模块为您处理。</p>
+<p>创建 Pool 的线值得您关注。首先，它没有指定在池中创建多少进程，尽管这是一个可选参数。默认情况下，<code>multiprocessing.Pool()</code> 将确定计算机中的 CPU 数量并与之匹配。这通常是最好的答案，在我们的案例中也是如此。</p>
+<p>对于这个问题，增加流程数量并不能让事情变得更快。它实际上减慢了速度，因为设置和拆除所有这些流程的成本大于并行执行 I/O 请求的好处。</p>
+<p>接下来，我们有该调用的 <code>initializer=set_global_session</code> 部分。请记住，我们池中的每个进程都有自己的内存空间。这意味着他们不能共享像会话对象这样的东西。您不希望每次调用该函数时都创建一个新的会话，您希望为每个进程创建一个会话。</p>
+<p>初始化器函数参数仅为这种情况而构建。没有办法将返回值从初始化器传回给进程 download_site() 调用的函数，但您可以初始化全局会话变量以保持每个进程的单个会话。因为每个进程都有自己的内存空间，所以每个进程的全局空间将是不同的。</p>
+<p>这真的是它的全部。代码的其余部分与您之前看到的非常相似。</p>
+<h4 id="为什么使用多进程">为什么使用多进程</h4>
+<p>这个示例的多处理版本很棒，因为它相对容易设置，并且几乎不需要额外的代码。它还充分利用了计算机中的 CPU 功率。此代码的执行时序图如下所示：</p>
+<p><img src="../assets/MProc.webp" alt=""></p>
+<h4 id="多进程的问题">多进程的问题</h4>
+<p>此版本的示例确实需要一些额外的设置，并且全局会话对象很奇怪。您必须花一些时间考虑在每个过程中访问哪些变量。</p>
+<p>最后，它显然比本示例中的异步和线程版本要慢</p>
+<h2 id="如何给-cpu-密集型程序提速">如何给 CPU 密集型程序提速？</h2>
+<p>让我们在这里稍微换一下档。到目前为止，这些示例都涉及 I/O 密集问题。现在，您将研究一个 CPU 密集的问题。如您所见，I/O 密集问题将大部分时间用于等待外部操作（如网络调用）完成。另一方面，CPU 密集的问题很少进行 I/O 操作，其整体执行时间是它处理所需数据速度的一个因素。</p>
+<p>为了我们的示例，我们将使用一个有点愚蠢的函数来创建需要很长时间才能在 CPU 上运行的东西。该函数计算从 0 到传入值的每个数字的平方和：</p>
+<pre><code class="language-py">def cpu_bound(number):
+    return sum(i * i for i in range(number))
+</code></pre>
+<p>传递一个很大的数字，计算需要一段时间。请记住，这只是您代码的占位符，它实际上做了一些有用的事情，需要大量的处理时间，例如计算方程的根或对大型数据结构进行排序。</p>
+<h3 id="cpu-密集同步版本">CPU 密集同步版本</h3>
+<pre><code class="language-py">import time
+
+def cpu_bound(number):
+    return sum(i * i for i in range(number))
+
+def find_sums(numbers):
+    for number in numbers:
+        cpu_bound(number)
+
+if __name__ == &quot;__main__&quot;:
+    numbers = [5_000_000 + x for x in range(20)]
+
+    start_time = time.time()
+    find_sums(numbers)
+    duration = time.time() - start_time
+    print(f&quot;Duration {duration} seconds&quot;)
+</code></pre>
+<p>此代码调用 <code>cpu_bound()</code> 20 次，每次都使用不同的大数字。它在单个 CPU 上的单个进程中的单个线程上完成所有这些操作。执行时序图如下所示</p>
+<pre><code class="language-mermaid">gantt
+    title io_threading.py
+    dateFormat YYYY-MM-DD
+    section I/0 Waiting
+    section CPU Processing
+        Thread 1 :t1, 2014-01-01, 5d
+        Thread 2 :t1, 2014-01-06, 5d
+</code></pre>
+<h3 id="threading-和-asyncio-版本">threading 和 asyncio 版本</h3>
+<p>你认为使用线程或 asyncio 重写此代码会加速多少？</p>
+<p>如果你回答“一点也不”，给自己一块饼干。如果你回答“它会放慢速度”，就给自己两个饼干。</p>
+<p>原因如下：在上面的 I/O 绑定示例中，大部分总时间都花在了等待缓慢操作完成上的时间。线程和 asyncio 通过允许您重叠等待的时间而不是按顺序完成来加快了这一点。</p>
+<p>然而，对于 CPU 绑定的问题，没有等待。CPU 正在以最快的速度运行以完成问题。在 Python 中，线程和任务在同一进程中在同一 CPU 上运行。这意味着一个 CPU 正在执行非并发代码的所有工作，以及设置线程或任务的额外工作。这需要超过 10 秒：</p>
+<h3 id="cpu-密集性多进程版本">CPU 密集性多进程版本</h3>
+<p>现在你终于到达了多处理真正闪耀的地方。与其他并发库不同，多处理被明确设计为跨多个 CPU 共享繁重的 CPU 工作负载。以下是它的执行时序图的样子：</p>
+<p><img src="../../assets/CPUMP.webp" alt=""></p>
+<p>代码</p>
+<pre><code class="language-py">import multiprocessing
+import time
+
+def cpu_bound(number):
+    return sum(i * i for i in range(number))
+
+def find_sums(numbers):
+    with multiprocessing.Pool() as pool:
+        pool.map(cpu_bound, numbers)
+
+if __name__ == &quot;__main__&quot;:
+    numbers = [5_000_000 + x for x in range(20)]
+
+    start_time = time.time()
+    find_sums(numbers)
+    duration = time.time() - start_time
+    print(f&quot;Duration {duration} seconds&quot;)
+</code></pre>
+<p>和并发版本相比并不需要多少更改。你必须导入多处理，然后从循环数字更改为创建 <code>multiprocessing.Pool</code> 对象，并使用其。map() 方法将单个数字发送到工作进程，因为它们变得自由。</p>
+<p>这正是您为 I/O 绑定多处理代码所做的，但在这里您不必担心 Session 对象。</p>
+<p>如上所述，处理 <code>multiprocessing.Pool()</code> 构造函数的可选参数值得关注。您可以指定在池中创建和管理多少个进程对象。默认情况下，它将确定您的机器中有多少个 CPU，并为每个 CPU 创建一个进程。虽然这非常适合我们的简单示例，但您可能希望在生产环境中有更多的控制权。</p>
+<p>此外，正如我们在关于线程的第一部分中提到的，<code>multiprocessing.Pool</code> 代码建立在队列和 Semaphore 等构建块上，这些构建块对那些用其他语言进行多线程和多处理代码的人来说会很熟悉。</p>
+<h4 id="为什么多进程版本更可靠">为什么多进程版本更可靠？</h4>
+<p>这个示例的多处理版本很棒，因为它相对容易设置，并且几乎不需要额外的代码。它还充分利用了计算机中的 CPU 功率。</p>
+<p>嘿，这正是我上次看多处理时说的。最大的区别是，这次它显然是最好的选择。在我的机器上需要 2.5 秒。</p>
+<h4 id="使用多进程的问题">使用多进程的问题</h4>
+<p>使用多处理有一些缺点。它们并没有真正出现在这个简单的例子中，但拆分您的问题，以便每个处理器可以独立工作，有时可能很困难。</p>
+<p>此外，许多解决方案要求流程之间进行更多的沟通。这可能会为您的解决方案增加一些非并发程序不需要处理的复杂性。</p>
+<h3 id="什么时候使用并发">什么时候使用并发</h3>
+<p>您在这里已经涵盖了很多领域，所以让我们回顾一些关键想法，然后讨论一些决策点，这些决策点将帮助您确定您想在项目中使用哪个（如果有的话）并发模块。</p>
+<p>这个过程的第一步是决定是否应该使用并发模块。虽然这里的示例使每个库看起来都非常简单，但并发总是具有额外的复杂性，并且通常会导致难以找到的错误。</p>
+<p>坚持添加并发，直到您遇到已知的性能问题，然后确定您需要哪种类型的并发。正如 Donald Knuth 所说，“过早优化是编程中所有邪恶（或至少是大多数）的根源。”</p>
+<p>一旦你决定你应该优化你的程序，弄清楚你的程序是 CPU 密集还是 I/O 密集是很好的下一步。请记住，I/O 密集程序是那些花大部分时间等待事情发生，而 CPU 密集程序则花时间处理数据或尽可能快地处理数字。</p>
+<p>如您所见，CPU 密集问题只能从使用多处理中获得真正的收益。线程和异步对这种类型的问题根本没有帮助。</p>
+<p>对于 I/O 密集问题，Python 社区中有一条一般经验法则：“可以时使用 asyncio，必须时使用线程。”asyncio 可以为这种类型的程序提供最佳速度，但有时您需要尚未移植的关键库来利用 asyncio。请记住，任何不放弃对事件循环控制的任务都会阻止所有其他任务。</p>
+<p>缔结</p>
+<p>您现在已经看到了Python中可用的并发的基本类型：</p>
+<ul>
+<li>线程</li>
+<li>异步</li>
+<li>多进程</li>
+</ul>
+<p>您已经理解了决定您应该为给定问题使用哪种并发方法，或者您是否应该使用任何并发方法！此外，您已经更好地了解了使用并发时可能出现的一些问题。</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://pilchark.github.io/2023/03/python_concurrency/" title="使用并发编程提高 python 速度" target="_blank" rel="external">https://pilchark.github.io/2023/03/python_concurrency/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://pilchark.github.io/2023/01/py_write_user-friendly_command_line_interfaces/" title="python 编写优雅的 CLI 接口工具"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://pilchark.github.io/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2023
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

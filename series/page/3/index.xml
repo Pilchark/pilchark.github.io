@@ -6,10 +6,19 @@
     <description>Recent content in Series on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Wed, 04 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python 中 map(),filter() 和 reduce() 详解</title>
+      <link>https://pilchark.github.io/2021/12/py_mapfilterreduce/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_mapfilterreduce/</guid>
+      <description>参考文章 : http://c.biancheng.net/view/5342.html https://stackabuse.com/map-filter-and-reduce-in-python-with-examples/ Python 仅对函数式编程提供了部分支持，主要包括 map()、filter() 和 reduce() 这 3 个函数，它们通常都结合 lambda 匿名函数一起使用。 lambda 匿名函</description>
+    </item>
     
     <item>
       <title>python 中的 *args 与 **kwargs</title>
