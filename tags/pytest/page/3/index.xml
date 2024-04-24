@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>python 的 OrderedDict 与 dict</title>
+      <link>https://pilchark.github.io/2021/12/py_ordereddict/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_ordereddict/</guid>
+      <description>原文 : https://realpython.com/python-ordereddict/ 前言 : Python 3.6中已更改, 内置dict类现在也保持有序。因此，Python社区中的许多人现在想知道OrderedDict是否仍然有用。</description>
+    </item>
+    
+    <item>
       <title>Python 中 map(),filter() 和 reduce() 详解</title>
       <link>https://pilchark.github.io/2021/12/py_mapfilterreduce/</link>
       <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>

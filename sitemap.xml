@@ -4,56 +4,70 @@
   
   <url>
     <loc>https://pilchark.github.io/categories/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/posts/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/tags/python/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/categories/python/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://pilchark.github.io/2024/04/2024-04-24_python_web_dev_security/</loc>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/series/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/tags/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://pilchark.github.io/series/themes-guide/</loc>
-    <lastmod>2023-03-13T00:00:00+00:00</lastmod>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://pilchark.github.io/tags/web/</loc>
+    <lastmod>2024-04-24T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

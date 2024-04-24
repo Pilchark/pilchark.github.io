@@ -6,10 +6,19 @@
     <description>Recent content in Series on Pilchark Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Mon, 13 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pilchark.github.io/series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>python time 函数</title>
+      <link>https://pilchark.github.io/2022/03/py_time_func/</link>
+      <pubDate>Thu, 24 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2022/03/py_time_func/</guid>
+      <description>参考文章: https://realpython.com/python-timer/?utm_source=notification_summary python 的 Timer 函数 几个内置 time 方法 monotonic() perf_counter() process_time() time() perf_counter 每次输入time.perf_counter()会显示时间，需要手动计算差值 # latest_tutorial.py import time from reader import feed def main():</description>
+    </item>
     
     <item>
       <title>python assert 用法</title>
@@ -180,15 +189,6 @@
       
       <guid>https://pilchark.github.io/2021/12/py_pip_and_pipx/</guid>
       <description>系统 pip 用法 设置国内镜像源 临时设置 : pip install -i https://pypi.tuna.tsinghua.edu.cn/simple [包名] 永久设置 : pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple 国内镜像网站 阿里云 http://mirrors.aliyun.com/pypi/simple/ 中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/ 豆瓣 http://pypi.douban.com/simple/ 清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ 中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/ 列</description>
-    </item>
-    
-    <item>
-      <title>python 的 OrderedDict 与 dict</title>
-      <link>https://pilchark.github.io/2021/12/py_ordereddict/</link>
-      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://pilchark.github.io/2021/12/py_ordereddict/</guid>
-      <description>原文 : https://realpython.com/python-ordereddict/ 前言 : Python 3.6中已更改, 内置dict类现在也保持有序。因此，Python社区中的许多人现在想知道OrderedDict是否仍然有用。</description>
     </item>
     
   </channel>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web on Pilchark Blog</title>
+    <link>https://pilchark.github.io/tags/web/</link>
+    <description>Recent content in web on Pilchark Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>CC BY 4.0 CN</copyright>
+    <lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://pilchark.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python 的 OrderedDict 与 dict</title>
+      <link>https://pilchark.github.io/2021/12/py_ordereddict/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_ordereddict/</guid>
+      <description>原文 : https://realpython.com/python-ordereddict/ 前言 : Python 3.6中已更改, 内置dict类现在也保持有序。因此，Python社区中的许多人现在想知道OrderedDict是否仍然有用。</description>
+    </item>
+    
+    <item>
+      <title>Python 中 map(),filter() 和 reduce() 详解</title>
+      <link>https://pilchark.github.io/2021/12/py_mapfilterreduce/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_mapfilterreduce/</guid>
+      <description>参考文章 : http://c.biancheng.net/view/5342.html https://stackabuse.com/map-filter-and-reduce-in-python-with-examples/ Python 仅对函数式编程提供了部分支持，主要包括 map()、filter() 和 reduce() 这 3 个函数，它们通常都结合 lambda 匿名函数一起使用。 lambda 匿名函</description>
+    </item>
+    
+    <item>
+      <title>python 中的 *args 与 **kwargs</title>
+      <link>https://pilchark.github.io/2021/12/py_args_and_kwargs/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_args_and_kwargs/</guid>
+      <description>参考文章 : https://www.cnblogs.com/Zi-Lai-Ye/p/9651213.html 描述 *args：任意个无名参数，类型为tuple或list.用于向函数发送没有关键字的可变长度参数列表 **kwargs：任意个关</description>
+    </item>
+    
+    <item>
+      <title>浅拷贝和深拷贝</title>
+      <link>https://pilchark.github.io/2021/12/py_copy_and_deepcopy/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_copy_and_deepcopy/</guid>
+      <description>参考文章 : https://www.cnblogs.com/semon-code/p/8231041.html 对象赋值 对象赋值不会复制对象，它只会复制一个对象引用，不会开辟新的内存空间. test = [&amp;quot;test&amp;quot;, 18, [&amp;quot;python&amp;quot;,&amp;quot;java&amp;quot;]] copytest = test print(id(test)) # 4559314816 print(id(copytest)) # 4559314816 # 将test赋值给cop</description>
+    </item>
+    
+    <item>
+      <title>使用 namedtuple 写出简练的代码</title>
+      <link>https://pilchark.github.io/2021/12/py_namedtuple/</link>
+      <pubDate>Mon, 06 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/py_namedtuple/</guid>
+      <description>原文 : https://realpy.thoncom/python-namedtuple/ 1. 使用 namedtuple 编写 Pythonic 代码 Pythonnamedtuple()是工厂函数，可在中使用collections。它允许您tuple使用命名字段创</description>
+    </item>
+    
+    <item>
+      <title>python 的基本数据结构</title>
+      <link>https://pilchark.github.io/2021/12/ds_python_data_structure/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/ds_python_data_structure/</guid>
+      <description>参考 : http://codingdict.com/article/4851 单链表 : https://zhuanlan.zhihu.com/p/95090717 1. 链表 1.1. 单链表 add_first(L,e): newest = Node(e) newest.next = L.head L.head = newest L.size += 1 class Node(object): def __init__(self, item): self.item = item self.next = None class SingleLinkList(object): def __init__(self, node=None): self.__head = node def is_empty(self): return self.__head is None def length(self): &amp;quot;&amp;quot;&amp;q</description>
+    </item>
+    
+    <item>
+      <title>python 的数据类型</title>
+      <link>https://pilchark.github.io/2021/12/ds_python_data_type/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/ds_python_data_type/</guid>
+      <description>参考 : https://docs.python.org/zh-cn/3/library/stdtypes.html?highlight=isalnum#bytearray.isalnum 内置数据类型 类型 缩写 文本类型： str 数值类型： int, float, complex 序列类型： list, tuple, range 映射类型： dict 集合类型： set, frozenset 布尔类型： bool 二进制类型： bytes, bytearray, memoryview python 查看数据类</description>
+    </item>
+    
+    <item>
+      <title>python 算法基础</title>
+      <link>https://pilchark.github.io/2021/12/ds_python_algorithms/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/2021/12/ds_python_algorithms/</guid>
+      <description>1. 基本概念 评价算法的好坏：渐近时间复杂度和渐近空间复杂度 常用算法 穷举法 - 又称为暴力破解法，对所有的可能性进行验证，直到找到正确答案。 贪婪法 -</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://pilchark.github.io/about/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/about/</guid>
+      <description>Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Hugo makes use of a variety of open source projects including:
+https://github.com/russross/blackfriday https://github.</description>
+    </item>
+    
+  </channel>
+</rss>
