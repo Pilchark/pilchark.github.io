@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+         - Pilchark Blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="Python 有太多软件包管理器 &amp;mdash; Python has too many package managers 本文由 简悦 SimpRead 转码， 原文地址 dublog.net Overview of Python&amp;rsquo;s Package management ecosystem in 20242024 年 Python 软件包管理生态系统概览 Python is a wonderful programming language. I’ve used it to build webapps, deep learning models," />
+    <meta name="generator" content="Hugo 0.101.0 with theme pure" />
+    <title> - Pilchark Blog</title>
+    
+    
+    <link rel="stylesheet" href="https://pilchark.github.io/css/style.min.e64d754037c0ee0ec4e20ab1d6f07740ace61729bc03850559b8caa21ae4a597.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="" />
+<meta property="og:description" content="Python 有太多软件包管理器 &mdash; Python has too many package managers 本文由 简悦 SimpRead 转码， 原文地址 dublog.net Overview of Python&rsquo;s Package management ecosystem in 20242024 年 Python 软件包管理生态系统概览 Python is a wonderful programming language. I’ve used it to build webapps, deep learning models," />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://pilchark.github.io/1/01/2024-08-15_python_pkg_problem/" /><meta property="article:section" content="posts" />
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="Python 有太多软件包管理器 &mdash; Python has too many package managers 本文由 简悦 SimpRead 转码， 原文地址 dublog.net Overview of Python&rsquo;s Package management ecosystem in 20242024 年 Python 软件包管理生态系统概览 Python is a wonderful programming language. I’ve used it to build webapps, deep learning models,">
+
+<meta itemprop="wordCount" content="8901">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Python 有太多软件包管理器 &mdash; Python has too many package managers 本文由 简悦 SimpRead 转码， 原文地址 dublog.net Overview of Python&rsquo;s Package management ecosystem in 20242024 年 Python 软件包管理生态系统概览 Python is a wonderful programming language. I’ve used it to build webapps, deep learning models,"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://gitee.com/pilchark" target="_blank">
+            <img class="img-circle img-rotate" src="https://pilchark.github.io/frog.svg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">Pilchark</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">Simple is better than complex.</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Dalian, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">🦒🌬🏚🌊🤝🈶⏲,📏🖇☁⛵🚣🌊🌊
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://pilchark.github.io/tags/collections/" class="tag-list-link" rel="4">collections<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/data_structure/" class="tag-list-link" rel="6">data_structure<span
+               class="tag-list-count">6</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/django/" class="tag-list-link" rel="1">django<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/docker/" class="tag-list-link" rel="1">docker<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/index/" class="tag-list-link" rel="1">index<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/linux/" class="tag-list-link" rel="2">linux<span
+               class="tag-list-count">2</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/mongodb/" class="tag-list-link" rel="1">mongodb<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/mysql/" class="tag-list-link" rel="1">mysql<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/oop/" class="tag-list-link" rel="1">oop<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pip/" class="tag-list-link" rel="3">pip<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/pytest/" class="tag-list-link" rel="1">pytest<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/python/" class="tag-list-link" rel="43">python<span
+               class="tag-list-count">43</span></a>
+            
+            
+            <a href="https://pilchark.github.io/tags/web/" class="tag-list-link" rel="1">web<span
+               class="tag-list-count">1</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/data_structure/" class="category-list-link">data_structure</a><span class="category-list-count">6</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/database/" class="category-list-link">database</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/django/" class="category-list-link">django</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/docker/" class="category-list-link">docker</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/linux/" class="category-list-link">linux</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/oop/" class="category-list-link">oop</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://pilchark.github.io/categories/python/" class="category-list-link">python</a><span class="category-list-count">43</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/collections/" class="tag-list-link">collections</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/data_structure/" class="tag-list-link">data_structure</a><span
+                    class="tag-list-count">6</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/django/" class="tag-list-link">django</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/docker/" class="tag-list-link">docker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/index/" class="tag-list-link">index</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/linux/" class="tag-list-link">linux</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/mongodb/" class="tag-list-link">mongodb</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/mysql/" class="tag-list-link">mysql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/oop/" class="tag-list-link">oop</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pip/" class="tag-list-link">pip</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/pytest/" class="tag-list-link">pytest</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">43</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://pilchark.github.io/tags/web/" class="tag-list-link">web</a><span
+                    class="tag-list-count">1</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2024/04/2024-04-24_python_web_dev_security/" class="title">Python 网络开发人员的安全实践</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2024-04-24 00:00:00 &#43;0000 UTC" itemprop="datePublished">2024-04-24</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2023/03/python_concurrency/" class="title">使用并发编程提高 python 速度</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2023-03-13 00:00:00 &#43;0000 UTC" itemprop="datePublished">2023-03-13</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2023/01/py_write_user-friendly_command_line_interfaces/" class="title">python 编写优雅的 CLI 接口工具</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2023-01-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2023-01-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/12/oop_solid_principles/" class="title">面向对象编程的 SOLID 原则 (python 语言)</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-12-12 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-12-12</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://pilchark.github.io/2022/08/py_dict/" class="title">排序 python 字典</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-08-23 00:00:00 &#43;0000 UTC" itemprop="datePublished">2022-08-23</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/1/01/2024-08-15_python_pkg_problem/"
+    ></a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8901字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 18分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="python-有太多软件包管理器-----python-has-too-many-package-managers">Python 有太多软件包管理器 &mdash; Python has too many package managers</h1>
+<blockquote>
+<p>本文由 <a href="http://ksria.com/simpread/">简悦 SimpRead</a> 转码， 原文地址 <a href="https://dublog.net/blog/so-many-python-package-managers/">dublog.net</a></p>
+</blockquote>
+<blockquote>
+<p>Overview of Python&rsquo;s Package management ecosystem in 20242024 年 Python 软件包管理生态系统概览</p>
+</blockquote>
+<p>Python is a wonderful programming language. I’ve used it to build webapps, deep learning models, games, and do numerical computation. However there is one aspect of Python that has been an inexcusable pain-in-the ass over many years. That would be the fragmented Python package and environment management ecosystem, succinctly represented by the following XKCD comic:<br>
+Python 是一门神奇的编程语言。我曾用它来构建网络应用程序、深度学习模型、游戏和进行数值计算。然而，多年来，Python 有一个方面一直让人难以忍受。这就是支离破碎的 Python 软件包和环境管理生态系统，下面的 XKCD 漫画简明扼要地体现了这一点：</p>
+<p><img src="https://dublog.net/images/python_environment_xkcd.png" alt=""></p>
+<p>You see, a lot of other programming languages developed standardized ways to setup versioning, dependency resolution, and dev environment setup. C# has <code>NuGet</code>, Javascript has <code>npm</code>, Dart has <code>pub</code>, and most notably Rust has <code>Cargo</code> – quite possibly the most widely loved package manager tool in existence.<br>
+很多其他编程语言都开发了标准化的方法来设置版本、依赖关系解析和开发环境设置。C# 有<code>NuGet</code>，Javascript 有<code>npm</code>，Dart 有<code>pub</code>，而最值得注意的是 Rust 有<code>Cargo</code>，这可能是目前最受欢迎的软件包管理工具了。</p>
+<h2 id="理智的做法">The sane way to do things<br>
+理智的做法</h2>
+<p>In a sane world, package management would work like it does with <code>Cargo</code> - the <code>rust</code> package manager. You have a single master configuration TOML file where you simply list your dependencies and config settings. The TOML file goes into a folder encapsulating your entire development environment. For extra reproducibility, whenever you build your environment and resolve all your package dependencies, a <code>*.lock</code> file records all the packages you used along with their versions and hashes.<br>
+在一个正常的世界里，软件包管理就像使用<code>Cargo</code>（<code>锈</code>包管理器）一样。你只需在一个主配置 TOML 文件中列出依赖关系和配置设置。TOML 文件会被放入一个包含整个开发环境的文件夹中。为了提高可重复性，在构建环境并解决所有软件包依赖关系时，<code>*.lock</code>文件会记录所有使用过的软件包及其版本和哈希值。</p>
+<p>Finally, because dependency resolution is a directed acylic graph (DAG) resolution problem, the dependency retrieval and resolution should both be engineered to be relatively fast. Dependency information should be freely available from a public API metadata server in a way that is simple to parse, and cached locally once downloaded to avoid redundantly hitting this server. Finally, the dependency resolution algorithm itself should be written in a relative fast programming language like C++ or Rust.<br>
+最后，由于依赖关系解析是一个有向脆性图（DAG）解析问题，因此依赖关系检索和解析都应设计得相对快速。依赖关系信息应以一种易于解析的方式从公共 API 元数据服务器上免费获取，并在下载后本地缓存，以避免重复访问该服务器。最后，依赖关系解析算法本身应该用相对较快的编程语言编写，如 C++ 或 Rust。</p>
+<p>The problem with Python has been that there hasn’t been a single tool that does <em>all of this</em> well although some have come enticingly close. To that end, here is my rundown of more than a dozen Python package managment/virtual environment tools:<br>
+Python 的问题在于，还没有一款工具能很好地完成_所有这些任务_，尽管有些工具已经很接近了。为此，我在这里列出了十几种 Python 软件包管理/虚拟环境工具：</p>
+<h2 id="经典-python-软件包管理">Classic Python Package Management<br>
+经典 Python 软件包管理</h2>
+<h3 id="pip-and-venv"><code>pip</code> and <code>venv</code></h3>
+<p><code>pip</code>和<code>venv</code></p>
+<p>The OG of Python package managers. Dependency resolution? <code>pip</code> up until recently hardly did any dependency resolution at all. Historically it would install packages one by one, conflicts be damned. In version 20.3, introduced in 2020, <code>pip</code>finally added dependency resolution backtracking, which means if an inconsistent state was detected, it would go back and try to fix the problem. Unlike many of the other tools in this list, and unlike tools like Cargo or NuGet in Rust and C# respectively, <code>pip</code> does not manage environments along with dependencies. A separate tool like <code>venv</code> or <code>virtualenv</code> needs to be used to create “virtual environments” which are in turn be completely decoupled from a specific project or project directory.<br>
+Python 软件包管理器中的 OG。直到最近，<code>pip</code>几乎都不做任何依赖关系解析。从历史上看，它会逐个安装软件包，不管是否存在冲突。在 2020 年推出的 20.3 版中，<code>pipfinally</code>增加了依赖关系解析回溯功能，这意味着如果检测到不一致的状态，它会回溯并尝试修复问题。与本列表中的许多其他工具不同，也与 Rust 和 C# 中的 Cargo 或 NuGet 等工具不同，<code>pip</code>不会在管理依赖关系的同时管理环境。需要使用类似<code>venv</code>或<code>virtualenv</code>这样的单独工具来创建 &ldquo;虚拟环境&rdquo;，而这些虚拟环境又与特定项目或项目目录完全分离。</p>
+<p>One of the key faults of <code>pip</code> is what happens when you decide to remove a dependency. Removing a dependency does not actually remove the sub-dependencies that were brought in by the original dependency, leaving a lot of potential cruft. This actually needs to be done either manually or by using yet another tool like <code>pip-autoremove</code> to remove sub-dependencies that are no longer useful.<br>
+<code>pip</code>的一个主要缺陷是当你决定移除一个依赖时会发生什么。移除依赖关系后，实际上并不会移除由原始依赖关系带来的子依赖关系，因此会留下许多潜在的垃圾。这实际上需要手动完成，或者使用<code>pip-autoremove</code>等其他工具移除不再有用的子依赖关系。</p>
+<h3 id="pyenvhttpsgithubcompyenvpyenv"><a href="https://github.com/pyenv/pyenv"><code>pyenv</code></a></h3>
+<p>One thing to note about python’s <code>venv</code> tool is that it isn’t really setup to create virtual environments for <em>different versions</em> of Python. To actually do this, yet another tool called <code>pyenv</code> exists which allows you to switch between different versions of system Python at will, with options to set Python locally for specific projects. Very often, I’ve seen this tool abused to set Python versions globally, which can lead to some severe reproducibility issues, with folks forgetting which version of Python they were using for different projects.<br>
+关于 Python 的<code>venv</code>工具，需要注意的一点是，它并不能为_不同版本的_Python 创建虚拟环境。要真正做到这一点，还需要另一个名为<code>pyenv</code>的工具，它允许你随意切换 Python 系统的不同版本，并为特定项目提供本地设置 Python 的选项。我经常看到有人滥用这个工具来全局设置 Python 版本，这会导致严重的可重复性问题，因为人们会忘记他们在不同项目中使用的 Python 版本。</p>
+<h3 id="pipenvhttpspipenvpypaioenlatest"><a href="https://pipenv.pypa.io/en/latest/"><code>pipenv</code></a></h3>
+<p>So <code>pip</code> and <code>venv</code> combined can let you build “virtual environments” and <code>pyenv</code> can let you switch Python versions. The natural thing to do is to have a tool that allows you to specify the python version and dependencies in a single file. <code>pipenv</code> basically sets this up, optionally interoperating with <code>pyenv</code> by letting users specify python version and dependencies in a <code>Pipfile</code> and locked dependencies in a <code>Pipfile.lock</code>.<br>
+<code>pip</code>和<code>venv</code>可以让你构建 &ldquo;虚拟环境&rdquo;，<code>pyenv</code>可以让你切换 Python 版本。<code>pipenv</code>基本上就是这样设置的，它可以与<code>pyenv</code>互操作，让用户在<code>Pipfile</code>中指定 Python 版本和依赖关系，在<code>Pipfile.lock</code> 中指定锁定的依赖关系。</p>
+<p>The downside to <code>pipenv</code> is that it’s dependency resolution is no better than that of <code>pip</code> which it uses under the hood. Furthermore, in 2020, a new “Python Enhancement Proposal” <a href="https://peps.python.org/pep-0621/"><code>PEP 621</code></a> was accepted defining how package metadata should be consolidated in the future for Python projects making <code>Pipfile</code> and <code>Pipfile.lock</code> no longer quite “idiomatic” in the long run…<br>
+<code>pipenv</code>的缺点是，它的依赖关系解析能力并不比在引擎盖下使用的<code>pip</code>更强。此外，2020 年，一个新的 &ldquo;<a href="https://peps.python.org/pep-0621/"><code>Python</code></a>增强提案 &ldquo;<a href="https://peps.python.org/pep-0621/"><code>PEP 621</code></a>被接受，该提案定义了 Python 项目未来应如何整合软件包元数据，使得<code>Pipfile</code>和<code>Pipfile.lock</code>从长远来看不再 &ldquo;习以为常&rdquo;<code>....</code>.</p>
+<h2 id="使用-pyprojecttoml-和-pep-621-整合-python-配置">Consolidating Python config with pyproject.toml and PEP-621<br>
+使用 pyproject.toml 和 PEP-621 整合 Python 配置</h2>
+<p>Before <code>PEP-621</code>, there were a large number of config files that could wind up in a given Python project:<br>
+在<code>PEP-621</code> 之前，一个给定的 Python 项目中可能会有大量的配置文件：</p>
+<ul>
+<li><code>requirements.txt</code>: The project’s dependencies, which may or may not include package hashes (for security reasons) depending on how its setup.<br>
+<code>requirements.txt</code>：项目的依赖项，其中可能包括也可能不包括软件包哈希值（出于安全考虑），这取决于项目的设置方式。</li>
+<li><code>setup.py</code> and <code>setup.cfg</code>: A script and a config file which collectively define dependencies and options.<br>
+<code>setup.py</code>和<code>setup.cfg</code>：共同定义依赖关系和选项的脚本和配置文件。</li>
+<li>`Pip 管道</li>
+<li><code>MANIFEST.in</code>: Tells packaging software (like setuptools) what sort of non-code files to include in the package.<br>
+<code>MANIFEST.in</code>：告诉打包软件（如 setuptools）在软件包中包含哪些非代码文件。</li>
+<li><code>tox.ini</code>: Used by the tool <code>tox</code> to configure environment setup, dependencies, and test commands (do you see the redundancy now?)<br>
+<code>tox.ini</code>：由工具<code>tox</code>使用，用于配置环境设置、依赖关系和测试命令（你现在看到冗余了吗？）</li>
+<li><code>Pipfile</code> and <code>Pipfile.lock</code>: For folks using <code>pipenv</code>.<br>
+<code>Pipfile</code>和<code>Pipfile.lock</code>：适用于使用<code>pipenv</code> 的用户。</li>
+<li><code>.pylintrc</code>: Used to setup config for linting tools like <code>black</code> and <code>isort</code><br>
+<code>.pylintrc</code>： 用于设置<code>black</code>和<code>isort</code>等工具的配置</li>
+<li><code>environment.yml</code>: Used specifically by conda to define dependencies, some of which are not python packages at all. Interestingly you can specify both pip dependencies and conda dependencies separately, even if a pip package has a corresponding (and possibly better curated) version on a conda channel!<br>
+<code>environment.yml</code>：conda 专用于定义依赖关系，其中有些根本不是 python 软件包。有趣的是，你可以分别指定 pip 依赖项和 conda 依赖项，即使某个 pip 软件包在 conda 频道上有相应的版本（可能是更好的版本）！</li>
+<li><code>.condarc</code>: The config file for Conda.<br>
+<code>.condarc</code>：Conda 的配置文件。</li>
+</ul>
+<p>Naturally the proliferation of all these tools and standards leads to a massive amount of redundancy. There is effectively no standard way to enumerate the dependencies of a given package nor how to setup tools like linters and tests.<br>
+所有这些工具和标准的激增自然会导致大量冗余。目前实际上还没有标准的方法来枚举特定软件包的依赖关系，也没有标准的方法来设置衬垫和测试等工具。</p>
+<p><img src="https://dublog.net/images/xkcd_standards.png" alt=""></p>
+<p>In 2020 <a href="https://peps.python.org/pep-0621/"><code>PEP 621</code></a> was accepted. This proposal effectively gives a guidance to consolidate <em>everything</em> into a <code>pyproject.toml</code> file, almost identical to <code>Cargo.toml</code> in Rust and similar to the <code>package.json</code> used in <code>npm</code>. Naturally this led to a proliferation of new Python package managers which leverage the new standard. Enter <code>poetry</code>, <code>PDM</code>, <code>Flit</code>, and <code>Hatch</code>.<br>
+2020 年，<a href="https://peps.python.org/pep-0621/"><code>PEP 621</code></a>被接受。该提案有效地指导了将_所有内容_整合到<code>pyproject.toml</code>文件中，几乎与 Rust 中的<code>Cargo.toml</code>相同，也与<code>npm</code> 中使用的<code>package.json</code>类似。这自然导致了利用新标准的新 Python 包管理器的激增。这<code>就是诗歌</code>、<code>PDM</code>、<code>Flit</code> 和<code>Hatch</code>。</p>
+<h3 id="poetry诗歌httpsgithubcompython-poetrypoetry"><a href="https://github.com/python-poetry/poetry">Poetry 诗歌</a></h3>
+<p><code>Poetry</code> right now is the closest tool in the Python ecosystem with widespread traction that actually comes close to approximating the experience of using tools like <code>Cargo</code> and <code>npm</code>. Unlike <code>pip</code> and similar to <code>conda</code> and <code>mamba</code> (<em>See below</em>), <code>Poetry</code> will attempt to resolve the full dependency graph DAG beforehand, and install dependencies in topological order. It <em>mostly</em> respects <code>pyproject.toml</code> and treats it as a first-class citizen. Like <code>conda</code> and <code>venv</code>, <code>poetry</code> can also manage your virtual environments, which can exist within or outside of your project folder. <code>poetry</code> also generates <code>poetry.lock</code> files which can be an immense boon for reproducibility. Notably, these lockfiles are multi-platform lock files meaning they can be extremely large. Finally, <code>poetry</code> is also a build tool, allowing users to build and publish Python packages rather seamlessly.<br>
+目前，<code>Poetry</code>是 Python 生态系统中最接近<code>Cargo</code>和<code>npm</code> 等工具使用体验的工具，并得到了广泛应用。与<code>pip</code>不同，与<code>conda</code>和<code>mamba</code>类似_（见下文_），<code>Poetry</code>会尝试事先解析完整的依赖关系图 DAG，并按照拓扑顺序安装依赖关系。它_主要_尊重<code>pyproject.toml</code>，并将其视为一等公民。与<code>conda</code>和<code>venv</code> 一样，<code>诗歌</code>也可以管理你的虚拟环境，这些虚拟环境可以存在于你的项目文件夹之内，也可以存在于项目文件夹之外。<code>诗歌</code>还会生成<code>诗歌锁</code>文件，这对可重复性大有裨益。值得注意的是，这些锁定文件是多平台锁定文件，这意味着它们可能非常大。最后，<code>诗歌</code>还是一个构建工具，允许用户无缝构建和发布 Python 包。</p>
+<p><code>Poetry</code> is <em>almost</em> the perfect tool for the job, however it has a number of downsides that can be utter deal breakers for production or even basic research and development. First of all dependency resolution can be incredibly slow. A big part of this is no fault of <code>poetry</code> in of itself, but rather in the disparate ways in which Python packages enumerate their dependencies. Unlike other programming ecosystems, not all Python packages declare their metadata in a way that is necessarily served cleanly by public metadata APIs like PyPI. In these cases, exploring every dependency for every possible package in the DAG can involve a staggering amount operations to directly figure out package dependencies by downloading and parsing python wheels. For some folks doing basic R&amp;D, the cost of simply having a few packages excluded from dependency resolution can be a fairer tradeoff than waiting minutes to hours to find a “failure to resolve dependencies”.<br>
+<code>诗歌</code> _几乎是_这项工作的完美工具，但它也有一些缺点，这些缺点对于生产甚至基础研发工作来说都是致命的。首先，解决依赖性问题的速度会慢得令人难以置信。这在很大程度上并不是<code>诗歌</code>本身的错，而是 Python 软件包列举其依赖关系的方式各不相同。与其他编程生态系统不同，并非所有 Python 软件包的元数据声明方式都能通过 PyPI 等公共元数据 API 干净地提供。在这种情况下，探索 DAG 中每一个可能软件包的每一个依赖关系都可能涉及大量的操作，而直接通过下载和解析 Python 轮子来找出软件包的依赖关系，则会产生惊人的工作量。对于一些从事基础研发工作的人来说，只需将一些软件包排除在依赖关系解析之外，其代价可能比等待数分钟至数小时才发现 &ldquo;依赖关系解析失败 &ldquo;更公平。</p>
+<p>Furthermore, as of 2024, the dependency resolver in <code>poetry</code> is actually still written in Python as a depth-first search algorithm. By comparison, tools like <code>mamba</code> have resolvers written in C++ as boolean SAT solvers which are orders of magnitude faster! Dependency resolves for large projects in <code>poetry</code>, combined with the generation of multiplatform lockfiles can take an obscene amount of time… especially when there is an actual conflict in the DAG.<br>
+此外，截至 2024 年，<code>诗歌</code>中的依赖解析器实际上仍是用 Python 编写的深度优先搜索算法。相比之下，<code>mamba</code>等工具的解析器是用 C++ 编写的布尔 SAT 求解器，速度要快上几个数量级！<code>诗歌</code>中大型项目的依赖关系解析，再加上多平台锁文件的生成，会耗费大量时间&hellip;&hellip;尤其是当 DAG 中存在实际冲突时。</p>
+<p>I have actually used <code>poetry</code> at my last job, and one of the number one issues with the tool is in how most folks (even incredibly experienced folks!) used it incorrectly to specify dependency bounds on library code intended to be widely shared. In <code>poetry</code> there is the option to use a caret <code>^</code> operator implicitly specify upper and lower bounds. For example, specifying <code>^0.2.3</code> is equivalent to specifying <code>&gt;=0.2.3,&lt;0.3.0</code>. This ceiling pinning seems like a good idea on the surface, but can wreck havok when applied across a large RnD organization, with numerous “false positive” unresolvable dependency DAGs when well-intentioned software engineers apply it too liberally. This sort of well intentioned ceiling pinning can have <a href="https://iscinumpy.dev/post/bound-version-constraints/">devastating consequences for libraries intended to be used widely</a>.<br>
+实际上，我在上一份工作中使用过<code>诗歌</code>，该工具的一个首要问题是大多数人（甚至是经验丰富的人！）如何错误地使用它来指定用于广泛共享的库代码的依赖边界。在<code>诗歌</code>中，可以选择使用粗体<code>^</code>运算符隐式指定上下限。例如，指定 ^0<code>.2.3</code>相当于指定<code>&gt;=0.2.3,&lt;0.3.0</code>。从表面上看，这种上限限定似乎是个好主意，但如果在大型 RnD 组织中应用，就会造成严重后果，因为用心良苦的软件工程师如果过于随意地应用这种上限限定，就会产生大量 &ldquo;假阳性 &ldquo;的、无法解决的依赖关系 DAG。这种用心良苦的 &ldquo;天花板钉牢 &ldquo;会<a href="https://iscinumpy.dev/post/bound-version-constraints/">给打算广泛使用的库</a>带来<a href="https://iscinumpy.dev/post/bound-version-constraints/">毁灭性的后果</a>。</p>
+<h3 id="pdmhttpsgithubcompdm-projectpdm"><a href="https://github.com/pdm-project/pdm"><code>pdm</code></a></h3>
+<p><code>pdm</code> is incredibly similar to <code>poetry</code>, but has a core difference difference in that it also supports <a href="https://peps.python.org/pep-0582/"><code>PEP-582</code></a>. This PEP basically brings <code>pdm</code> in line with other programming language environment setups by jettisoning the idea of virtual environments that are independent of a given project/folder. When you are in your project directory, you are effectively in your virtual environment (which is not necessarily totally isolated from the system environment and any other active virtual environments). This can greatly reduce the futzing around of having to activate and deactivate various virtual environment tools in Python. Furthermore, <code>pdm</code> is much more compliant with PEP standards than <code>poetry</code>, which can be a killer advantage for certain users.<br>
+<code>pdm</code>与<code>诗歌</code>非常相似，但有一个核心区别，那就是它也支持<a href="https://peps.python.org/pep-0582/"><code>PEP-582</code></a>。PEP-582 基本上使<code>pdm</code>与其他编程语言的环境设置保持一致，摒弃了虚拟环境独立于特定项目/文件夹的想法。当您在项目目录中时，您实际上是在虚拟环境中（不一定与系统环境和任何其他活动虚拟环境完全隔离）。这可以大大减少在 Python 中激活和停用各种虚拟环境工具的麻烦。此外，<code>pdm</code>比<code>poetry</code> 更符合 PEP 标准，这对某些用户来说是一个致命的优势。</p>
+<h3 id="hatchhttpsgithubcompypahatch"><a href="https://github.com/pypa/hatch"><code>hatch</code></a></h3>
+<p>Unlike the other tools on this list, <code>hatch</code> is a full build system for python which support <code>pyproject.toml</code>. I have not actually tried this tool, but it mostly overlaps with <code>poetry</code> in many ways, and has one particular feature that I have yet to see in any other Python tool. You can actually use <code>hatch</code> to run tests in parallel on <a href="https://hatch.pypa.io/latest/tutorials/testing/overview/"><em>multiple versions of python</em></a>.<br>
+与本列表中的其他工具不同，<code>hatch</code>是一个完整的 Python 构建系统，支持<code>pyproject.toml</code>。我还没有实际试用过这个工具，但它在很多方面都与<code>诗歌</code>重叠，而且有一个我在其他 Python 工具中还没有看到过的特殊功能。实际上，你可以使用<code>hatch</code>在<a href="https://hatch.pypa.io/latest/tutorials/testing/overview/"><em>多个版本的 python</em></a> 上并行运行测试。</p>
+<h2 id="the-conda-ecosystem康达生态系统">The Conda ecosystem 康达生态系统</h2>
+<p>It would be impossible to dive into an article on Python tooling without talking about Conda. <code>conda</code> was created by some of the most prominent members of the Python open source community - Travis Oliphant (one of the creators of Numpy, Numba, and SciPy) and Peter Wang who was a developer of Bokeh.<br>
+<code>Conda</code>是由 Python 开源社区中一些最杰出的成员创建的，其中包括 Travis Oliphant（Numpy、Numba 和 SciPy 的创建者之一）和 Bokeh 的开发者 Peter Wang。</p>
+<h3 id="condahttpscondaioprojectscondaenlatestuser-guidegetting-startedhtml"><a href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html"><code>conda</code></a></h3>
+<p>In many ways <code>conda</code> and <code>anaconda</code> solves most of the core problems with Python environment setups for data science work. <code>conda</code> actually can manage non-Python dependencies along with Python packages within its own <code>conda</code> virtual environments. This provided a fairly ergonomic way for scientists to swap around non-python dependencies without resorting to using Docker (which is significantly higher friction to use). This is the tool I use outside of work, and it’s great for experimenting.<br>
+在很多方面，<code>Conda</code>和<code>anaconda</code>解决了数据科学工作中 Python 环境设置的大部分核心问题。<code>Conda</code>实际上可以在自己的<code>conda</code>虚拟环境中管理非 Python 依赖项和 Python 软件包。这为科学家们提供了一种相当符合人体工程学的方式来交换非 Python 依赖项，而无需使用 Docker（使用 Docker 的摩擦明显更高）。这是我在工作之余使用的工具，非常适合做实验。</p>
+<p>Like <code>poetry</code>, <code>conda</code> performs a full dependency resolve when building an environment, but unlike <code>poetry</code>, in recent years the <code>conda</code> dependency resolver has been <a href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">swapped out for a faster one written in C++</a> called <code>libmamba</code>. Additionally, unlike <code>poetry</code>, there is no need to go and attempt to parse python packages directly when insufficient metadata was provided by upstream package maintainers. This is because <code>conda</code> has entirely separate metadata api servers which force package uploaders to maintain stricter standards of dependency declarations.<br>
+与<code>诗歌</code>一样，<code>conda</code>也会在构建环境时执行完整的依赖解析，但与<code>诗歌</code>不同的<a href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">是</a>，近年来，<code>conda</code>依赖解析器已经<a href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">换成了用 C++ 编写的速度更快的</a> <code>libmamba</code>。此外，与<code>诗歌</code>不同的是，当上游软件包维护者提供的元数据不足时，conda 不需要直接解析 python 软件包。这是因为<code>conda</code>拥有完全独立的元数据 api 服务器，迫使软件包上传者保持更严格的依赖声明标准。</p>
+<p>The core tradeoff with <code>conda</code> is that it attempts to do package metadata the “right” way by enforcing the existence of a separate <code>environment.yml</code> which properly declares dependencies and other metadata. It is actually this information which is served by <code>conda</code>’s separate metadata API servers. This can be onerous to adapt in a company that already has many internal python packages. If there is some obscure python package out there that does not have this file, then you won’t be able to install it using <code>conda</code> cleanly. However, <code>pip</code> installs within conda environments are possible leading to a potentially awkward mishmash of relying on two package managers. Another thing to keep in mind with <code>conda</code> is that it neither generates lock files out-of-the-box nor supports <code>pyproject.toml</code> config files.<br>
+<code>conda</code>的核心关键在于，它试图以 &ldquo;正确 &ldquo;的方式来处理软件包元数据，即强制执行独立的<code>environment.yml</code>，以正确声明依赖关系和其他元数据。实际上，这些信息是由<code>conda</code>独立的元数据 API 服务器提供的。对于已经拥有许多内部 python 软件包的公司来说，这可能是一个繁重的适应过程。如果有一些晦涩难懂的 Python 软件包没有这个文件，那么你就无法使用<code>conda</code>干净利落地安装它。不过，在 conda 环境中安装<code>pip</code>也是可能的，这可能会导致依赖两个软件包管理器的尴尬局面。<code>conda</code>还需要注意的一点是，它既不能直接生成锁文件，也不支持<code>pyproject.toml</code>配置文件。</p>
+<p>In 2024, <code>conda</code> is not ideally ergonomic. Users still have to fiddle around with <code>conda</code> virtual environments which are decoupled from specific project folders. Dependencies and config for a project can be difficult to keep track of across conda <code>environment.yml</code> files, pip installs, and other configuration files. Publishing a package is neither particularly simple nor easy.<br>
+2024 年的<code>conda</code>并不符合人体工程学。用户仍然需要摆弄与特定项目文件夹分离的<code>conda</code>虚拟环境。一个项目的依赖关系和配置很难在 conda<code>environment.yml</code>文件、pip installs 和其他配置文件中进行跟踪。发布软件包既不简单也不容易。</p>
+<p>I have also seen some organizations avoid using <code>conda</code> for production deployments due to the fact <code>conda</code> tends to install a lot of cruft since it manages non-python dependencies as well. Such orgs will lean towards using <code>Docker</code> and <code>*.lock</code> style files to enumerate dependencies.<br>
+我还看到有些组织避免在生产部署中使用<code>conda</code>，因为<code>conda</code>还会管理非 Python 的依赖关系，往往会安装很多垃圾。这些组织会倾向于使用<code>Docker</code>和<code>*.lock</code>类型的文件来列举依赖关系。</p>
+<p>That being said, <code>conda</code> is probably the best tool for data scientists and experimentalists right now. It is treated as a first-class citizen by a number of third party tools widely used in the Python ecosystem such as <a href="https://www.ray.io/">Ray</a> and <a href="https://metaflow.org/">Metaflow</a>.<br>
+尽管如此，对于数据科学家和实验人员来说，<code>conda</code>可能是目前最好的工具。在 Python 生态系统中广泛使用的许多第三方工具（如<a href="https://www.ray.io/">Ray</a>和<a href="https://metaflow.org/">Metaflow</a>）都将其视为一等公民。</p>
+<h4 id="mambahttpsgithubcommamba-orgmamba"><a href="https://github.com/mamba-org/mamba"><code>mamba</code></a></h4>
+<p>There are actually multiple implementations of <code>conda</code>. <code>mamba</code> is basically a full rewrite of <code>conda</code> in C++, making it substantially faster. The slowest bits of <code>conda</code> however were actually the solver, and as of 2024, the <code>libmamba</code> solver has been ported over to <code>conda</code> from the <code>mamba</code> project.<br>
+<code>mamba</code>基本上是用 C++ 重写了<code>conda</code>，使其速度大大提高。然而<code>conda</code>中最慢的部分实际上是求解器，截至 2024 年，<code>libmamba</code>求解器已从<code>mamba</code>项目移植到<code>conda</code>。</p>
+<p>In 2024, members of the <code>mamba</code> team switched over to working on <code>pixi</code> – a full <code>mamba</code> and <code>conda</code> replacement written completely in Rust (see below).<br>
+2024 年，<code>mamba</code>团队成员转而开发<code>pixi</code>，这是一款完全用 Rust 编写的<code>mamba</code>和<code>conda</code>替代软件（见下文）。</p>
+<h2 id="python-软件包管理与-rust-的结合">Python Package management meets Rust<br>
+Python 软件包管理与 Rust 的结合</h2>
+<p>Some of the most promising developments in the Python package management world have been from the Rust community. No doubt Rustaceans have a clear example of how a package manager setup <em>should</em> work in the from of <code>Cargo</code>, and so several promising solutions have cropped up in the past 2 years, most notable of which has been <code>uv</code>.<br>
+Python 软件包管理领域最有前途的一些发展来自 Rust 社区。毋庸置疑，Rust 社区的成员已经从<code>Cargo</code> 中找到了一个清晰的例子，说明软件包管理器_应该_如何工作，因此在过去两年中出现了几个很有前途的解决方案，其中最引人注目的是<code>uv</code>。</p>
+<h3 id="huakhttpsgithubcomcnpryerhuak"><a href="https://github.com/cnpryer/huak"><code>huak</code></a></h3>
+<p>Just to illustrate that multiple groups have tried to make a “Cargo for Python”, I wanted to briefly mention <code>huak</code>. The tool is completely experimental as of the writing of this article and not widely used, but attempts to graft the ergonomics of Cargo into a python package manager.<br>
+为了说明有多个团体都在尝试制作 &ldquo;Python 版 Cargo&rdquo;，我想简单提一下<code>huak</code>。在撰写本文时，该工具还处于实验阶段，并未被广泛使用，但它试图将 Cargo 的人机工程学原理嫁接到 Python 软件包管理器中。</p>
+<h3 id="pixihttpsgithubcomprefix-devpixi"><a href="https://github.com/prefix-dev/pixi"><code>pixi</code></a></h3>
+<p>One of the most ambitious Rust projects is <code>pixi</code> which seeks to be a drop-in replacement for <code>conda</code>. Like <code>conda</code>, <code>pixi</code> can manage non-python dependencies. In mid 2024, <code>pixi</code> started to switch from its own backend <code>rip</code> to <code>uv</code> (see below) for better performance. This is an actively evolving tool, and I eagerly await to see where it goes. Unlike <code>conda</code> and <code>mamba</code>, <code>pixi</code> incorporates its own type of <a href="https://pixi.sh/v0.20.0/features/lockfile/"><code>*.lock</code> file</a> which immediately puts it ahead of vanilla <code>conda</code> for reproducibility.<br>
+<code>pixi</code>是最具雄心的 Rust 项目之一，其目标是成为<code>conda</code> 的直接替代品。与<code>conda</code> 一样，<code>pixi</code>也可以管理非 Python 依赖项。2024 年中期，<code>pixi</code>开始从自己的后端<code>rip</code>转向<code>uv</code>（见下文），以获得更好的性能。这是一个积极进化的工具，我热切地期待着它的发展。与<code>conda</code>和<code>mamba</code> 不同，<code>pixi</code>集成了自己的<a href="https://pixi.sh/v0.20.0/features/lockfile/"><code>*.lock</code>文件类型</a>，这让它在可重复性方面立即领先于 vanilla<code>conda</code>。</p>
+<h3 id="ryehttpsgithubcomastral-shrye"><a href="https://github.com/astral-sh/rye"><code>rye</code></a></h3>
+<p>One of the first attempts to redo Python package management in Rust by <a href="https://github.com/mitsuhiko">Armin Ronacher</a>. When I first saw this over a year ago, the actual slow part (dependency resolution) was simply calling <code>piptools</code> under the hood, leading to no discernable gain in speed or performance.<br>
+<a href="https://github.com/mitsuhiko">Armin Ronacher</a> 首次尝试用 Rust 重做 Python 软件包管理。一年多前，当我第一次看到它时，实际缓慢的部分（依赖关系解析）只是在引擎盖下调用<code>piptools</code>，导致速度或性能没有明显提升。</p>
+<p>However, over time, the project has matured to the point where it now does most if not all of what <code>poetry</code> does only faster. This project was recently taken over by <code>Astral.sh</code> (developers of <code>uv</code> and the <code>ruff</code> linter) and now uses the same dependency resolver as <code>uv</code> on the backend. The tool has also gained a decent amount of traction on some major projects. For example, the <a href="https://github.com/openai/openai-python">OpenAI</a> Python API library uses it. There is a strong possibility that the functionality of <code>rye</code> will eventually be fully replicated by <code>uv</code> alone, leading to a merging of the two projects.<br>
+不过，随着时间的<code>推移</code>，这个项目已经发展得非常成熟，现在它可以完成<code>诗歌</code>的大部分功能，甚至全部功能，只是速度更快。<code>Astral.sh</code>（<code>uv</code>和<code>ruff</code> <code>linter</code>的开发者）最近接管了这个项目，并在后台使用与<code>uv</code>相同的依赖解析器。该工具还在一些大型项目中获得了相当大的影响力。例如，<a href="https://github.com/openai/openai-python">OpenAI</a>Python API 库就使用了它。<code>rye</code>的功能很有可能最终被<code>uv</code>单独完全复制，从而导致两个项目的合并。</p>
+<h3 id="uvhttpsastralshbloguv"><a href="https://astral.sh/blog/uv"><code>uv</code></a></h3>
+<p><code>uv</code> is by far the most promising package management tool in the Python ecosystem as of the writing of this post. This project actually aims to be a drop-in replacement for <code>pip</code> on top of being a <code>Cargo</code> for Python. The API is currently in no ways stable (as of 2024), but the benchmarks are incredibly promsing. Most notably, the development is backed by Astral.sh, a company formed by <a href="https://twitter.com/charliermarsh">Charlie Marsh</a> and the creators of the <a href="https://notes.crmarsh.com/python-tooling-could-be-much-much-faster"><code>ruff</code> linter</a>, a widely beloved tool that virtually supplanted all incumbants overnight when it was released in 2022.<br>
+<code>uv</code>是迄今为止 Python 生态系统中最有前途的软件包管理工具。这个项目的目标是在成为 Python<code>Cargo</code>的基础上，成为<code>pip</code>的直接替代品。API 目前还不稳定（截至 2024 年），但其基准却令人难以置信。最值得注意的是，该项目的开发得到了 Astral.sh 的支持。Astral.sh 是由<a href="https://twitter.com/charliermarsh">查理-马什（Charlie Marsh</a>）和<a href="https://notes.crmarsh.com/python-tooling-could-be-much-much-faster"><code>ruff</code>linter</a> 的创建者共同成立的一家公司，<a href="https://notes.crmarsh.com/python-tooling-could-be-much-much-faster"><code>ruff</code>linter</a> 是一款广受欢迎的工具，在 2022 年发布时几乎一夜之间取代了所有现有工具。</p>
+<p>Like <code>poetry</code>, this project supports <code>pyproject.toml</code>, and like <code>pip</code> it uses a backtracking approach for dependency resolution. Unlike <code>pip</code> this algorithm is written in Rust and is very fast! Benchmarks show that <code>uv</code> is at least order of magnitude faster than <code>poetry</code> <a href="https://github.com/astral-sh/uv/blob/main/BENCHMARKS.md">when it comes to dependency resolution</a>. I fully expect <code>uv</code> to supersede tools like <code>poetry</code> in the future as the project matures and API stabilizes, however as of this writing, it is more of a drop-in replacement for various <code>pip</code> tools than an opinionated build/packaging/versioning tool like <code>poetry</code> or <code>rye</code>,<br>
+和<code>诗歌</code>一样，该项目也支持<code>pyproject.toml</code>，而且和<code>pip</code>一样，它也使用反向追踪方法来解决依赖关系问题。与<code>pip</code>不同的是，该算法是用 Rust 编写的，速度非常快！基准测试表明，<a href="https://github.com/astral-sh/uv/blob/main/BENCHMARKS.md">在依赖关系解析方面</a>，<code>uv</code>至少比<code>poetry</code>快一个数量级。我完全相信，随着项目的成熟和 API 的稳定，<code>uv</code>将在未来取代<code>诗歌</code>等工具，但就目前而言，它更像是各种<code>pip</code>工具的替代品，而不是像<code>诗歌</code>或<code>rye</code> 那样有主见的构建/打包/版本控制工具、</p>
+<p>One promising sign of <code>uv</code>’s performance and adoption is the usage of its libraries in other package managers like <code>pixi</code> and <code>rye</code>.<br>
+<code>uv</code>的性能和被采用的一个有希望的迹象是其库在<code>pixi</code>和<code>rye</code> 等其他软件包管理器中的使用。</p>
+<h3 id="verdict判决">Verdict 判决</h3>
+<p>Hopefully one day there will be a cohesive solution to bring Python package management to the simplicity and ergonomics seen in the Javascript and Rust development ecosystems. Until then, I would simply recommend that most data science/experimentalists stick to using <code>conda</code>, and production oriented folks use <code>pip</code> or <code>poetry</code> (with some mindfulness towards slow dependency resolve for complex projects with <code>poetry</code>).<br>
+希望有一天能有一个统一的解决方案，让 Python 包管理变得像 Javascript 和 Rust 开发生态系统那样简单和人性化。在此之前，我只建议大多数数据科学/实验人员坚持使用<code>conda</code>，而面向生产的人员则使用<code>pip</code>或<code>poetry</code>（对于使用<code>poetry</code> 的复杂项目，需要注意依赖关系解决速度较慢）。</p>
+<p>Fingers crossed, though, I hope <code>uv</code> takes off and the Python community can one day coalesce around a single standardized tool! And there are some promising signs that tools like <code>pixi</code> can improve on <code>conda</code> and its wider scoped dependency management.<br>
+但我还是希望<code>uv</code>能起飞，Python 社区有一天能围绕一个标准化的工具团结起来！有迹象表明，像<code>pixi</code>这样的工具可以改进<code>conda</code>及其更广泛的依赖关系管理。</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://pilchark.github.io/1/01/2024-08-15_python_pkg_problem/" title="" target="_blank" rel="external">https://pilchark.github.io/1/01/2024-08-15_python_pkg_problem/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://gitee.com/pilchark" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://pilchark.github.io/frog.svg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://gitee.com/pilchark" target="_blank"><span class="text-dark">Pilchark</span><small class="ml-1x">Simple is better than complex.</small></a></h3>
+        <div>Primary Python Developer.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="next">
+                <a href="https://pilchark.github.io/about/"
+                    title="About"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://gitee.com/pilchark" target="_blank" title="gitee" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitee"></i></a></li>
+    <li><a href="https://github.com/Pilchark" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://pilchark.github.io/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2017  -
+    2024
+    <div class="publishby">
+        Theme by <a href="https://github.com/xiaoheiAh" target="_blank"> xiaoheiAh </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://pilchark.github.io/js/application.min.c181e6b0c036798c7731cfb85b41b44c80689fd48fee546b73d449386ce6ccfb.js"></script>
+<script src="https://pilchark.github.io/js/plugin.min.46930345227de54c034f39c80841463c3b879632feb482e9f2734d4b616ae3be.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/pilchark.github.io',
+            CONTENT_URL: 'https:\/\/pilchark.github.io\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://pilchark.github.io/js/insight.min.07c7d73e2ec5e960e55f8b98577ada0bd78b36e7ef9d6dd65b85d4b1d443e7c1a1ca7cd1d98e7105db5fd72583cbc6fbb5e386062d3bf3c2568588fbb38c0c06.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

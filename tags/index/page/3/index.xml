@@ -93,5 +93,14 @@ Hugo makes use of a variety of open source projects including:
 https://github.com/russross/blackfriday https://github.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://pilchark.github.io/1/01/2024-08-15_python_pkg_problem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://pilchark.github.io/1/01/2024-08-15_python_pkg_problem/</guid>
+      <description>Python 有太多软件包管理器 &amp;mdash; Python has too many package managers 本文由 简悦 SimpRead 转码， 原文地址 dublog.net Overview of Python&amp;rsquo;s Package management ecosystem in 20242024 年 Python 软件包管理生态系统概览 Python is a wonderful programming language. I’ve used it to build webapps, deep learning models,</description>
+    </item>
+    
   </channel>
 </rss>
