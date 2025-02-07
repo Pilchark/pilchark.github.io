@@ -5,7 +5,8 @@ title = "Hugo Theme Stack Starter"
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
-defaultContentLanguage = "zh-cn"
+defaultContentLanguage = "en"
+DefaultContentLanguageInSubdir = true
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
 # This will make .Summary and .WordCount behave correctly for CJK languages.
@@ -16,3 +17,43 @@ disqusShortname = "hugo-theme-stack"
 
 [pagination]
 pagerSize = 5
+
+[languages]
+  [languages.en]
+    contentDir = "content/en" #English
+    weight = 1
+    languageName = "English" # Name shown in the main menu
+    subtitle = "This is subtitle for this website"
+    [languages.en.params]
+      linkedin = "https://pilchark.github.io/en/"
+    [[languages.en.menu.main]]
+        name = "Blog"
+        url = ""
+        weight = 1
+    [[languages.en.menu.main]]
+        name = "About"
+        url = "page/about/"
+        weight = 3
+    [[languages.en.menu.main]]
+        name = "Tags"
+        url = "tags"
+        weight = 3
+  [languages.zh-CN]
+    contentDir = "content/zh-CN" #Simplified Chinese
+    weight = 2
+    languageName = "简体中文" # Name shown in the main menu
+    subtitle = "副标题"
+    [languages.zh-CN.params]
+      linkedin = "https://pilchark.github.io/zh-CN/"
+    [[languages.zh-CN.menu.main]]
+        name = "博客"
+        url = ""
+        weight = 1
+    [[languages.zh-CN.menu.main]]
+        name = "关于"
+        url = "page/about/"
+        weight = 3
+    [[languages.zh-CN.menu.main]]
+        name = "标签"
+        url = "tags"
+        weight = 3
