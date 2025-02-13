@@ -1,14 +1,12 @@
 ---
 title: About Short Video and Movie Random Thoughts
-description: A look at "Schindler's List".
+description: A look at "Schindler's List"
 slug: short videos and movies
 date: 2025-01-18 00:00:00+0000
 image: 
 categories:
     - Life
 tags:
-
-weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 # Short videos bring an elevated emotional threshold to the modern man

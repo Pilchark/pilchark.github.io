@@ -26,18 +26,6 @@ pagerSize = 5
     subtitle = "This is subtitle for this website"
     [languages.en.params]
       linkedin = "https://pilchark.github.io/en/"
-    [[languages.en.menu.main]]
-        name = "Blog"
-        url = ""
-        weight = 1
-    [[languages.en.menu.main]]
-        name = "About"
-        url = "page/about/"
-        weight = 3
-    [[languages.en.menu.main]]
-        name = "Tags"
-        url = "tags"
-        weight = 3
   [languages.zh-CN]
     contentDir = "content/zh-CN" #Simplified Chinese
     weight = 2
@@ -45,15 +33,3 @@ pagerSize = 5
     subtitle = "副标题"
     [languages.zh-CN.params]
       linkedin = "https://pilchark.github.io/zh-CN/"
-    [[languages.zh-CN.menu.main]]
-        name = "博客"
-        url = ""
-        weight = 1
-    [[languages.zh-CN.menu.main]]
-        name = "关于"
-        url = "page/about/"
-        weight = 3
-    [[languages.zh-CN.menu.main]]
-        name = "标签"
-        url = "tags"
-        weight = 3

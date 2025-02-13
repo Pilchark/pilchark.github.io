@@ -7,8 +7,6 @@ image:
 categories:
     - Life
 tags:
-
-weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
 # 短视频带给现代人的情感阈值的提升
