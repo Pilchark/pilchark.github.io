@@ -1,7 +1,7 @@
 ---
-title: how to deal with fragment addiction
+title: how to deal with fragmented addiction
 date: 2025-02-17
-description: Short videos and fragmentation information
+description: the damage from short videos and fragmented information
 categories:
     - Life
 ---
