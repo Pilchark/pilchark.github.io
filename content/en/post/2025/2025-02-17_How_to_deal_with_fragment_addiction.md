@@ -6,30 +6,33 @@ categories:
     - Life
 ---
 
-## What is fragment addiction ##
+## What is Fragment Addiction?
 
-An obsession with an activity or behavior that is so overwhelming that it sacrifices the original routine and schedule list
+A compulsive obsession with an activity or behavior that is so overwhelming that it disrupts one's normal routine and daily schedule.
 
-If he withdraws from the activity instantly, he would feel negative emotions and feelings, and even anxiety.
+When someone withdraws from the activity suddenly, they experience negative emotions, feelings, and even anxiety.
 
 ## How fragment Addiction Develops
 
 1. Intrinsically
 
-Stress at work or feel like there's something worth to do in a fragmentation time, need for stimulation to get the brain to secrete dopamine.
+Work-related stress or feeling the need to be productive during short breaks 
+leads to seeking stimulation for dopamine release in the brain.
 
 2. External
 
-Short video algorithmic recommendation, they show what you like and interestsm cash-out bonus.
+Through algorithmic recommendations of short videos that target personal interests and preferences, 
+along with incentives like cash-out bonuses.
 
 ## How to overcome
 
-1. Realize
-Accept yourself, Game is OK, lie in bed is although OK.
-Do not need to push yourself to eliminate addiction rapidly, you can analyze how much time you spent on ,and if that's what you want?
+1. Recognition
 
-2. Change
+Accept yourself - gaming is okay, and taking time to rest is also okay.
+Don't pressure yourself to overcome the addiction immediately. Instead, analyze how much time you spend on these activities and consider if that aligns with your goals.
 
-Make daily plans.There's a method I've been seen, split a day to pieces of blocks,summarize the daily tasks accomplished.
-Try new things and accept challenges, that makes you feel energy.
-Do not always stay in your comfortable circle, even with one step forward.
+2. Transformation
+
+Create daily plans. One effective method I've seen involves dividing the day into time blocks and tracking completed tasks.
+Try new activities and embrace challenges - they can energize you.
+Step out of your comfort zone, even if it's just one small step at a time.
