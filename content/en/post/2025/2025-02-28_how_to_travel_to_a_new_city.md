@@ -8,16 +8,16 @@ categories:
 
 ## 1. Safety First
 
-No matter where you go, you should always remember the most important thing is our personal safety.
-If you travel to a country that the gun is legal by law, you may take a research to avoid somewhere dangerous, the slum or the distrcit in the warzone.
-What's more, it's not only about the personal safety. If you go to a city which the climate is totaly different with your city, Beware of heatstroke or get cold. If you try to take a hiking far away from the city center, make sure the battery power of you cell-phone is enough, or just take a non-smart phones for backup, if there's emeregency situation that you want to call 911.
+Personal safety should always be your top priority, no matter where you travel. If you're visiting a country where firearms are legal, research ahead to avoid dangerous areas, slums, or conflict zones. 
 
-## 2. Go to somewhere not popular
+Safety isn't just about avoiding crime. When traveling to places with different climates from your home, be mindful of health risks like heatstroke or extreme cold. If you're planning activities like hiking away from city centers, ensure your phone is fully charged and consider carrying a backup phone for emergencies. Having a way to contact emergency services (like 911) could be crucial.
 
-When people talk about the some modern cities in the world, they always predict a place. The Big Ben in London, Statue of Liberty in US, Eiffel Tower in France, that makes sense.But if you'd like to find out the life style, the secret of the city which can't be directly saw by your eyes, you could go to the market for a breakfast. Observe the cleaners, the ministore owners, the elder people in the parks, they just tell you the feelings of this city in a implicit way.
+## 2. Explore Off the Beaten Path
 
-## 3. Make one goal and only one.
+When people think of major world cities, they often focus on famous landmarks - London's Big Ben, New York's Statue of Liberty, or Paris's Eiffel Tower. While these are impressive, they don't tell the whole story. To truly understand a city's lifestyle and hidden character, venture into local markets for breakfast, observe the daily routines of street cleaners, chat with small shop owners, or watch elderly residents in parks. These authentic experiences reveal the city's true spirit in ways that tourist attractions can't.
 
-The office workers don't have much vacations, so they will go to as many attractions as possible.There's saying in Chinese to describe these people, 'The Navy SEALs Travelers'. People got a anxious feeling ff they didn't visit all the places on the to-do list.
+## 3. Focus on One Main Goal
 
-There's one solution, make a formost goal before your trip, and pay all of your attention to it, when you finished that means you achieved your trip successfully.If you still have time left to visit other attractions, those are bonus for you.
+Many office workers, with their limited vacation time, try to pack too many attractions into their itinerary. In China, these rushed tourists are jokingly called "Navy SEAL Travelers." This approach often leads to anxiety about completing a lengthy to-do list rather than enjoying the experience.
+
+Instead, set one primary goal for your trip and focus on achieving it. Consider everything else a bonus. This approach helps you fully appreciate your chosen experience without the stress of rushing through multiple attractions. Once you've accomplished your main goal, you can relax and explore other sites if time permits.
