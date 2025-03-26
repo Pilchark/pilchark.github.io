@@ -28,6 +28,7 @@ Example 2:
 Input: nums = [0,0,0,0,0], goal = 0
 Output: 15
 
+## 1. Forthright Solution
 
 > Let me help you think about this differently. While recursion could be one approach, there might be a more efficient way.
 > 

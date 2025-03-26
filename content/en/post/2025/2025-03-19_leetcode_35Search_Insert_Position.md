@@ -207,3 +207,7 @@ def searchInsert(nums: List[int], target: int) -> int:
             return m
     return p  # not p+1 since the final step always p=m+1
 ```
+
+## 2. Research
+
+
