@@ -8,26 +8,24 @@ categories:
 
 ## Health
 
-The formost consumption, which we can better call it the investment,
-I think it's health.The health investment include the mental health and physical health.  
-I've got a feeling that sometimes when I go home from work, I cann't get my mind out of the 
-working status rapidly.So all the stuff that make we have energetic everyday is deserved to purchase.
-A latex pillow, a noise-canceling headset, they are all good for we to have a rest.  
-Aslo if we think a yoga mat is good for we to immerse outself into a medition, we can purchase that.  
-By the way, we should notice that it's not mean that we've formed a habit when we own the tools.
+The foremost consumption, which we can better call an investment, I think it's health. The health investment includes mental health and physical health.  
+I've got a feeling that sometimes when I go home from work, I can't get my mind out of the working status rapidly. So all the stuff that makes us energetic every day is worth purchasing.  
+A latex pillow, a noise-canceling headset, they are all good for us to have a rest.  
+Also, if we think a yoga mat is good for us to immerse ourselves into meditation, we can purchase that.  
+By the way, we should notice that it doesn't mean that we've formed a habit when we own the tools.
 
 ## Knowledge
 
-There's a proverb, "the books are the stairs to the success".That's absolutely correct.
-But Nowadays, there are some other convenient way for us to broden our horizon, open up our mind.
-The online course is convenient for us to acknowledge new subject, i.e. Coursera and Udemy.  
-I think they're much better than wetube because we must be concentrate on the lecture and there are homework and quiz for we to review what we learned this lesson.These are import for we to absorb the knowledge.  
-Besides, it valuable to purchase for a trip to a new city or new county, I found that there are always some similar traditional practise in different countries, they are just expressed in difference ways.
+There's a proverb, "Books are the windows to the world." That's absolutely correct.  
+But nowadays, there are some other convenient ways for us to broaden our horizons and open up our minds.  
+Online courses are convenient for us to learn new subjects, i.e., Coursera and Udemy.  
+I think they're much better than YouTube because we must concentrate on the lecture and there are homework and quizzes for us to review what we learned in the lesson. These are important for us to absorb the knowledge.  
+Besides, it's valuable to pay for a trip to a new city or new country. I found that there are always some similar traditional practices in different countries; they are just expressed in different ways.
 
 ## Time-saving
 
-The last but not the least, it's about time saving.  
-I remembered a thought in an article, that we pay twice for each stuff we purchased.
-Sometimes before I bought something, I paid time to look for the lowest history price, and then spend addtional attention on the news that if the price was reduction today.Even I bought it with a lower price in the end, but I lose the time of my attention.So in my mind, it's deserved to pay a little more expensive for the the time-saving.  
-There's another similar thing, there're a lot of pirate games and softwares in my country when I was a child.So I get used to find pirate one when a new game wes released.Sometimes it takes really long time and download speed is very slow, this also decrease my passion. At last the origin of satisfaction comes from a pirate game version was found instead of enjoying the story in the game.That's not good for the developers and also me.  
-In my mind, it's not deserved to spend time on the stuff that distract out main goal, It seems that out spend money a little expensive currently, but it improves out concentration and help we just enjoy the nowdays life.
+Last but not least, it's about time-saving.  
+I remembered a thought in an article, that we pay twice for each thing we purchase.  
+Sometimes before I buy something, I spend time looking for the lowest historical price, and then spend additional attention on the news to see if the price was reduced today. Even if I bought it at a lower price in the end, I lose the time of my attention. So in my mind, it's worth paying a little more for the time-saving.  
+There's another similar thing: there were a lot of pirated games and software in my country when I was a child. So I got used to finding a pirated one when a new game was released. Sometimes it takes a really long time and the download speed is very slow, which also decreases my passion. At last, the origin of satisfaction comes from finding a pirated game version instead of enjoying the story in the game. That's not good for the developers and also for me.  
+In my mind, it's not worth spending time on things that distract from our main goal. It seems that we spend a little more money on the surface, but it improves our concentration and helps us just enjoy today's life.
