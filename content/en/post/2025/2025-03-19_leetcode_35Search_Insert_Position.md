@@ -210,4 +210,60 @@ def searchInsert(nums: List[int], target: int) -> int:
 
 ## 2. Research
 
+### Tips for Binary Search
 
+1. **sorted** : Ensure the array is sorted.
+2. **Edge Cases**: Consider edge cases such as an empty array, an array with one element, or the target value being at the beginning or end of the array.
+3. **Iterative vs. Recursive**: Binary search can be implemented iteratively or recursively. Choose the one that fits your needs. Iterative is generally preferred for its simplicity and to avoid potential stack overflow issues with recursion.
+4. **Indices Management**: Be careful with the calculation of the middle index to avoid overflow.
+5. **Return Values**: Decide what to return if the target is not found. Typically, you return `-1` or `None`.
+6. **Performance**: Binary search has a time complexity of O(log n), making it very efficient for large datasets.
+
+
+#### Iterative Binary Search
+
+```python
+def binary_search_iterative(arr, target):
+    left, right = 0, len(arr) - 1
+    
+    while left <= right:
+        mid = left + (right - left) // 2
+        
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1  # Target not found
+
+# Example usage
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+target = 5
+result = binary_search_iterative(arr, target)
+print(f"Element found at index: {result}")
+```
+
+#### Recursive Binary Search
+
+```python
+def binary_search_recursive(arr, target, left, right):
+    if left > right:
+        return -1  # Target not found
+    
+    mid = left + (right - left) // 2
+    
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target:
+        return binary_search_recursive(arr, target, mid + 1, right)
+    else:
+        return binary_search_recursive(arr, target, left, mid - 1)
+
+# Example usage
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+target = 5
+result = binary_search_recursive(arr, target, 0, len(arr) - 1)
+print(f"Element found at index: {result}")
+```
