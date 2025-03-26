@@ -6,11 +6,6 @@ categories:
     - Life
 ---
 
-## introduction
-
-Before the essay, please have a notice that I'm not talking about the consumerism trap in this blog.
-What I'd like talked about today, it's not concrete stuffs.
-
 ## Health
 
 The formost consumption, which we can better call it the investment,
