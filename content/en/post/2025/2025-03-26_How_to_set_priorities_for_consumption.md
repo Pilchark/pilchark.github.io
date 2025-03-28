@@ -20,7 +20,7 @@ There's a proverb, "Books are the windows to the world." That's absolutely corre
 But nowadays, there are some other convenient ways for us to broaden our horizons and open up our minds.  
 Online courses are convenient for us to learn new subjects, i.e., Coursera and Udemy.  
 I think they're much better than YouTube because we must concentrate on the lecture and there are homework and quizzes for us to review what we learned in the lesson. These are important for us to absorb the knowledge.  
-Besides, it's valuable to pay for a trip to a new city or new country. I found that there are always some similar traditional practices in different countries; they are just expressed in different ways.
+Besides, it's valuable to pay for a trip to a new city or new country. We'll always meet new person and absorb new culture in a trip, that's also a way of learning.
 
 ## Time-saving
 
